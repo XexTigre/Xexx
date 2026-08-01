@@ -1,4 +1,4 @@
-version: 1.6.0
+version: 1.7.0
 entrypoints:
   router: specs/CROSS_SPEC_MATRIX.md
   policy: policies/cross_spec_policy.yaml
@@ -14,6 +14,10 @@ entrypoints:
   exact_texture_transform_spec: specs/EXACT_TEXTURE_AND_TRANSFORM_SPEC.md
   safe_topology_repair_spec: specs/SAFE_TOPOLOGY_REPAIR_SPEC.md
   safe_repair_execution_spec: specs/SAFE_REPAIR_EXECUTION_SPEC.md
+  blender_environment_lock: blender_env/environment.lock.json
+  blender_environment_readme: blender_env/README.md
+  blender_environment_verifier: blender_env/scripts/verify_environment.py
+  blender_workspace_generator: blender_env/scripts/create_roblox_workspace.py
 pipelines:
   avatar_setup_body_input: specs/AVATAR_SETUP_INPUT_SPEC.md
   r15_final_body: specs/R15_FINAL_BODY_SPEC.md
@@ -27,6 +31,7 @@ reaudit_lessons: knowledge/AUDIT_TRUTH_SCOPE_LESSONS.md
 exact_texture_transform_lessons: knowledge/EXACT_TEXTURE_SAFE_TRANSFORM_LESSONS.md
 safe_component_repair_lessons: knowledge/SAFE_COMPONENT_REPAIR_WITHOUT_DEFORMATION.md
 geometric_seam_audit_lessons: knowledge/GEOMETRIC_WATERTIGHT_SEAM_AUDIT.md
+blender_environment_lessons: knowledge/BLENDER_EXECUTION_ENVIRONMENT.md
 safe_repair_case: examples/RBX_ANIME_DOLL_SAFE_REPAIR_V2_manifest.json
 safe_repair_review: reports/RBX_ANIME_DOLL_SAFE_REPAIR_V2_REVIEW.md
 exact_texture_transform_case: examples/RBX_ANIME_DOLL_PRESERVED_BAKED_V2_manifest.json
