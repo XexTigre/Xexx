@@ -1,0 +1,44 @@
+{
+  "schema_version": "2.0.0",
+  "artifact": {
+    "source_sha256": "b551a526e6d613132fb6b5dd2ae3a6c0cf4ff44a980a31c00906fcadc976a142",
+    "output_sha256": "68bf4a9b71ee8861536d254d78e7d51e2bc652f1828601fa1edd45ef47d07fc9",
+    "output_file": "RBX_ANIME_DOLL_RIGGED_FACE_BONES_V1.glb"
+  },
+  "preservation": {
+    "geometry_attributes_unchanged": true,
+    "image_bytes_unchanged": true,
+    "rest_pose_max_vertex_delta_stud": 5.266404692189068e-7
+  },
+  "rig": {
+    "joint_count": 49,
+    "body_joint_count": 17,
+    "face_joint_count": 32,
+    "root_face_joint": "DynamicHead",
+    "required_bones_present": true,
+    "facs_mapping": "NOT_IMPLEMENTED"
+  },
+  "weights": {
+    "max_influences": 4,
+    "root_influenced_vertices": 0,
+    "unweighted_vertices": 0,
+    "max_sum_error": 1.0058283805847168e-7
+  },
+  "visual_proofs": {
+    "external_face_angles": 50,
+    "internal_face_angles": 50,
+    "body_views": 8,
+    "pose_tests": 8
+  },
+  "external_gates": {
+    "khronos": "NOT_RUN",
+    "blender_reimport": "NOT_RUN",
+    "roblox_studio": "NOT_RUN",
+    "ugc": "NOT_RUN"
+  },
+  "decision": {
+    "status": "RIGGED_LOCAL_REVIEWED",
+    "release_eligible": false,
+    "manual_override": false
+  }
+}
