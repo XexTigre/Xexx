@@ -68,6 +68,18 @@ def document(tmp_path: Path, scope: str = "texture_only") -> dict:
             "authorized_modifier_ops": [],
             "edit_mask_sha256": None,
         },
+        "deformation_controls": {
+            "armature_transform_applied_after_binding": False,
+            "corrective_smooth": {
+                "used": False,
+                "stack_after_armature": True,
+                "factor": 0.0,
+                "restricted_by_vertex_group": True,
+                "pin_boundaries": True,
+                "bind_required": False,
+                "bind_completed": True,
+            },
+        },
         "geometry": {
             "unapproved_moved_vertex_count": 0,
             "max_unapproved_vertex_delta_stud": 0.0,
@@ -160,3 +172,24 @@ def test_evidence_tampering_is_rejected(tmp_path: Path) -> None:
     result = evaluate(doc, tmp_path)
     assert result["status"] == "REJECTED"
     assert "EVIDENCE_HASH_MISMATCH:proof" in result["reason_codes"]
+
+
+def test_blind_armature_transform_is_rejected(tmp_path: Path) -> None:
+    doc = document(tmp_path)
+    doc["deformation_controls"]["armature_transform_applied_after_binding"] = True
+    result = evaluate(doc, tmp_path)
+    assert result["status"] == "REJECTED"
+    assert "BLIND_ARMATURE_TRANSFORM_APPLY" in result["reason_codes"]
+
+
+def test_non_local_corrective_smooth_is_rejected(tmp_path: Path) -> None:
+    doc = document(tmp_path)
+    doc["deformation_controls"]["corrective_smooth"].update({
+        "used": True,
+        "factor": 0.5,
+        "stack_after_armature": True,
+        "restricted_by_vertex_group": False,
+    })
+    result = evaluate(doc, tmp_path)
+    assert result["status"] == "REJECTED"
+    assert "CORRECTIVE_SMOOTH_NOT_LOCAL" in result["reason_codes"]
