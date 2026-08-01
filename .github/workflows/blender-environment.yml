@@ -1,0 +1,57 @@
+name: Blender environment
+
+on:
+  push:
+    paths:
+      - "blender_env/**"
+      - ".github/workflows/blender-environment.yml"
+  pull_request:
+    paths:
+      - "blender_env/**"
+      - ".github/workflows/blender-environment.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  blender-smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install runtime libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libx11-6 libxi6 libxrender1 libxfixes3 libxxf86vm1 \
+            libgl1 libegl1 libxkbcommon0 libsm6
+
+      - name: Cache Blender archive
+        uses: actions/cache@v4
+        with:
+          path: .cache/blender
+          key: blender-4.5.12-linux-x64
+
+      - name: Bootstrap pinned Blender
+        run: bash blender_env/bootstrap_linux.sh
+
+      - name: Validate generated workspace
+        run: |
+          .tools/blender/4.5.12/blender \
+            --background \
+            artifacts/ROBLOX_CONTRACT_WORKSPACE_4_5.blend \
+            --disable-autoexec \
+            --python-exit-code 1 \
+            --python blender_env/scripts/validate_workspace.py \
+            -- --report artifacts/blender_reports/workspace_linux.json
+
+      - name: Upload environment evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: blender-environment-4.5.12
+          if-no-files-found: error
+          path: |
+            artifacts/ROBLOX_CONTRACT_WORKSPACE_4_5.blend
+            artifacts/blender_reports/*.json
