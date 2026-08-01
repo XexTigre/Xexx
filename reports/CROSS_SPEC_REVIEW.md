@@ -15,10 +15,25 @@ Resolved the highest-risk contradictions:
 - generated components versus preserved components;
 - local validation versus Studio/UGC evidence.
 
-## Review 3 — anti-false-PASS
+## Review 3 — schema and adversarial validation
 
-The schema uses conditional pipeline constraints, exact artifact hashes, separate evidence items, `manual_override: false`, and only three release states. Missing evidence is not approval.
+The JSON Schema Draft 2020-12 file parsed successfully. Five valid pipeline fixtures were accepted:
+
+- Avatar Setup body input;
+- final R15 body;
+- dynamic head;
+- rigid accessory;
+- layered accessory.
+
+Four adversarial fixtures were rejected as intended:
+
+- final R15 body facing `-Z`;
+- rigid accessory containing skinning;
+- layered accessory missing the inner cage;
+- Avatar Setup body input containing an embedded accessory.
+
+The schema also requires exact artifact hashes, separate evidence items, `manual_override: false`, and only three release states. Missing evidence is not approval.
 
 ## Honest limitation
 
-These specifications and schemas have been structurally reviewed. They do not claim that a particular GLB/FBX passed Studio or UGC validation without exact-artifact Studio evidence.
+These specifications and schemas have been structurally and adversarially reviewed. They do not claim that a particular GLB/FBX passed Studio or UGC validation without exact-artifact Studio evidence.
