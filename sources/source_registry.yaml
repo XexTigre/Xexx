@@ -1,4 +1,4 @@
-version: 1
+version: 1.1
 reviewed_at: 2026-07-31
 sources:
   - id: github-spec-kit
@@ -24,17 +24,67 @@ sources:
   - id: roblox-avatar-setup
     authority: primary
     url: https://create.roblox.com/docs/avatar-setup/auto-setup-requirements
-    purpose: avatar_setup
+    purpose: avatar_setup_input
     max_age_days: 30
   - id: roblox-character-bodies
     authority: primary
     url: https://create.roblox.com/docs/avatar/character-bodies/specifications
-    purpose: r15_body
+    purpose: r15_final_body
+    max_age_days: 30
+  - id: roblox-character-body-components
+    authority: primary
+    url: https://create.roblox.com/docs/avatar/character-bodies
+    purpose: body_parts_cages_attachments
     max_age_days: 30
   - id: roblox-dynamic-heads
     authority: primary
     url: https://create.roblox.com/docs/avatar/dynamic-heads/specifications
     purpose: dynamic_head
+    max_age_days: 30
+  - id: roblox-head-validation
+    authority: primary
+    url: https://create.roblox.com/docs/avatar/dynamic-heads/validate
+    purpose: dynamic_head_validation
+    max_age_days: 30
+  - id: roblox-rigid-accessories
+    authority: primary
+    url: https://create.roblox.com/docs/avatar/rigid-accessories/specifications
+    purpose: rigid_accessory
+    max_age_days: 30
+  - id: roblox-layered-accessories
+    authority: primary
+    url: https://create.roblox.com/docs/avatar/layered-accessories/specifications
+    purpose: layered_accessory
+    max_age_days: 30
+  - id: roblox-general-mesh
+    authority: primary
+    url: https://create.roblox.com/docs/art/modeling/specifications
+    purpose: general_mesh
+    max_age_days: 30
+  - id: roblox-export-settings
+    authority: primary
+    url: https://create.roblox.com/docs/art/modeling/export-requirements
+    purpose: export_settings
+    max_age_days: 30
+  - id: roblox-texture-specifications
+    authority: primary
+    url: https://create.roblox.com/docs/art/modeling/texture-specifications
+    purpose: textures_and_pbr
+    max_age_days: 30
+  - id: roblox-studio-character-test
+    authority: primary
+    url: https://create.roblox.com/docs/art/characters/testing/studio
+    purpose: studio_playtest
+    max_age_days: 30
+  - id: roblox-ugc-validation
+    authority: primary
+    url: https://create.roblox.com/docs/marketplace/validation-system
+    purpose: ugc_validation_categories
+    max_age_days: 30
+  - id: roblox-marketplace-policy
+    authority: primary
+    url: https://create.roblox.com/docs/marketplace/marketplace-policy
+    purpose: marketplace_policy
     max_age_days: 30
   - id: khronos-gltf-validator
     authority: primary
