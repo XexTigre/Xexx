@@ -19,6 +19,13 @@
 - vértices: 6.363;
 - triângulos: 9.764.
 
+## Evidências produzidas
+
+- 12 azimutes renderizados do GLB reaberto;
+- prancha com linhas de altura, largura, profundidade, cintura, quadril e cabeça;
+- prova dos hashes idênticos da imagem, UV e índices;
+- manifesto JSON do artefato e das decisões por escopo.
+
 ## Falhas preservadas e expostas
 
 - componentes desconectados: 139;
@@ -26,9 +33,9 @@
 - non-manifold: 0;
 - head internals não classificados semanticamente;
 - rig, cages e attachments ausentes;
-- Roblox Studio, Avatar Setup e UGC Validator não executados.
+- Khronos Validator, Roblox Studio, Avatar Setup e UGC Validator não executados neste job.
 
-## Decisão
+## Decisão revisada
 
 - `texture_preservation = PASS`;
 - `uv_preservation = PASS`;
@@ -38,4 +45,4 @@
 - `r15_final_readiness = BLOCKED`;
 - `release_eligible = false`.
 
-A textura está comprovadamente inalterada em bytes. Isso não corrige nem oculta os defeitos geométricos do arquivo-fonte.
+A textura está comprovadamente inalterada em bytes. Isso não corrige nem oculta os defeitos geométricos do arquivo-fonte. A revisão confirma somente as provas locais indicadas e não declara aceitação no Roblox Studio.
