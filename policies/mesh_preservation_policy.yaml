@@ -71,6 +71,25 @@ required_body_poses:
   - neck_left_45
   - neck_right_45
 
+required_head_poses:
+  - blink_left
+  - blink_right
+  - mouth_open
+  - smile
+  - frown
+
+deformation_controls:
+  armature_transform_after_binding:
+    allowed_by_default: false
+    require_explicit_authorization: true
+    require_full_pose_regression: true
+  corrective_smooth:
+    factor_min: 0.0
+    factor_max: 1.0
+    require_stack_after_armature: true
+    require_vertex_group_restriction: true
+    require_bind_when_constructive_modifiers_precede: true
+
 forbidden_by_default:
   - decimate_apply
   - remesh_apply
