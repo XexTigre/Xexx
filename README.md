@@ -15,6 +15,27 @@ CONSTITUTION → SPEC → CLARIFY → PLAN → TASKS → BUILD
 
 Ausência de evidência produz `BLOCKED` ou `REJECTED`, nunca aprovação presumida.
 
+## Entrada obrigatória do cérebro
+
+O agente deve carregar primeiro:
+
+```text
+knowledge/index.yaml
+specs/CROSS_SPEC_MATRIX.md
+policies/cross_spec_policy.yaml
+schemas/cross_asset_contract.schema.json
+```
+
+A matriz escolhe um único pipeline antes de qualquer alteração:
+
+- `avatar_setup_body_input`;
+- `r15_final_body`;
+- `dynamic_head`;
+- `rigid_accessory`;
+- `layered_accessory`.
+
+Isso impede misturar regras contraditórias, como frente `-Z` para entrada do Avatar Setup e frente `+Z` para corpo R15 final.
+
 ## Cadeia de confiança
 
 1. A solicitação e a spec definem requisitos obrigatórios e mensuráveis.
@@ -22,7 +43,7 @@ Ausência de evidência produz `BLOCKED` ou `REJECTED`, nunca aprovação presum
 3. O gerador produz o ativo e seu manifesto.
 4. Validadores independentes registram ferramenta, versão, comando, relatório e hashes.
 5. Cada alegação referencia evidências reais.
-6. `src/fail_closed_gate.py` recalcula a decisão; o agente não escolhe o resultado.
+6. Os gates recalculam a decisão; o agente não escolhe o resultado.
 7. Roblox Studio permanece um gate separado quando exigido.
 8. Conhecimento novo entra por PR com reprodução e teste de regressão.
 
@@ -37,13 +58,35 @@ Não existe estado `PASS_WITHOUT_EVIDENCE`.
 ## Regras principais
 
 - Log sem erro não prova sucesso.
-- O GLB exportado deve ser auditado; o estado do Blender não basta.
+- O arquivo exportado deve ser reaberto e auditado; o estado do Blender não basta.
 - Todo relatório deve apontar o SHA-256 do artefato validado.
 - Gerador e validador crítico não podem ter a mesma identidade.
 - Evidência visual não substitui métricas geométricas.
 - Validação local não substitui teste real no Roblox Studio.
 - `UNKNOWN`, `NOT_RUN` e `SKIPPED` não podem virar `VERIFIED`.
 - Decisões são calculadas e não aceitam override manual.
+- A saída do Avatar Setup é um novo artefato e precisa de novo hash e nova validação completa.
+
+## Specs cruzadas
+
+```text
+specs/CROSS_SPEC_MATRIX.md
+specs/AVATAR_SETUP_INPUT_SPEC.md
+specs/R15_FINAL_BODY_SPEC.md
+specs/DYNAMIC_HEAD_AND_CAGE_SPEC.md
+specs/ACCESSORY_PIPELINES_SPEC.md
+specs/EXPORT_STUDIO_RELEASE_SPEC.md
+```
+
+O schema `schemas/cross_asset_contract.schema.json` usa condições por pipeline para bloquear, entre outros casos:
+
+- corpo R15 final orientado como entrada do Avatar Setup;
+- corpo final sem 15 meshes, 15 outer cages ou 19 attachments;
+- rig com mais de quatro influências ou influência no Root;
+- cabeça dinâmica sem cage, três landmarks ou pelo menos 17 poses FACS;
+- acessório rígido com skinning;
+- acessório em camadas sem inner/outer cage;
+- aprovação sem evidência Studio/UGC quando obrigatória.
 
 ## Auditoria visual intensiva
 
@@ -52,35 +95,11 @@ O módulo `schemas/roblox_visual_audit.schema.json` obriga o agente a gerar e re
 - conjunto canônico de 62 vistas;
 - passes beauty, albedo plano, silhueta, wireframe, normal, UV checker e seam heatmap;
 - escala medida em studs e perfil Roblox declarado;
-- regras diferentes de eixo frontal para entrada do Avatar Setup e corpo R15 final;
 - métricas por pixel: IoU, Chamfer, SSIM, LPIPS e CIEDE2000;
 - hashes para cada render, máscara, mapa e relatório;
 - revisão independente e decisão fail-closed.
 
-A regra “sem margem visível” não remove o padding UV. A política exige gutter e bleed suficientes para impedir linhas e vazamento de cor: 16 px entre ilhas, 16 px até a borda e 8 px de bleed em atlas 2048².
-
-Consulte `specs/PIXEL_VISUAL_AUDIT_SPEC.md`, `policies/visual_quality_policy.json` e `src/visual_audit_gate.py`.
-
-## Estrutura
-
-```text
-.specify/memory/constitution.md
-AGENTS.md
-docs/RESEARCH_BASIS.md
-sources/source_registry.yaml
-policies/truthfulness.yaml
-policies/visual_quality_policy.json
-schemas/claim.schema.json
-schemas/validation_run.schema.json
-schemas/release_decision.schema.json
-schemas/roblox_visual_audit.schema.json
-specs/PIXEL_VISUAL_AUDIT_SPEC.md
-src/fail_closed_gate.py
-src/visual_audit_gate.py
-tests/test_fail_closed_gate.py
-tests/test_visual_audit_gate.py
-.github/workflows/validate.yml
-```
+A regra “sem margem visível” não remove o padding UV. A política exige gutter e bleed suficientes para impedir linhas e vazamento de cor.
 
 ## Executar
 
@@ -93,4 +112,4 @@ python src/visual_audit_gate.py path/to/visual_audit.json
 
 ## Limite honesto
 
-Este repositório valida contratos, hashes, evidências e decisões. Ele não prova que um GLB específico foi aceito pelo Roblox Studio sem o GLB, o relatório real do Studio e as demais evidências obrigatórias.
+Este repositório valida contratos, hashes, evidências e decisões. Ele não prova que um GLB/FBX específico foi aceito pelo Roblox Studio sem o arquivo exato, o relatório real do Studio e as demais evidências obrigatórias.
