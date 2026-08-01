@@ -1,4 +1,4 @@
-version: 2.0.1
+version: 2.2.0
 entrypoints:
   router: specs/CROSS_SPEC_MATRIX.md
   policy: policies/cross_spec_policy.yaml
@@ -22,6 +22,11 @@ entrypoints:
   exponential_visual_gate: src/exponential_visual_gate.py
   non_destructive_rig_spec: specs/NON_DESTRUCTIVE_BODY_FACE_RIG_SPEC.md
   rigging_sources: sources/rigging_50_primary_sources.yaml
+  true_3d_mouth_spec: specs/TRUE_3D_MOUTH_FACS17_V3_SPEC.md
+  orientation_50view_spec: specs/ORIENTATION_AND_50VIEW_DELIVERY_SPEC.md
+  orientation_50view_policy: policies/orientation_50view_delivery_policy.yaml
+  orientation_50view_schema: schemas/orientation_50view_delivery.schema.json
+  orientation_50view_gate: src/orientation_50view_gate.py
   studio_avatar_previewer_stylelink_fix: roblox_studio/fix_avatar_previewer_stylelinks.lua
   blender_environment_lock: blender_env/environment.lock.json
   blender_environment_readme: blender_env/README.md
@@ -43,6 +48,8 @@ geometric_seam_audit_lessons: knowledge/GEOMETRIC_WATERTIGHT_SEAM_AUDIT.md
 enhanced_evidence_lessons: knowledge/ENHANCED_EVIDENCE_VISUALIZATION_LESSONS.md
 exponential_visual_lessons: knowledge/EXPONENTIAL_VISUAL_VALIDATION_LESSONS.md
 rigging_50_source_lessons: knowledge/NON_DESTRUCTIVE_RIGGING_50_SOURCE_LESSONS.md
+true_3d_mouth_lessons: knowledge/TRUE_3D_MOUTH_V3_LESSONS.md
+studio_backwards_delivery_lessons: knowledge/STUDIO_BACKWARDS_DELIVERY_FAILURE_LESSONS.md
 studio_avatar_previewer_stylelink_lessons: knowledge/STUDIO_AVATAR_PREVIEWER_STYLELINK_WORKAROUND.md
 blender_environment_lessons: knowledge/BLENDER_EXECUTION_ENVIRONMENT.md
 safe_repair_case: examples/RBX_ANIME_DOLL_SAFE_REPAIR_V2_manifest.json
@@ -53,6 +60,10 @@ exponential_visual_case: examples/RBX_ANIME_DOLL_EXPONENTIAL_V4_contract.json
 exponential_visual_review: reports/RBX_ANIME_DOLL_EXPONENTIAL_V4_REVIEW.md
 rigged_face_case: examples/RBX_ANIME_DOLL_RIGGED_FACE_V1_contract.json
 rigged_face_review: reports/RBX_ANIME_DOLL_RIGGED_FACE_V1_REVIEW.md
+true_3d_mouth_case: examples/RBX_ANIME_DOLL_3D_MOUTH_V3_contract.json
+true_3d_mouth_review: reports/RBX_ANIME_DOLL_3D_MOUTH_V3_REVIEW.md
+orientation_50view_case: examples/RBX_ANIME_DOLL_V15_orientation_50view_summary.json
+orientation_50view_review: reports/RBX_ANIME_DOLL_V15_FINAL_REVIEW.md
 exact_texture_transform_case: examples/RBX_ANIME_DOLL_PRESERVED_BAKED_V2_manifest.json
 exact_texture_transform_review: reports/RBX_ANIME_DOLL_PRESERVED_BAKED_V2_REVIEW.md
 lessons: knowledge/ROBLOX_AVATAR_CROSS_KNOWLEDGE.md
