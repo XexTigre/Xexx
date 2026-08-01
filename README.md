@@ -45,6 +45,22 @@ Não existe estado `PASS_WITHOUT_EVIDENCE`.
 - `UNKNOWN`, `NOT_RUN` e `SKIPPED` não podem virar `VERIFIED`.
 - Decisões são calculadas e não aceitam override manual.
 
+## Auditoria visual intensiva
+
+O módulo `schemas/roblox_visual_audit.schema.json` obriga o agente a gerar e registrar uma prova visual determinística, com:
+
+- conjunto canônico de 62 vistas;
+- passes beauty, albedo plano, silhueta, wireframe, normal, UV checker e seam heatmap;
+- escala medida em studs e perfil Roblox declarado;
+- regras diferentes de eixo frontal para entrada do Avatar Setup e corpo R15 final;
+- métricas por pixel: IoU, Chamfer, SSIM, LPIPS e CIEDE2000;
+- hashes para cada render, máscara, mapa e relatório;
+- revisão independente e decisão fail-closed.
+
+A regra “sem margem visível” não remove o padding UV. A política exige gutter e bleed suficientes para impedir linhas e vazamento de cor: 16 px entre ilhas, 16 px até a borda e 8 px de bleed em atlas 2048².
+
+Consulte `specs/PIXEL_VISUAL_AUDIT_SPEC.md`, `policies/visual_quality_policy.json` e `src/visual_audit_gate.py`.
+
 ## Estrutura
 
 ```text
@@ -53,11 +69,16 @@ AGENTS.md
 docs/RESEARCH_BASIS.md
 sources/source_registry.yaml
 policies/truthfulness.yaml
+policies/visual_quality_policy.json
 schemas/claim.schema.json
 schemas/validation_run.schema.json
 schemas/release_decision.schema.json
+schemas/roblox_visual_audit.schema.json
+specs/PIXEL_VISUAL_AUDIT_SPEC.md
 src/fail_closed_gate.py
+src/visual_audit_gate.py
 tests/test_fail_closed_gate.py
+tests/test_visual_audit_gate.py
 .github/workflows/validate.yml
 ```
 
@@ -67,6 +88,7 @@ tests/test_fail_closed_gate.py
 python -m pip install -e .[dev]
 pytest -q
 python src/fail_closed_gate.py path/to/release_input.json
+python src/visual_audit_gate.py path/to/visual_audit.json
 ```
 
 ## Limite honesto
