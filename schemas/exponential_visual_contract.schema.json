@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xextigre.github.io/roblox-3d-contract-brain/schemas/exponential_visual_contract.schema.json",
+  "title": "Exponential Visual Validation Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "artifact", "coverage_model", "structure", "geometry", "surface", "visual", "project_policy", "external_gates", "decision", "evidence"],
+  "properties": {
+    "schema_version": {"const": "4.0.0"},
+    "artifact": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["file", "path", "sha256", "source_file", "source_sha256", "pipeline"],
+      "properties": {
+        "file": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "source_file": {"type": "string", "minLength": 1},
+        "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "pipeline": {"const": "avatar_setup_body_input_candidate"}
+      }
+    },
+    "coverage_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "canonical_views", "essential_passes_62", "extended_passes_12", "scale_factors", "grid_levels", "cells_per_image", "actual_rendered_view_passes", "silhouette_multiscale_evaluations", "appearance_multiscale_evaluations", "silhouette_spatial_cells", "appearance_spatial_cells", "semantic_visibility_cells", "total_quantitative_observations"],
+      "properties": {
+        "name": {"const": "power_of_two_spatial_visual_pyramid"},
+        "canonical_views": {"const": 62},
+        "essential_passes_62": {"const": 4},
+        "extended_passes_12": {"const": 8},
+        "scale_factors": {"const": [1, 2, 4, 8]},
+        "grid_levels": {"const": [1, 2, 4, 8]},
+        "cells_per_image": {"const": 85},
+        "actual_rendered_view_passes": {"const": 344},
+        "silhouette_multiscale_evaluations": {"const": 248},
+        "appearance_multiscale_evaluations": {"const": 48},
+        "silhouette_spatial_cells": {"const": 5270},
+        "appearance_spatial_cells": {"const": 1020},
+        "semantic_visibility_cells": {"minimum": 1, "type": "integer"},
+        "total_quantitative_observations": {"minimum": 7000, "type": "integer"}
+      }
+    },
+    "structure": {
+      "type": "object", "additionalProperties": true,
+      "required": ["local_parser_errors", "geometry_nodes", "triangles", "triangle_limit", "triangle_margin", "dimensions_stud", "node_transforms_identity"],
+      "properties": {
+        "local_parser_errors": {"type": "array", "maxItems": 0},
+        "geometry_nodes": {"type": "integer", "minimum": 1},
+        "triangles": {"type": "integer", "minimum": 1},
+        "triangle_limit": {"const": 10742},
+        "triangle_margin": {"type": "integer"},
+        "dimensions_stud": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number", "exclusiveMinimum": 0}},
+        "node_transforms_identity": {"const": true}
+      }
+    },
+    "geometry": {
+      "type": "object", "additionalProperties": false,
+      "required": ["physical_boundary_edges", "physical_nonmanifold_edges", "degenerate_triangles", "duplicate_face_groups", "render_boundary_edges"],
+      "properties": {
+        "physical_boundary_edges": {"const": 0},
+        "physical_nonmanifold_edges": {"const": 0},
+        "degenerate_triangles": {"const": 0},
+        "duplicate_face_groups": {"const": 0},
+        "render_boundary_edges": {"type": "integer", "minimum": 0}
+      }
+    },
+    "surface": {
+      "type": "object", "additionalProperties": true,
+      "required": ["normals_finite", "normal_length_min", "normal_length_max", "uv_outside_0_1_count", "uv_exact", "texture_byte_exact", "texture_sha256"],
+      "properties": {
+        "normals_finite": {"const": true},
+        "normal_length_min": {"type": "number", "minimum": 0.99},
+        "normal_length_max": {"type": "number", "maximum": 1.01},
+        "uv_outside_0_1_count": {"const": 0},
+        "uv_exact": {
+          "type": "object", "additionalProperties": true,
+          "required": ["nonzero_overlap_pairs", "status"],
+          "properties": {"nonzero_overlap_pairs": {"const": 0}, "status": {"const": "PASS"}}
+        },
+        "texture_byte_exact": {"const": true},
+        "texture_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "visual": {
+      "type": "object", "additionalProperties": true,
+      "required": ["appearance_ssim_p05_all_cells", "ms_ssim_min", "expected_semantic_contract_satisfied", "internal_components_present"],
+      "properties": {
+        "appearance_ssim_p05_all_cells": {"type": "number", "minimum": 0, "maximum": 1},
+        "ms_ssim_min": {"type": "number", "minimum": 0, "maximum": 1},
+        "expected_semantic_contract_satisfied": {"const": true},
+        "internal_components_present": {
+          "type": "object", "additionalProperties": false,
+          "required": ["MouthBag_Component", "UpperTeeth_Component", "LowerTeeth_Component", "Tongue_Component"],
+          "properties": {
+            "MouthBag_Component": {"const": true},
+            "UpperTeeth_Component": {"const": true},
+            "LowerTeeth_Component": {"const": true},
+            "Tongue_Component": {"const": true}
+          }
+        }
+      }
+    },
+    "project_policy": {
+      "type": "object", "additionalProperties": true,
+      "required": ["authority", "frozen", "thresholds"],
+      "properties": {"authority": {"const": "internal_project_policy_not_official_roblox"}, "frozen": {"const": true}}
+    },
+    "external_gates": {
+      "type": "object", "additionalProperties": false,
+      "required": ["khronos_gltf_validator", "blender_4_5_12_import_reopen_exact_artifact", "roblox_avatar_setup", "roblox_studio_playtest", "ugc_validation"],
+      "properties": {
+        "khronos_gltf_validator": {"enum": ["PASS", "FAIL", "NOT_RUN"]},
+        "blender_4_5_12_import_reopen_exact_artifact": {"enum": ["PASS", "FAIL", "NOT_RUN"]},
+        "roblox_avatar_setup": {"enum": ["PASS", "FAIL", "NOT_RUN"]},
+        "roblox_studio_playtest": {"enum": ["PASS", "FAIL", "NOT_RUN"]},
+        "ugc_validation": {"enum": ["PASS", "FAIL", "NOT_RUN"]}
+      }
+    },
+    "decision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "release_eligible", "manual_override", "reason_codes"],
+      "properties": {
+        "status": {"enum": ["LOCAL_EXPONENTIAL_REVIEWED", "LOCAL_EXPONENTIAL_REVIEWED_WITH_WARNINGS", "REJECTED_LOCAL", "BLOCKED", "RELEASE_APPROVED"]},
+        "release_eligible": {"type": "boolean"},
+        "manual_override": {"const": false},
+        "reason_codes": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "evidence": {
+      "type": "array", "minItems": 10,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["path", "sha256", "size_bytes", "artifact_sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "size_bytes": {"type": "integer", "minimum": 1},
+          "artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    }
+  }
+}
