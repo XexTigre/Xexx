@@ -1,0 +1,32 @@
+version: 1
+policy: truthfulness_fail_closed
+positive_claims:
+  require:
+    - requirement_id
+    - artifact_sha256
+    - evidence_ids
+    - evaluator_id
+    - measured_at
+  forbidden_without_evidence:
+    - PASS
+    - APPROVED
+    - VALIDATED
+    - READY_FOR_ROBLOX
+state_mapping:
+  missing_input: BLOCKED
+  validator_not_run: BLOCKED
+  stale_mandatory_source: BLOCKED
+  evidence_digest_mismatch: REJECTED
+  artifact_digest_mismatch: REJECTED
+  contradictory_evidence: REJECTED
+  failed_mandatory_requirement: REJECTED
+  all_mandatory_requirements_verified: APPROVED
+rules:
+  - execution_without_error_is_not_evidence
+  - editor_state_is_not_exported_artifact_evidence
+  - unknown_cannot_be_promoted_to_verified
+  - warning_cannot_be_silently_discarded
+  - studio_claim_requires_studio_report_bound_to_artifact_digest
+  - generator_cannot_be_critical_validator
+  - release_decision_is_computed_only
+  - manual_override_is_forbidden
