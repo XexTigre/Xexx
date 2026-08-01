@@ -1,0 +1,63 @@
+version: 1.1.0
+policy_id: roblox-cross-spec-policy
+reviewed_at: 2026-07-31
+decision_states: [APPROVED, REJECTED, BLOCKED]
+source_precedence:
+  - official_asset_type_spec
+  - official_avatar_setup_spec_for_input_stage
+  - official_ugc_validation_and_studio_output
+  - versioned_project_policy
+  - historical_heuristic
+pipeline_requirements:
+  avatar_setup_body_input:
+    front_axis: -Z
+    up_axis: +Y
+    mesh_count_min: 1
+    triangle_total_max: 10742
+    rig_required: false
+    no_embedded_accessories: true
+    distinct_neck_required: true
+    head_components:
+      eyes: 2
+      mouthparts: [upper_teeth, lower_teeth, tongue]
+    exit_label: READY_FOR_AVATAR_SETUP_ATTEMPT
+  r15_final_body:
+    front_axis: +Z
+    up_axis: +Y
+    render_mesh_count: 15
+    outer_cage_count: 15
+    attachment_count: 19
+    rig_required: true
+    max_influences_per_vertex: 4
+    root_influences_allowed: false
+    triangle_total_max: 10742
+    studio_required: true
+  dynamic_head:
+    head_outer_cage_required: true
+    landmark_count: 3
+    facs_pose_count_min: 17
+    required_motion_tests: [blink, mouth_open, happy, sad]
+    studio_head_validation_required: true
+  rigid_accessory:
+    render_mesh_count: 1
+    triangle_total_max: 4000
+    watertight: true
+    skinning_allowed: false
+    studio_attachment_validation_required: true
+  layered_accessory:
+    render_mesh_count: 1
+    triangle_total_max: 4000
+    watertight: true
+    skinning_required: true
+    inner_cage_required: true
+    outer_cage_required: true
+    attachment_count_min: 1
+    studio_wrap_validation_required: true
+anti_false_pass:
+  missing_required_evidence: BLOCKED
+  unknown_or_not_run: BLOCKED
+  threshold_failure: REJECTED
+  artifact_hash_mismatch: REJECTED
+  self_validation_only: REJECTED
+  stale_evidence: REJECTED
+  manual_override_allowed: false
