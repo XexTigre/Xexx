@@ -1,4 +1,4 @@
-version: 1.8.0
+version: 1.9.0
 entrypoints:
   router: specs/CROSS_SPEC_MATRIX.md
   policy: policies/cross_spec_policy.yaml
@@ -17,6 +17,9 @@ entrypoints:
   enhanced_evidence_spec: specs/ENHANCED_EVIDENCE_AND_VISUALIZATION_SPEC.md
   enhanced_evidence_schema: schemas/enhanced_evidence_contract.schema.json
   enhanced_evidence_gate: src/enhanced_evidence_gate.py
+  exponential_visual_spec: specs/EXPONENTIAL_VISUAL_VALIDATION_SPEC.md
+  exponential_visual_schema: schemas/exponential_visual_contract.schema.json
+  exponential_visual_gate: src/exponential_visual_gate.py
   blender_environment_lock: blender_env/environment.lock.json
   blender_environment_readme: blender_env/README.md
   blender_environment_verifier: blender_env/scripts/verify_environment.py
@@ -35,11 +38,14 @@ exact_texture_transform_lessons: knowledge/EXACT_TEXTURE_SAFE_TRANSFORM_LESSONS.
 safe_component_repair_lessons: knowledge/SAFE_COMPONENT_REPAIR_WITHOUT_DEFORMATION.md
 geometric_seam_audit_lessons: knowledge/GEOMETRIC_WATERTIGHT_SEAM_AUDIT.md
 enhanced_evidence_lessons: knowledge/ENHANCED_EVIDENCE_VISUALIZATION_LESSONS.md
+exponential_visual_lessons: knowledge/EXPONENTIAL_VISUAL_VALIDATION_LESSONS.md
 blender_environment_lessons: knowledge/BLENDER_EXECUTION_ENVIRONMENT.md
 safe_repair_case: examples/RBX_ANIME_DOLL_SAFE_REPAIR_V2_manifest.json
 safe_repair_review: reports/RBX_ANIME_DOLL_SAFE_REPAIR_V2_REVIEW.md
 enhanced_evidence_case: examples/RBX_ANIME_DOLL_EVIDENCE_V3_contract.json
 enhanced_evidence_review: reports/RBX_ANIME_DOLL_EVIDENCE_V3_REVIEW.md
+exponential_visual_case: examples/RBX_ANIME_DOLL_EXPONENTIAL_V4_contract.json
+exponential_visual_review: reports/RBX_ANIME_DOLL_EXPONENTIAL_V4_REVIEW.md
 exact_texture_transform_case: examples/RBX_ANIME_DOLL_PRESERVED_BAKED_V2_manifest.json
 exact_texture_transform_review: reports/RBX_ANIME_DOLL_PRESERVED_BAKED_V2_REVIEW.md
 lessons: knowledge/ROBLOX_AVATAR_CROSS_KNOWLEDGE.md
