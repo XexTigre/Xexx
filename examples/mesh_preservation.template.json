@@ -43,6 +43,18 @@
     "authorized_modifier_ops": [],
     "edit_mask_sha256": "EDIT_MASK_SHA256_HERE"
   },
+  "deformation_controls": {
+    "armature_transform_applied_after_binding": false,
+    "corrective_smooth": {
+      "used": false,
+      "stack_after_armature": true,
+      "factor": 0.0,
+      "restricted_by_vertex_group": true,
+      "pin_boundaries": true,
+      "bind_required": false,
+      "bind_completed": true
+    }
+  },
   "geometry": {
     "unapproved_moved_vertex_count": 0,
     "max_unapproved_vertex_delta_stud": 0,
