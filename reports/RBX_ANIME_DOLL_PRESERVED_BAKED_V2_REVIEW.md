@@ -45,4 +45,6 @@
 - `r15_final_readiness = BLOCKED`;
 - `release_eligible = false`.
 
-A textura está comprovadamente inalterada em bytes. Isso não corrige nem oculta os defeitos geométricos do arquivo-fonte. A revisão confirma somente as provas locais indicadas e não declara aceitação no Roblox Studio.
+## Confirmação final
+
+A textura está comprovadamente inalterada em bytes. Isso não corrige nem oculta os defeitos geométricos do arquivo-fonte. A revisão confirma somente as provas locais indicadas e não declara aceitação no Roblox Studio. Os arquivos finais foram conferidos depois da exportação e o pacote recebeu SHA-256 próprio.
