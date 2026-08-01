@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xextigre.github.io/roblox-contract-brain/schemas/validation_run.schema.json",
+  "title": "Reproducible validation run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "artifact_sha256", "validator", "command", "started_at", "finished_at", "exit_code", "report_path", "report_sha256", "result"],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "artifact_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "validator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "version", "role"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "role": {"enum": ["generator", "validator", "studio", "release_gate"]}
+      }
+    },
+    "command": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "environment": {"type": "object"},
+    "started_at": {"type": "string", "format": "date-time"},
+    "finished_at": {"type": "string", "format": "date-time"},
+    "exit_code": {"type": "integer"},
+    "report_path": {"type": "string", "minLength": 1},
+    "report_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "result": {"enum": ["PASS", "FAIL", "ERROR", "NOT_RUN"]},
+    "covered_requirement_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"result": {"const": "PASS"}}},
+      "then": {
+        "properties": {
+          "exit_code": {"const": 0},
+          "covered_requirement_ids": {"minItems": 1}
+        },
+        "required": ["covered_requirement_ids"]
+      }
+    }
+  ]
+}
