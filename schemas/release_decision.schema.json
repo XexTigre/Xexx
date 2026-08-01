@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xextigre.github.io/roblox-contract-brain/schemas/release_decision.schema.json",
+  "title": "Computed release decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision_id", "artifact_sha256", "contract_sha256", "decision", "reasons", "input_digests", "computed_by", "computed_at", "decision_sha256"],
+  "properties": {
+    "decision_id": {"type": "string", "minLength": 1},
+    "artifact_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "contract_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "decision": {"enum": ["APPROVED", "REJECTED", "BLOCKED"]},
+    "reasons": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+    "input_digests": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+      "minProperties": 1
+    },
+    "computed_by": {"type": "string", "const": "fail_closed_gate"},
+    "computed_at": {"type": "string", "format": "date-time"},
+    "manual_override": {"type": "boolean", "const": false},
+    "decision_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"decision": {"const": "APPROVED"}}},
+      "then": {
+        "properties": {
+          "reasons": {"contains": {"const": "all mandatory requirements independently verified"}}
+        }
+      }
+    }
+  ]
+}
