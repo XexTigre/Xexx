@@ -1,0 +1,91 @@
+version: 1.2.0
+policy_type: mesh_preservation
+manual_override: false
+
+scopes:
+  texture_only:
+    lock_topology: true
+    lock_vertex_order: true
+    lock_rest_positions: true
+    lock_uv: true
+    lock_rig: true
+    lock_weights: true
+    lock_cages: true
+    lock_attachments: true
+  geometry_local_fix:
+    lock_topology: true
+    lock_vertex_order: true
+    lock_uv: true
+    lock_rig: true
+    lock_weights: true
+    lock_cages: true
+    lock_attachments: true
+    require_edit_mask: true
+  rig_weight_fix:
+    lock_topology: true
+    lock_vertex_order: true
+    lock_rest_positions: true
+    lock_uv: true
+    lock_armature_rest_pose: true
+    lock_cages: true
+    lock_attachments: true
+  cage_fix:
+    lock_render_geometry: true
+    lock_cage_topology: true
+    lock_cage_vertex_order: true
+    lock_cage_uv: true
+    lock_attachments: true
+  full_rebuild:
+    require_reference_fidelity: true
+    require_full_roblox_validation: true
+
+thresholds:
+  unchanged_vertex_delta_stud_max: 0.00001
+  normalized_weight_sum_error_max: 0.0001
+  max_bone_influences: 4
+  root_influenced_vertex_count_max: 0
+  unweighted_deform_vertex_count_max: 0
+  silhouette_iou_outside_edit_mask_min: 0.995
+  contour_chamfer_p95_px_max_at_1024: 1.0
+  rest_volume_ratio_min: 0.995
+  rest_volume_ratio_max: 1.005
+  symmetric_region_error_p95_stud_max: 0.002
+  joint_volume_retention_ratio_min: 0.90
+  new_self_intersection_count_max: 0
+  new_boundary_edge_count_max: 0
+  new_non_manifold_edge_count_max: 0
+
+required_body_poses:
+  - rest
+  - a_pose
+  - t_pose
+  - left_elbow_90
+  - right_elbow_90
+  - left_arm_overhead
+  - right_arm_overhead
+  - left_hip_flexion_90
+  - right_hip_flexion_90
+  - left_knee_90
+  - right_knee_90
+  - squat
+  - neck_left_45
+  - neck_right_45
+
+forbidden_by_default:
+  - decimate_apply
+  - remesh_apply
+  - voxel_remesh
+  - weld_apply
+  - merge_by_distance
+  - boolean_apply
+  - subdivision_apply
+  - shrinkwrap_apply
+  - surface_deform_apply
+  - mesh_deform_apply
+  - global_smooth
+  - cage_vertex_addition
+  - cage_vertex_deletion
+  - cage_uv_change
+  - blind_armature_transform_apply
+  - unvalidated_automatic_weights
+  - threshold_weakening
