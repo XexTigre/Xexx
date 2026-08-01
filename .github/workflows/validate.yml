@@ -16,15 +16,20 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install validation dependencies
-        run: python -m pip install -e .[dev]
-      - name: Parse JSON schemas
+        run: python -m pip install pytest jsonschema pyyaml
+      - name: Parse JSON schemas and YAML policies
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
+          import yaml
           for path in Path('schemas').glob('*.json'):
               json.loads(path.read_text())
-              print('OK', path)
+              print('JSON OK', path)
+          for root in ('policies', 'sources'):
+              for path in Path(root).glob('*.yaml'):
+                  yaml.safe_load(path.read_text())
+                  print('YAML OK', path)
           PY
       - name: Run adversarial tests
         run: pytest -q
