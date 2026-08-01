@@ -12,4 +12,4 @@
 
 The supplied screenshot demonstrates the prior backwards delivery. V15 is an empirical `+Z` correction. It must still be confirmed in Avatar Setup using **Manually Align Front** if Studio disagrees; local Blender proof does not constitute platform approval.
 
-The complete machine contract, all 950 raw renders, 19 boards, Blender scene and Blender round-trip GLB are included in the downloadable V15 evidence package. The full contract SHA-256 is `99ef015e39e51cb387597737b0a0e0d7e24e1cc1d590a3584506f567d6a8c233`.
+The complete machine contract, all 950 raw renders, 19 boards, Blender scene and Blender round-trip GLB are included in the downloadable V15 evidence package. The final full-contract SHA-256 is `8d5e3566461adb3d75f802a2db5cd72aee80dd25babbcbb7ca53950f219ef478`.
