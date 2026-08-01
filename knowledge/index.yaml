@@ -1,4 +1,4 @@
-version: 1.3.0
+version: 1.4.0
 entrypoints:
   router: specs/CROSS_SPEC_MATRIX.md
   policy: policies/cross_spec_policy.yaml
@@ -11,6 +11,7 @@ entrypoints:
   reaudit_policy: policies/scoped_reaudit_policy.yaml
   reaudit_schema: schemas/scoped_reaudit.schema.json
   reaudit_gate: src/scoped_reaudit_gate.py
+  exact_texture_transform_spec: specs/EXACT_TEXTURE_AND_TRANSFORM_SPEC.md
 pipelines:
   avatar_setup_body_input: specs/AVATAR_SETUP_INPUT_SPEC.md
   r15_final_body: specs/R15_FINAL_BODY_SPEC.md
@@ -21,4 +22,6 @@ release: specs/EXPORT_STUDIO_RELEASE_SPEC.md
 visual: specs/PIXEL_VISUAL_AUDIT_SPEC.md
 preservation: knowledge/MESH_DEFORMATION_PREVENTION.md
 reaudit_lessons: knowledge/AUDIT_TRUTH_SCOPE_LESSONS.md
+exact_texture_transform_lessons: knowledge/EXACT_TEXTURE_SAFE_TRANSFORM_LESSONS.md
+exact_texture_transform_case: examples/RBX_ANIME_DOLL_PRESERVED_BAKED_V2_manifest.json
 lessons: knowledge/ROBLOX_AVATAR_CROSS_KNOWLEDGE.md
