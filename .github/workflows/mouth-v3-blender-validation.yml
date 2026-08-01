@@ -1,12 +1,8 @@
 name: Mouth V3 Blender validation
 
+# Manual only until the reviewed validation-clone chunk set is complete and hash-valid.
+# This workflow is not a release gate for the V15 orientation candidate.
 on:
-  pull_request:
-    paths:
-      - "assets/mouth_v3/**"
-      - "blender_env/scripts/validate_mouth_v3.py"
-      - "blender_env/scripts/compose_mouth_v3_boards.py"
-      - ".github/workflows/mouth-v3-blender-validation.yml"
   workflow_dispatch:
 
 permissions:
@@ -18,17 +14,28 @@ jobs:
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
+
+      - name: Verify complete reviewed chunk set
+        run: |
+          test "$(find assets/mouth_v3/chunks_clone -maxdepth 1 -name 'validation_clone.glb.xz.b64.part*' | wc -l)" -eq 10
+          for n in $(seq -w 0 9); do
+            test -s "assets/mouth_v3/chunks_clone/validation_clone.glb.xz.b64.part${n}"
+          done
+
       - name: Install runtime libraries
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends libx11-6 libxi6 libxrender1 libxfixes3 libxxf86vm1 libgl1 libegl1 libxkbcommon0 libsm6 python3-pil nodejs npm ffmpeg
+
       - name: Cache Blender archive
         uses: actions/cache@v4
         with:
           path: .cache/blender
           key: blender-4.5.12-linux-x64
+
       - name: Bootstrap pinned Blender
         run: bash blender_env/bootstrap_linux.sh
+
       - name: Reconstruct geometry-rig validation clone from reviewed chunks
         run: |
           mkdir -p assets/mouth_v3 artifacts/mouth_v3
@@ -36,6 +43,7 @@ jobs:
           echo "f0c90eb91bf13da8b98885b59bb61f4bdde2b66fbc83d607cdb0b13cb7fb79ea  artifacts/mouth_v3/validation_clone.glb.xz" | sha256sum --check --strict
           xz --decompress --stdout artifacts/mouth_v3/validation_clone.glb.xz > assets/mouth_v3/RBX_ANIME_DOLL_3D_MOUTH_RIGGED_FACS17_V3_VALIDATION_CLONE.glb
           echo "c9fce46adcea04caf58158bdb9226cc76e11c59241983ec464ebdfcec8eb967a  assets/mouth_v3/RBX_ANIME_DOLL_3D_MOUTH_RIGGED_FACS17_V3_VALIDATION_CLONE.glb" | sha256sum --check --strict
+
       - name: Official Khronos glTF validation
         run: |
           npm install --no-save gltf-validator
@@ -44,15 +52,19 @@ jobs:
           const f='assets/mouth_v3/RBX_ANIME_DOLL_3D_MOUTH_RIGGED_FACS17_V3_VALIDATION_CLONE.glb';
           validator.validateBytes(new Uint8Array(fs.readFileSync(f)),{uri:f,maxIssues:1000}).then(r=>{fs.writeFileSync('artifacts/mouth_v3/RBX_ANIME_DOLL_3D_MOUTH_RIGGED_FACS17_V3_VALIDATION_CLONE.glb.khronos.json',JSON.stringify(r,null,2));if(r.issues.numErrors>0)throw new Error('Khronos errors '+r.issues.numErrors)}).catch(e=>{console.error(e);process.exit(1)});
           NODE
+
       - name: Import, evaluate, render and reopen in Blender 4.5.12
         run: |
           .tools/blender/4.5.12/blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python blender_env/scripts/validate_mouth_v3.py -- --input assets/mouth_v3/RBX_ANIME_DOLL_3D_MOUTH_RIGGED_FACS17_V3_VALIDATION_CLONE.glb --out artifacts/mouth_v3
+
       - name: Compose proof boards
         run: python3 blender_env/scripts/compose_mouth_v3_boards.py --root artifacts/mouth_v3
+
       - name: Encode Blender mouth-motion recordings
         run: |
           ffmpeg -y -framerate 30 -i artifacts/mouth_v3/renders/motion_jawdrop/%03d.png -c:v libx264 -pix_fmt yuv420p -movflags +faststart artifacts/mouth_v3/BLENDER_JAWDROP_MOTION.mp4
           ffmpeg -y -framerate 30 -i artifacts/mouth_v3/renders/motion_pucker/%03d.png -c:v libx264 -pix_fmt yuv420p -movflags +faststart artifacts/mouth_v3/BLENDER_PUCKER_MOTION.mp4
+
       - name: Upload Blender proof package
         uses: actions/upload-artifact@v4
         with:
