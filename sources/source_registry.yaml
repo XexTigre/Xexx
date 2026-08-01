@@ -1,0 +1,43 @@
+version: 1
+reviewed_at: 2026-07-31
+sources:
+  - id: github-spec-kit
+    authority: primary
+    url: https://github.com/github/spec-kit
+    purpose: spec_driven_development
+    max_age_days: 90
+  - id: json-schema-2020-12
+    authority: standard
+    url: https://json-schema.org/draft/2020-12
+    purpose: machine_readable_contracts
+    max_age_days: 365
+  - id: slsa-provenance-1.2
+    authority: standard
+    url: https://slsa.dev/spec/v1.2/provenance
+    purpose: artifact_provenance
+    max_age_days: 180
+  - id: rfc8785
+    authority: standard
+    url: https://www.rfc-editor.org/rfc/rfc8785
+    purpose: canonical_json_hashing
+    max_age_days: 3650
+  - id: roblox-avatar-setup
+    authority: primary
+    url: https://create.roblox.com/docs/avatar-setup/auto-setup-requirements
+    purpose: avatar_setup
+    max_age_days: 30
+  - id: roblox-character-bodies
+    authority: primary
+    url: https://create.roblox.com/docs/avatar/character-bodies/specifications
+    purpose: r15_body
+    max_age_days: 30
+  - id: roblox-dynamic-heads
+    authority: primary
+    url: https://create.roblox.com/docs/avatar/dynamic-heads/specifications
+    purpose: dynamic_head
+    max_age_days: 30
+  - id: khronos-gltf-validator
+    authority: primary
+    url: https://github.com/KhronosGroup/glTF-Validator
+    purpose: gltf_structure
+    max_age_days: 90
