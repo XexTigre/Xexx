@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xextigre.github.io/roblox-3d-contract-brain/schemas/mesh_preservation_contract.schema.json",
+  "title": "Roblox Mesh Preservation Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version", "pipeline_id", "change_scope", "artifact", "baseline",
+    "output", "authorization", "geometry", "rigging", "cages", "attachments",
+    "pose_tests", "evidence", "review", "decision"
+  ],
+  "properties": {
+    "contract_version": {"const": "1.2.0"},
+    "pipeline_id": {
+      "enum": ["avatar_setup_body_input", "r15_final_body", "dynamic_head", "rigid_accessory", "layered_accessory"]
+    },
+    "change_scope": {
+      "enum": ["texture_only", "geometry_local_fix", "rig_weight_fix", "cage_fix", "full_rebuild"]
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_path", "source_sha256", "output_path", "output_sha256"],
+      "properties": {
+        "source_path": {"type": "string", "minLength": 1},
+        "source_sha256": {"$ref": "#/$defs/sha256"},
+        "output_path": {"type": "string", "minLength": 1},
+        "output_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "baseline": {"$ref": "#/$defs/snapshot"},
+    "output": {"$ref": "#/$defs/snapshot"},
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["topology_change_authorized", "uv_change_authorized", "rest_shape_change_authorized", "authorized_modifier_ops", "edit_mask_sha256"],
+      "properties": {
+        "topology_change_authorized": {"type": "boolean"},
+        "uv_change_authorized": {"type": "boolean"},
+        "rest_shape_change_authorized": {"type": "boolean"},
+        "authorized_modifier_ops": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "edit_mask_sha256": {"anyOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]}
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unapproved_moved_vertex_count", "max_unapproved_vertex_delta_stud",
+        "new_boundary_edge_count", "new_non_manifold_edge_count", "new_self_intersection_count",
+        "silhouette_iou_outside_mask", "contour_chamfer_p95_px", "rest_volume_ratio",
+        "symmetric_region_error_p95_stud"
+      ],
+      "properties": {
+        "unapproved_moved_vertex_count": {"type": "integer", "minimum": 0},
+        "max_unapproved_vertex_delta_stud": {"type": "number", "minimum": 0},
+        "new_boundary_edge_count": {"type": "integer", "minimum": 0},
+        "new_non_manifold_edge_count": {"type": "integer", "minimum": 0},
+        "new_self_intersection_count": {"type": "integer", "minimum": 0},
+        "silhouette_iou_outside_mask": {"type": "number", "minimum": 0, "maximum": 1},
+        "contour_chamfer_p95_px": {"type": "number", "minimum": 0},
+        "rest_volume_ratio": {"type": "number", "exclusiveMinimum": 0},
+        "symmetric_region_error_p95_stud": {"type": "number", "minimum": 0}
+      }
+    },
+    "rigging": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_influences_observed", "root_influenced_vertex_count", "unweighted_deform_vertex_count",
+        "normalized_weight_sum_error_max", "armature_rest_pose_unchanged", "preserve_volume_changed",
+        "weight_transfer_method"
+      ],
+      "properties": {
+        "max_influences_observed": {"type": "integer", "minimum": 0},
+        "root_influenced_vertex_count": {"type": "integer", "minimum": 0},
+        "unweighted_deform_vertex_count": {"type": "integer", "minimum": 0},
+        "normalized_weight_sum_error_max": {"type": "number", "minimum": 0},
+        "armature_rest_pose_unchanged": {"type": "boolean"},
+        "preserve_volume_changed": {"type": "boolean"},
+        "weight_transfer_method": {
+          "enum": ["none", "nearest_face_interpolated", "projected_face_interpolated", "topology", "manual", "automatic_weights"]
+        }
+      }
+    },
+    "cages": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["present", "topology_unchanged", "vertex_order_unchanged", "uv_unchanged"],
+      "properties": {
+        "present": {"type": "boolean"},
+        "topology_unchanged": {"type": "boolean"},
+        "vertex_order_unchanged": {"type": "boolean"},
+        "uv_unchanged": {"type": "boolean"}
+      }
+    },
+    "attachments": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["names_unchanged", "transforms_unchanged"],
+      "properties": {
+        "names_unchanged": {"type": "boolean"},
+        "transforms_unchanged": {"type": "boolean"}
+      }
+    },
+    "modifier_operations": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true,
+      "default": []
+    },
+    "pose_tests": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["pose_id", "status", "joint_volume_retention_ratio", "new_self_intersection_count", "evidence_ids"],
+        "properties": {
+          "pose_id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["PASS", "FAIL", "BLOCKED", "NOT_RUN"]},
+          "joint_volume_retention_ratio": {"anyOf": [{"type": "number", "minimum": 0}, {"type": "null"}]},
+          "new_self_intersection_count": {"anyOf": [{"type": "integer", "minimum": 0}, {"type": "null"}]},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["evidence_id", "path", "sha256", "artifact_sha256", "tool", "tool_version"],
+        "properties": {
+          "evidence_id": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"$ref": "#/$defs/sha256"},
+          "artifact_sha256": {"$ref": "#/$defs/sha256"},
+          "tool": {"type": "string", "minLength": 1},
+          "tool_version": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generator_id", "validator_id", "reviewer_id"],
+      "properties": {
+        "generator_id": {"type": "string", "minLength": 1},
+        "validator_id": {"type": "string", "minLength": 1},
+        "reviewer_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "manual_override"],
+      "properties": {
+        "status": {"enum": ["APPROVED", "REJECTED", "BLOCKED"]},
+        "manual_override": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "vertex_count", "edge_count", "face_count", "triangle_count", "topology_sha256",
+        "vertex_order_sha256", "rest_position_sha256", "uv_sha256", "rig_sha256",
+        "cage_topology_sha256", "cage_uv_sha256", "attachment_sha256"
+      ],
+      "properties": {
+        "vertex_count": {"type": "integer", "minimum": 0},
+        "edge_count": {"type": "integer", "minimum": 0},
+        "face_count": {"type": "integer", "minimum": 0},
+        "triangle_count": {"type": "integer", "minimum": 0},
+        "topology_sha256": {"$ref": "#/$defs/sha256"},
+        "vertex_order_sha256": {"$ref": "#/$defs/sha256"},
+        "rest_position_sha256": {"$ref": "#/$defs/sha256"},
+        "uv_sha256": {"$ref": "#/$defs/sha256"},
+        "rig_sha256": {"$ref": "#/$defs/sha256"},
+        "cage_topology_sha256": {"$ref": "#/$defs/sha256"},
+        "cage_uv_sha256": {"$ref": "#/$defs/sha256"},
+        "attachment_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}
