@@ -1,0 +1,8 @@
+# Critical trust files require owner review
+/.specify/ @XexTigre
+/schemas/ @XexTigre
+/policies/ @XexTigre
+/sources/ @XexTigre
+/src/ @XexTigre
+/.github/workflows/ @XexTigre
+/AGENTS.md @XexTigre
