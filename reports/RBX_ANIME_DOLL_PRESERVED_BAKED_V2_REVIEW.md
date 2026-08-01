@@ -21,9 +21,9 @@
 
 ## Evidências produzidas
 
-- 12 azimutes renderizados do GLB reaberto;
-- prancha com linhas de altura, largura, profundidade, cintura, quadril e cabeça;
-- prova dos hashes idênticos da imagem, UV e índices;
+- 12 azimutes renderizados do GLB reaberto — SHA-256 `4fbd38fc4558e3da4d0faac4cd760a4f6ead3e8de539b2967630e9323bf06aa2`;
+- prancha com linhas de medidas — SHA-256 `78dc138eede159a4980155b847ddc1159634537db7c9a520b8876c36f15db2aa`;
+- prova de textura/UV/índices idênticos — SHA-256 `1e841a451054a9f7ae28d28aa15b8811a26371a167a30405ca3330e5068b3fe4`;
 - manifesto JSON do artefato e das decisões por escopo.
 
 ## Falhas preservadas e expostas
