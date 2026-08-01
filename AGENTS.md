@@ -7,15 +7,27 @@
 3. Read `knowledge/index.yaml` and `specs/CROSS_SPEC_MATRIX.md`.
 4. Select exactly one primary `pipeline_id` before rotating, renaming, partitioning, rigging, caging, or validating the asset.
 5. Select one `change_scope` and load `specs/MESH_PRESERVATION_AND_DEFORMATION_SPEC.md`, `policies/mesh_preservation_policy.yaml`, and `schemas/mesh_preservation_contract.schema.json`.
-6. Load the pipeline spec, `policies/cross_spec_policy.yaml`, and `schemas/cross_asset_contract.schema.json`.
-7. Create or update a measurable job specification.
-8. Lock the contract, original artifact, baseline, edit mask, and referenced inputs by SHA-256.
-9. Build without weakening thresholds and without overwriting the only original.
-10. Validate the exported artifact, not only the editor state.
-11. Compare baseline versus output and run all mandatory pose tests.
-12. Record claims and evidence separately.
-13. Run an independent review.
-14. Compute the release decision with the fail-closed gates.
+6. Select one `requested_scope` and load `specs/SCOPED_REAUDIT_SPEC.md`, `policies/scoped_reaudit_policy.yaml`, `schemas/scoped_reaudit.schema.json`, and `src/scoped_reaudit_gate.py`.
+7. Load the pipeline spec, `policies/cross_spec_policy.yaml`, and `schemas/cross_asset_contract.schema.json`.
+8. Create or update a measurable job specification.
+9. Lock the contract, original artifact, baseline, edit mask, and referenced inputs by SHA-256.
+10. Build without weakening thresholds and without overwriting the only original.
+11. Validate the exported artifact, not only the editor state.
+12. Compare baseline versus output and run all mandatory pose tests.
+13. Record claims and evidence separately.
+14. Run an independent review.
+15. Compute the scoped audit and release decisions with the fail-closed gates.
+
+## Scoped audit rules
+
+- Never use a generic `PASS`, `APPROVED`, `VALIDATED` or `READY_FOR_ROBLOX`. Always name the exact scope.
+- A lower scope never approves a higher scope: parsing the GLB does not prove Khronos conformance; preservation does not prove Avatar Setup readiness; Avatar Setup input readiness does not prove a final R15 body; local checks do not prove Studio or Marketplace acceptance.
+- Record absolute output defects separately from regressions. `new_boundary_edge_count=0` cannot clear pre-existing open boundaries.
+- `mesh_object_count` and `connected_component_count` are different metrics. Avatar Setup readiness requires a complete semantic component manifest, not only a summary count.
+- `doubleSided=true` is a rendering flag, not evidence that geometry is closed.
+- Project thresholds such as 62 views, UV gutter and visual similarity must be labeled `project`; do not present them as official Roblox limits.
+- `release_eligible=true` is allowed only for `ugc_marketplace` after exact-artifact Studio/UGC evidence.
+- The output of Avatar Setup is always a new artifact with a new hash, inventory, audit and release decision.
 
 ## Pipeline separation
 
@@ -46,8 +58,8 @@
 - Never treat tool completion as proof of correctness.
 - Never infer `PASS` from missing findings.
 - Missing evidence means `BLOCKED`.
-- Contradictory evidence means `REJECTED` until resolved.
-- A claim may be `VERIFIED` only when every referenced evidence file exists and its digest matches.
+- Contradictory evidence means `FAILED` or `REJECTED` until resolved.
+- A claim may be verified only when every referenced evidence file exists and its digest matches.
 - Never say an asset passed Roblox Studio unless a Studio report identifies the exact artifact SHA-256.
 - Never silently change a contract after generation begins.
 - Never let the generator approve its own critical output.
