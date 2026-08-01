@@ -10,15 +10,16 @@
 6. Select one `change_scope` and load `specs/MESH_PRESERVATION_AND_DEFORMATION_SPEC.md`, `policies/mesh_preservation_policy.yaml`, and `schemas/mesh_preservation_contract.schema.json`.
 7. Select one `requested_scope` and load `specs/SCOPED_REAUDIT_SPEC.md`, `policies/scoped_reaudit_policy.yaml`, `schemas/scoped_reaudit.schema.json`, and `src/scoped_reaudit_gate.py`.
 8. For enhanced visual evidence, load `specs/ENHANCED_EVIDENCE_AND_VISUALIZATION_SPEC.md`, `schemas/enhanced_evidence_contract.schema.json`, and `src/enhanced_evidence_gate.py`.
-9. Load the pipeline spec, `policies/cross_spec_policy.yaml`, and `schemas/cross_asset_contract.schema.json`.
-10. Create or update a measurable job specification.
-11. Lock the contract, original artifact, baseline, edit mask, and referenced inputs by SHA-256.
-12. Build without weakening thresholds and without overwriting the only original.
-13. Validate the exported artifact, not only the editor state.
-14. Compare baseline versus output and run all mandatory pose tests.
-15. Record claims and evidence separately.
-16. Run an independent review.
-17. Compute the scoped audit and release decisions with the fail-closed gates.
+9. For exponential visual review, load `specs/EXPONENTIAL_VISUAL_VALIDATION_SPEC.md`, `schemas/exponential_visual_contract.schema.json`, and `src/exponential_visual_gate.py`.
+10. Load the pipeline spec, `policies/cross_spec_policy.yaml`, and `schemas/cross_asset_contract.schema.json`.
+11. Create or update a measurable job specification.
+12. Lock the contract, original artifact, baseline, edit mask, and referenced inputs by SHA-256.
+13. Build without weakening thresholds and without overwriting the only original.
+14. Validate the exported artifact, not only the editor state.
+15. Compare baseline versus output and run all mandatory pose tests.
+16. Record claims and evidence separately.
+17. Run an independent review.
+18. Compute the scoped audit and release decisions with the fail-closed gates.
 
 ## Blender environment rules
 
@@ -41,6 +42,17 @@
 - Keep overlap, gutter, border clearance and bleed as separate checks.
 - Label IoU, SSIM, color, symmetry and gutter thresholds as internal project policies, not official Roblox limits.
 - Local evidence can produce only `CANDIDATE_LOCAL_REVIEWED` until official Khronos, locked Blender import/reopen, Avatar Setup, Studio and UGC gates pass for the exact artifact.
+
+## Exponential visual rules
+
+- Use the power-of-two spatial pyramid `1×1`, `2×2`, `4×4`, `8×8`; record the expected 85 cells per image and reject coverage totals that do not reconcile.
+- Run scales `1×`, `2×`, `4×`, `8×` and display the worst cells instead of publishing only averages.
+- Empty/empty silhouette cells are neutral matches; never convert them into false IoU failures.
+- External body regions require canonical visibility evidence. Mouthbag, upper teeth, lower teeth and tongue may be occluded externally and therefore require named geometry plus an isolated, hash-bound internal proof board.
+- Every render pass, crop, zoom, table and metric must identify the exact artifact SHA-256.
+- SSIM and MS-SSIM are supporting metrics only. They never substitute for geometry, Khronos, Blender reopen, Avatar Setup, Studio or UGC checks.
+- The generator cannot self-certify. The gate must independently reopen evidence files, recalculate hashes and recompute the decision.
+- `LOCAL_EXPONENTIAL_REVIEWED` never means `READY_FOR_ROBLOX` and never sets `release_eligible=true`.
 
 ## Scoped audit rules
 
