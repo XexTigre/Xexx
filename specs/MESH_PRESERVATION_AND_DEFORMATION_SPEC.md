@@ -67,6 +67,7 @@ O agente não pode promover o escopo durante a execução. Uma mudança de escop
 - Ordem declarada e hash da configuração.
 - `Preserve Volume` só pode ser ativado/desativado com comparação de poses.
 - Não aplicar o modificador destrutivamente antes da validação do rig.
+- Não aplicar transformações na armature após o binding sem autorização explícita, cópia de segurança e regressão completa de poses.
 
 ### Corrective Smooth
 
@@ -83,7 +84,7 @@ Decimate, Remesh, Weld, Boolean, aplicada de Subdivision, Shrinkwrap aplicada, S
 
 ## 8. Poses canônicas mínimas
 
-Para corpo rigado:
+Para corpo R15 rigado:
 
 - `rest`
 - `a_pose`
@@ -100,7 +101,15 @@ Para corpo rigado:
 - `neck_left_45`
 - `neck_right_45`
 
-Para cabeça dinâmica, acrescentar blink esquerdo/direito, mouth open, smile e frown.
+Para o pipeline de cabeça dinâmica isolada:
+
+- `blink_left`
+- `blink_right`
+- `mouth_open`
+- `smile`
+- `frown`
+
+Quando uma cabeça dinâmica fizer parte de um corpo completo, aplicar os dois conjuntos em contratos vinculados ao mesmo artefato final.
 
 Nenhuma pose obrigatória pode ficar `NOT_RUN`, `UNKNOWN` ou `SKIPPED` em uma decisão `APPROVED`.
 
