@@ -30,6 +30,13 @@
 - IoU p05 das células de silhueta: **1.000000**
 - ΔE00 p95 máximo: **1.335575**
 
+## Revisões adversariais confirmadas
+
+1. Células vazias em fonte e saída foram corrigidas para equivalência neutra, evitando falso IoU zero.
+2. Dentes e língua internos deixaram de exigir visibilidade externa e passaram a exigir geometria nomeada mais prancha isolada ligada ao hash.
+3. A primeira repetição dos testes em ambiente isolado encontrou uma falha de importação do pacote Python. O teste foi corrigido para inserir explicitamente a raiz do repositório e a suíte foi repetida.
+4. Resultado final: JSON Schema Draft 2020-12 válido, exemplo válido, Python compilado, gate real sem rejeições/bloqueios/avisos e **8 testes adversariais aprovados**.
+
 ## Estado
 
 `LOCAL_EXPONENTIAL_REVIEWED`. Khronos, reabertura do GLB no Blender bloqueado, Avatar Setup, Studio e UGC permanecem `NOT_RUN`; portanto `release_eligible=false`.
