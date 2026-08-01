@@ -1,0 +1,12 @@
+version: 1.0.0
+authority: internal_project_policy_not_official_roblox
+required_regions: 19
+views_per_region: 50
+total_raw_views: 950
+yaw_degrees: [0, 36, 72, 108, 144, 180, 216, 252, 288, 324]
+pitch_degrees: [-40, -20, 0, 20, 40]
+yaw_0_semantic: FRONT
+yaw_180_semantic: BACK
+symmetry_p95_stud_max: 0.001
+generic_ready_for_roblox_forbidden: true
+exact_hash_platform_retest_required_after_axis_change: true
