@@ -1,0 +1,14 @@
+version: 1.1.0
+entrypoints:
+  router: specs/CROSS_SPEC_MATRIX.md
+  policy: policies/cross_spec_policy.yaml
+  contract_schema: schemas/cross_asset_contract.schema.json
+pipelines:
+  avatar_setup_body_input: specs/AVATAR_SETUP_INPUT_SPEC.md
+  r15_final_body: specs/R15_FINAL_BODY_SPEC.md
+  dynamic_head: specs/DYNAMIC_HEAD_AND_CAGE_SPEC.md
+  rigid_accessory: specs/ACCESSORY_PIPELINES_SPEC.md
+  layered_accessory: specs/ACCESSORY_PIPELINES_SPEC.md
+release: specs/EXPORT_STUDIO_RELEASE_SPEC.md
+visual: specs/PIXEL_VISUAL_AUDIT_SPEC.md
+lessons: knowledge/ROBLOX_AVATAR_CROSS_KNOWLEDGE.md
