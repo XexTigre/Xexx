@@ -24,4 +24,5 @@ preservation: knowledge/MESH_DEFORMATION_PREVENTION.md
 reaudit_lessons: knowledge/AUDIT_TRUTH_SCOPE_LESSONS.md
 exact_texture_transform_lessons: knowledge/EXACT_TEXTURE_SAFE_TRANSFORM_LESSONS.md
 exact_texture_transform_case: examples/RBX_ANIME_DOLL_PRESERVED_BAKED_V2_manifest.json
+exact_texture_transform_review: reports/RBX_ANIME_DOLL_PRESERVED_BAKED_V2_REVIEW.md
 lessons: knowledge/ROBLOX_AVATAR_CROSS_KNOWLEDGE.md
