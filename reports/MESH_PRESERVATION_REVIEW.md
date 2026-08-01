@@ -14,7 +14,7 @@ PASS. Operações como Decimate, Remesh, Weld, Merge by Distance, Boolean, Smoot
 
 ## Revisão 4 — testes adversariais
 
-Sete cenários foram executados:
+Nove cenários foram executados:
 
 - caso completo aprovado;
 - textura alterando geometria rejeitada;
@@ -22,7 +22,13 @@ Sete cenários foram executados:
 - pose ausente bloqueada;
 - colapso de volume articular rejeitado;
 - autoaprovação rejeitada;
-- evidência adulterada rejeitada.
+- evidência adulterada rejeitada;
+- transformação cega de armature rejeitada;
+- Corrective Smooth global/não local rejeitado.
+
+## Revisão 5 — segunda passagem independente
+
+PASS. A segunda passagem corrigiu três lacunas: cabeça dinâmica agora usa poses faciais próprias em vez das poses corporais; o schema registra a configuração do Corrective Smooth; e o gate rejeita aplicação de transformações na armature após o binding sem autorização e regressão completa. A correção de cage também compara os hashes reais de topologia e UV.
 
 ## Limite honesto
 
