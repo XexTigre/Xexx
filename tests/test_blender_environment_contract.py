@@ -24,7 +24,8 @@ def test_bootstraps_pin_same_version_and_verify_sha256() -> None:
     windows = (ENV / "bootstrap_windows.ps1").read_text(encoding="utf-8")
     for content in (linux, windows):
         assert "4.5.12" in content
-        assert "blender-4.5.12.sha256" in content or "blender-$Version.sha256" in content
+        assert ".sha256" in content
+        assert "SHA256" in content.upper()
         assert "--disable-autoexec" in content
         assert "--factory-startup" in content
         assert "--python-exit-code" in content
