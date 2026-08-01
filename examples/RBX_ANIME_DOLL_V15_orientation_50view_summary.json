@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "full_contract_sha256": "99ef015e39e51cb387597737b0a0e0d7e24e1cc1d590a3584506f567d6a8c233",
+  "artifact": {
+    "file": "RBX_ANIME_DOLL_AVATAR_SETUP_FRONT_3D_MOUTH_SYMMETRIC_V15.glb",
+    "sha256": "75a2dd5c6403b5846264a1f5730444d530aa669e193028f69a9f2ba0026d9bdd",
+    "triangles": 9913,
+    "triangle_limit": 10742,
+    "mesh_count": 22
+  },
+  "orientation": {
+    "official_documented_avatar_setup_front_axis": "-Z",
+    "delivered_empirical_front_axis": "+Z",
+    "yaw0_semantic": "FRONT",
+    "yaw180_semantic": "BACK",
+    "failure_screenshot_sha256": "c122d622e005ff75d9c8506b9690917a25daafeca5f808e9bad9ddc918591de3",
+    "manual_align_front_required_if_preview_disagrees": true
+  },
+  "geometry": {
+    "degenerate_triangles": 0,
+    "physical_nonmanifold_edges": 0,
+    "unexpected_boundary_edges": 0,
+    "allowed_face_mouth_boundary_edges": 33
+  },
+  "mouth": {
+    "true_3d": true,
+    "decal_2d_present": false,
+    "preexisting_cage_present": false,
+    "components": ["UpperLip_Component", "LowerLip_Component", "UpperTeeth_Component", "LowerTeeth_Component", "Tongue_Component", "MouthBag_Component"]
+  },
+  "symmetry": {
+    "plane_x": 0.0,
+    "internal_policy_p95_stud_max": 0.001,
+    "eyes_p95": 0.00005523860454559326,
+    "arms_p95": 0.0,
+    "hands_p95": 0.0,
+    "upper_legs_p95": 0.000055223703384399414,
+    "lower_legs_p95": 0.00005523860454559326,
+    "feet_p95": 0.00005523860454559326,
+    "all_pass": true
+  },
+  "blender_proof": {
+    "version": "4.5.12 LTS",
+    "build_hash": "84afd5f785f7",
+    "region_count": 19,
+    "views_per_region": 50,
+    "raw_render_count": 950,
+    "required_regions": ["full_body", "head", "left_eye", "right_eye", "mouth_external", "mouth_internal", "neck", "upper_torso", "lower_torso", "left_arm", "right_arm", "left_hand", "right_hand", "left_upper_leg", "right_upper_leg", "left_lower_leg", "right_lower_leg", "left_foot", "right_foot"],
+    "overview_board_sha256": "5c2fb027f95ba83db799560131e7d0905b6480420510d81755f4147ebfe029ca",
+    "orientation_board_sha256": "e6924543e539ae465884714439d52bba60750b22c61b2e54a63842dab038467f",
+    "symmetry_board_sha256": "21264cac0c773349c1ee387b4fca2c0cbab70a14da9c1c2a1383dc8a9df3ce08",
+    "blend_sha256": "bfe124f09fa7a325c3d4aa45c2fe184104ead820796705c57dff468fb07783ac",
+    "roundtrip_glb_sha256": "b464881a421c1d9a443289af01eca962c9a015473d9e4c81ccb37a9a1ac60f8e"
+  },
+  "platform_gates": {
+    "roblox_avatar_setup_exact_hash": "NOT_RUN",
+    "roblox_studio_playtest_exact_hash": "NOT_RUN",
+    "ugc_marketplace_validation": "NOT_RUN"
+  },
+  "decision": {
+    "status": "LOCAL_BLENDER_50VIEW_REVIEWED",
+    "release_eligible": false,
+    "manual_override": false
+  }
+}
