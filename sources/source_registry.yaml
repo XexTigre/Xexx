@@ -1,4 +1,4 @@
-version: 1.2
+version: 1.3
 reviewed_at: 2026-07-31
 sources:
   - id: github-spec-kit
@@ -24,7 +24,7 @@ sources:
   - id: roblox-avatar-setup
     authority: primary
     url: https://create.roblox.com/docs/avatar-setup/auto-setup-requirements
-    purpose: avatar_setup_input
+    purpose: avatar_setup_input_and_semantic_component_requirements
     max_age_days: 30
   - id: roblox-avatar-setup-overview
     authority: primary
@@ -34,7 +34,7 @@ sources:
   - id: roblox-character-bodies
     authority: primary
     url: https://create.roblox.com/docs/avatar/character-bodies/specifications
-    purpose: r15_final_body
+    purpose: r15_final_body_parts_rig_weights_transforms
     max_age_days: 30
   - id: roblox-character-body-components
     authority: primary
@@ -79,12 +79,12 @@ sources:
   - id: roblox-studio-character-test
     authority: primary
     url: https://create.roblox.com/docs/art/characters/testing/studio
-    purpose: studio_playtest
+    purpose: exact_artifact_studio_import_and_playtest
     max_age_days: 30
   - id: roblox-ugc-validation
     authority: primary
     url: https://create.roblox.com/docs/marketplace/validation-system
-    purpose: ugc_validation_categories
+    purpose: ugc_release_validation_categories
     max_age_days: 30
   - id: roblox-marketplace-policy
     authority: primary
@@ -111,6 +111,11 @@ sources:
     url: https://docs.blender.org/manual/en/latest/modeling/modifiers/deform/corrective_smooth.html
     purpose: local_joint_deformation_correction
     max_age_days: 90
+  - id: blender-smooth-vertices
+    authority: primary
+    url: https://docs.blender.org/manual/en/latest/modeling/meshes/editing/vertex/smooth_vertices.html
+    purpose: explain_global_smooth_shape_drift_risk
+    max_age_days: 90
   - id: blender-apply-transforms
     authority: primary
     url: https://docs.blender.org/manual/en/latest/scene_layout/object/editing/transform/apply.html
@@ -119,5 +124,5 @@ sources:
   - id: khronos-gltf-validator
     authority: primary
     url: https://github.com/KhronosGroup/glTF-Validator
-    purpose: gltf_structure
+    purpose: gltf_2_spec_validation_and_json_report
     max_age_days: 90
