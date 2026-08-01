@@ -1,4 +1,4 @@
-version: 1.1
+version: 1.2
 reviewed_at: 2026-07-31
 sources:
   - id: github-spec-kit
@@ -25,6 +25,11 @@ sources:
     authority: primary
     url: https://create.roblox.com/docs/avatar-setup/auto-setup-requirements
     purpose: avatar_setup_input
+    max_age_days: 30
+  - id: roblox-avatar-setup-overview
+    authority: primary
+    url: https://create.roblox.com/docs/avatar-setup
+    purpose: automatic_rigging_skinning_caging_partitioning
     max_age_days: 30
   - id: roblox-character-bodies
     authority: primary
@@ -86,6 +91,31 @@ sources:
     url: https://create.roblox.com/docs/marketplace/marketplace-policy
     purpose: marketplace_policy
     max_age_days: 30
+  - id: blender-armature-modifier
+    authority: primary
+    url: https://docs.blender.org/manual/en/latest/modeling/modifiers/deform/armature.html
+    purpose: armature_deformation_and_preserve_volume
+    max_age_days: 90
+  - id: blender-weight-paint-editing
+    authority: primary
+    url: https://docs.blender.org/manual/en/latest/sculpt_paint/weight_paint/editing.html
+    purpose: normalize_clean_limit_total_mirror_transfer_weights
+    max_age_days: 90
+  - id: blender-data-transfer
+    authority: primary
+    url: https://docs.blender.org/manual/en/latest/modeling/modifiers/modify/data_transfer.html
+    purpose: weight_and_vertex_data_mapping
+    max_age_days: 90
+  - id: blender-corrective-smooth
+    authority: primary
+    url: https://docs.blender.org/manual/en/latest/modeling/modifiers/deform/corrective_smooth.html
+    purpose: local_joint_deformation_correction
+    max_age_days: 90
+  - id: blender-apply-transforms
+    authority: primary
+    url: https://docs.blender.org/manual/en/latest/scene_layout/object/editing/transform/apply.html
+    purpose: safe_transform_application_timing
+    max_age_days: 90
   - id: khronos-gltf-validator
     authority: primary
     url: https://github.com/KhronosGroup/glTF-Validator
