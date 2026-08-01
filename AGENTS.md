@@ -9,15 +9,16 @@
 5. Select exactly one primary `pipeline_id` before rotating, renaming, partitioning, rigging, caging, or validating the asset.
 6. Select one `change_scope` and load `specs/MESH_PRESERVATION_AND_DEFORMATION_SPEC.md`, `policies/mesh_preservation_policy.yaml`, and `schemas/mesh_preservation_contract.schema.json`.
 7. Select one `requested_scope` and load `specs/SCOPED_REAUDIT_SPEC.md`, `policies/scoped_reaudit_policy.yaml`, `schemas/scoped_reaudit.schema.json`, and `src/scoped_reaudit_gate.py`.
-8. Load the pipeline spec, `policies/cross_spec_policy.yaml`, and `schemas/cross_asset_contract.schema.json`.
-9. Create or update a measurable job specification.
-10. Lock the contract, original artifact, baseline, edit mask, and referenced inputs by SHA-256.
-11. Build without weakening thresholds and without overwriting the only original.
-12. Validate the exported artifact, not only the editor state.
-13. Compare baseline versus output and run all mandatory pose tests.
-14. Record claims and evidence separately.
-15. Run an independent review.
-16. Compute the scoped audit and release decisions with the fail-closed gates.
+8. For enhanced visual evidence, load `specs/ENHANCED_EVIDENCE_AND_VISUALIZATION_SPEC.md`, `schemas/enhanced_evidence_contract.schema.json`, and `src/enhanced_evidence_gate.py`.
+9. Load the pipeline spec, `policies/cross_spec_policy.yaml`, and `schemas/cross_asset_contract.schema.json`.
+10. Create or update a measurable job specification.
+11. Lock the contract, original artifact, baseline, edit mask, and referenced inputs by SHA-256.
+12. Build without weakening thresholds and without overwriting the only original.
+13. Validate the exported artifact, not only the editor state.
+14. Compare baseline versus output and run all mandatory pose tests.
+15. Record claims and evidence separately.
+16. Run an independent review.
+17. Compute the scoped audit and release decisions with the fail-closed gates.
 
 ## Blender environment rules
 
@@ -30,6 +31,16 @@
 - Use the generated workspace collections: immutable source, working copy, rig/cages/attachments, evidence, quarantine, and export.
 - The environment report and workspace validation report are mandatory evidence for Blender-generated claims.
 - A different Blender version produces a different environment identity and requires fresh regression tests.
+
+## Enhanced evidence rules
+
+- Generate the canonical 62-view set from the exact artifact: 12 yaws at five pitches plus the two poles.
+- Hash every board, report and measurement and bind it to the artifact SHA-256.
+- Measure both render-index topology and physical position-consolidated topology; never confuse attribute seams with holes.
+- Use exact polygon intersection area for UV overlap. Raster multi-coverage is diagnostic only because shared borders can be counted repeatedly.
+- Keep overlap, gutter, border clearance and bleed as separate checks.
+- Label IoU, SSIM, color, symmetry and gutter thresholds as internal project policies, not official Roblox limits.
+- Local evidence can produce only `CANDIDATE_LOCAL_REVIEWED` until official Khronos, locked Blender import/reopen, Avatar Setup, Studio and UGC gates pass for the exact artifact.
 
 ## Scoped audit rules
 
