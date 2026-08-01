@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xextigre.github.io/roblox-contract-brain/orientation-50view-delivery.schema.json",
+  "type": "object",
+  "required": ["schema_version", "artifact", "orientation", "origin_scale", "geometry", "mouth", "symmetry", "blender_proof", "platform_gates", "decision"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "artifact": {
+      "type": "object",
+      "required": ["path", "sha256", "triangles", "triangle_limit", "mesh_count"],
+      "properties": {
+        "path": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "triangles": {"type": "integer", "maximum": 10742},
+        "triangle_limit": {"const": 10742},
+        "mesh_count": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": true
+    },
+    "orientation": {
+      "type": "object",
+      "required": ["official_documented_avatar_setup_front_axis", "delivered_empirical_front_axis", "yaw0_semantic", "yaw180_semantic", "source_failure_screenshot", "manual_align_front_required_if_preview_disagrees", "truth_boundary"],
+      "properties": {
+        "official_documented_avatar_setup_front_axis": {"const": "-Z"},
+        "delivered_empirical_front_axis": {"enum": ["-Z", "+Z"]},
+        "yaw0_semantic": {"const": "FRONT"},
+        "yaw180_semantic": {"const": "BACK"},
+        "source_failure_screenshot": {
+          "type": "object",
+          "required": ["path", "sha256"],
+          "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+          "additionalProperties": true
+        },
+        "manual_align_front_required_if_preview_disagrees": {"const": true},
+        "truth_boundary": {"type": "string", "minLength": 40}
+      },
+      "additionalProperties": true
+    },
+    "origin_scale": {
+      "type": "object",
+      "required": ["unit", "foot_center_x", "ground_y", "transforms_baked"],
+      "properties": {
+        "unit": {"const": "stud"},
+        "foot_center_x": {"type": "number", "minimum": -0.001, "maximum": 0.001},
+        "ground_y": {"type": "number", "minimum": -0.001, "maximum": 0.001},
+        "transforms_baked": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "geometry": {
+      "type": "object",
+      "required": ["degenerate_triangles", "physical_nonmanifold_edges_total", "unexpected_boundary_edges", "allowed_face_boundary_edges", "per_object"],
+      "properties": {
+        "degenerate_triangles": {"const": 0},
+        "physical_nonmanifold_edges_total": {"const": 0},
+        "unexpected_boundary_edges": {"const": 0},
+        "allowed_face_boundary_edges": {"type": "integer", "minimum": 0},
+        "per_object": {"type": "object", "minProperties": 1}
+      },
+      "additionalProperties": true
+    },
+    "mouth": {
+      "type": "object",
+      "required": ["true_3d", "decal_2d_present", "cage_present", "components"],
+      "properties": {
+        "true_3d": {"const": true},
+        "decal_2d_present": {"const": false},
+        "cage_present": {"const": false},
+        "components": {"type": "array", "minItems": 6, "uniqueItems": true}
+      },
+      "additionalProperties": true
+    },
+    "symmetry": {
+      "type": "object",
+      "required": ["plane_x", "policy_p95_stud_max", "measurements", "all_pass"],
+      "properties": {
+        "plane_x": {"const": 0.0},
+        "policy_p95_stud_max": {"type": "number", "exclusiveMinimum": 0},
+        "measurements": {"type": "object", "minProperties": 9},
+        "all_pass": {"const": true}
+      },
+      "additionalProperties": true
+    },
+    "blender_proof": {
+      "type": "object",
+      "required": ["version", "build_hash", "region_count", "views_per_region", "raw_render_count", "required_regions", "regions", "proof_boards", "blend", "roundtrip"],
+      "properties": {
+        "version": {"const": "4.5.12 LTS"},
+        "build_hash": {"const": "84afd5f785f7"},
+        "region_count": {"const": 19},
+        "views_per_region": {"const": 50},
+        "raw_render_count": {"const": 950},
+        "required_regions": {"const": ["full_body", "head", "left_eye", "right_eye", "mouth_external", "mouth_internal", "neck", "upper_torso", "lower_torso", "left_arm", "right_arm", "left_hand", "right_hand", "left_upper_leg", "right_upper_leg", "left_lower_leg", "right_lower_leg", "left_foot", "right_foot"]},
+        "regions": {
+          "type": "array",
+          "minItems": 19,
+          "maxItems": 19,
+          "items": {
+            "type": "object",
+            "required": ["region_id", "view_count", "board_path", "board_sha256", "raw_views"],
+            "properties": {
+              "region_id": {"enum": ["full_body", "head", "left_eye", "right_eye", "mouth_external", "mouth_internal", "neck", "upper_torso", "lower_torso", "left_arm", "right_arm", "left_hand", "right_hand", "left_upper_leg", "right_upper_leg", "left_lower_leg", "right_lower_leg", "left_foot", "right_foot"]},
+              "view_count": {"const": 50},
+              "board_path": {"type": "string"},
+              "board_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              "raw_views": {
+                "type": "array",
+                "minItems": 50,
+                "maxItems": 50,
+                "items": {
+                  "type": "object",
+                  "required": ["path", "sha256", "yaw", "pitch"],
+                  "properties": {
+                    "path": {"type": "string"},
+                    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                    "yaw": {"enum": [0, 36, 72, 108, 144, 180, 216, 252, 288, 324]},
+                    "pitch": {"enum": [-40, -20, 0, 20, 40]}
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "proof_boards": {
+          "type": "array",
+          "minItems": 3,
+          "items": {"type": "object", "required": ["path", "sha256"], "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}, "additionalProperties": true}
+        },
+        "blend": {"type": "object", "required": ["path", "sha256"], "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}, "additionalProperties": true},
+        "roundtrip": {"type": "object", "required": ["path", "sha256"], "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}, "additionalProperties": true}
+      },
+      "additionalProperties": true
+    },
+    "platform_gates": {
+      "type": "object",
+      "required": ["roblox_avatar_setup_exact_hash", "roblox_studio_playtest_exact_hash", "ugc_marketplace_validation"],
+      "additionalProperties": {"enum": ["PASS", "FAIL", "NOT_RUN", "BLOCKED"]}
+    },
+    "decision": {
+      "type": "object",
+      "required": ["status", "release_eligible", "manual_override"],
+      "properties": {
+        "status": {"enum": ["LOCAL_BLENDER_50VIEW_REVIEWED", "BLOCKED", "REJECTED", "RELEASE_APPROVED"]},
+        "release_eligible": {"type": "boolean"},
+        "manual_override": {"const": false}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
