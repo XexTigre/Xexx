@@ -1,0 +1,28 @@
+version: 1.0.0
+authority: internal_project_policy_not_official_roblox
+input: exported_glb
+required_components:
+  - Head
+  - UpperLip
+  - LowerLip
+  - MouthBag
+  - UpperTeeth
+  - LowerTeeth
+  - Tongue
+front_view_grid:
+  x_samples: 29
+  y_samples: 17
+thresholds:
+  suspicious_patch_frontmost_ratio_max: 0.005
+  suspicious_patch_width_to_lips_max: 1.5
+  mouthbag_external_frontmost_samples_max: 0
+material_rules:
+  external_face_patch_requires_base_color_texture: true
+  suspicious_face_patch_double_sided_forbidden: true
+  alpha_mode_for_external_face_patch: OPAQUE
+delivery_rules:
+  parse_exported_glb: true
+  exact_sha256_required: true
+  closeup_from_exact_export_required: true
+  generic_pass_forbidden: true
+  platform_gates_separate: true
