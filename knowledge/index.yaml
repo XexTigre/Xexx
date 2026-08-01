@@ -1,4 +1,4 @@
-version: 2.0.0
+version: 2.0.1
 entrypoints:
   router: specs/CROSS_SPEC_MATRIX.md
   policy: policies/cross_spec_policy.yaml
@@ -22,6 +22,7 @@ entrypoints:
   exponential_visual_gate: src/exponential_visual_gate.py
   non_destructive_rig_spec: specs/NON_DESTRUCTIVE_BODY_FACE_RIG_SPEC.md
   rigging_sources: sources/rigging_50_primary_sources.yaml
+  studio_avatar_previewer_stylelink_fix: roblox_studio/fix_avatar_previewer_stylelinks.lua
   blender_environment_lock: blender_env/environment.lock.json
   blender_environment_readme: blender_env/README.md
   blender_environment_verifier: blender_env/scripts/verify_environment.py
@@ -42,6 +43,7 @@ geometric_seam_audit_lessons: knowledge/GEOMETRIC_WATERTIGHT_SEAM_AUDIT.md
 enhanced_evidence_lessons: knowledge/ENHANCED_EVIDENCE_VISUALIZATION_LESSONS.md
 exponential_visual_lessons: knowledge/EXPONENTIAL_VISUAL_VALIDATION_LESSONS.md
 rigging_50_source_lessons: knowledge/NON_DESTRUCTIVE_RIGGING_50_SOURCE_LESSONS.md
+studio_avatar_previewer_stylelink_lessons: knowledge/STUDIO_AVATAR_PREVIEWER_STYLELINK_WORKAROUND.md
 blender_environment_lessons: knowledge/BLENDER_EXECUTION_ENVIRONMENT.md
 safe_repair_case: examples/RBX_ANIME_DOLL_SAFE_REPAIR_V2_manifest.json
 safe_repair_review: reports/RBX_ANIME_DOLL_SAFE_REPAIR_V2_REVIEW.md
