@@ -1,0 +1,44 @@
+version: 1.3.0
+policy_type: scoped_reaudit
+manual_override: false
+statuses:
+- SATISFIED
+- FAILED
+- BLOCKED
+scope_order:
+- container_parse
+- gltf_spec_validation
+- preservation
+- avatar_setup_input_readiness
+- r15_final_readiness
+- studio_playtest
+- ugc_marketplace
+rules:
+  no_scope_escalation: true
+  release_eligible_only_for: ugc_marketplace
+  require_exact_artifact_hash: true
+  require_distinct_generator_validator_reviewer: true
+  absolute_metrics_required: true
+  semantic_component_manifest_required_for_avatar_setup: true
+  double_sided_is_not_watertight_evidence: true
+  avatar_setup_output_is_new_artifact: true
+project_quality:
+  enforce_only_when_requested: true
+  uv_gutter_px_2048_min: 16.0
+  uv_border_clearance_px_2048_min: 16.0
+  uv_bleed_px_min: 8.0
+  canonical_views: 62
+official_avatar_setup:
+  triangle_total_max: 10742
+  front_axis: -Z
+  allowed_poses:
+  - A
+  - T
+  rig_required: false
+official_r15_final:
+  body_part_mesh_count: 15
+  front_axis: +Z
+  up_axis: +Y
+  outer_cage_count: 15
+  attachment_count: 19
+  transforms_identity: true
