@@ -5,18 +5,31 @@
 1. Read `.specify/memory/constitution.md`.
 2. Read `sources/source_registry.yaml` and reject stale mandatory sources.
 3. Read `knowledge/index.yaml` and `specs/CROSS_SPEC_MATRIX.md`.
-4. Select exactly one primary `pipeline_id` before rotating, renaming, partitioning, rigging, caging, or validating the asset.
-5. Select one `change_scope` and load `specs/MESH_PRESERVATION_AND_DEFORMATION_SPEC.md`, `policies/mesh_preservation_policy.yaml`, and `schemas/mesh_preservation_contract.schema.json`.
-6. Select one `requested_scope` and load `specs/SCOPED_REAUDIT_SPEC.md`, `policies/scoped_reaudit_policy.yaml`, `schemas/scoped_reaudit.schema.json`, and `src/scoped_reaudit_gate.py`.
-7. Load the pipeline spec, `policies/cross_spec_policy.yaml`, and `schemas/cross_asset_contract.schema.json`.
-8. Create or update a measurable job specification.
-9. Lock the contract, original artifact, baseline, edit mask, and referenced inputs by SHA-256.
-10. Build without weakening thresholds and without overwriting the only original.
-11. Validate the exported artifact, not only the editor state.
-12. Compare baseline versus output and run all mandatory pose tests.
-13. Record claims and evidence separately.
-14. Run an independent review.
-15. Compute the scoped audit and release decisions with the fail-closed gates.
+4. Before any Blender execution, read `blender_env/environment.lock.json` and `knowledge/BLENDER_EXECUTION_ENVIRONMENT.md`; use only the pinned version and safe runner.
+5. Select exactly one primary `pipeline_id` before rotating, renaming, partitioning, rigging, caging, or validating the asset.
+6. Select one `change_scope` and load `specs/MESH_PRESERVATION_AND_DEFORMATION_SPEC.md`, `policies/mesh_preservation_policy.yaml`, and `schemas/mesh_preservation_contract.schema.json`.
+7. Select one `requested_scope` and load `specs/SCOPED_REAUDIT_SPEC.md`, `policies/scoped_reaudit_policy.yaml`, `schemas/scoped_reaudit.schema.json`, and `src/scoped_reaudit_gate.py`.
+8. Load the pipeline spec, `policies/cross_spec_policy.yaml`, and `schemas/cross_asset_contract.schema.json`.
+9. Create or update a measurable job specification.
+10. Lock the contract, original artifact, baseline, edit mask, and referenced inputs by SHA-256.
+11. Build without weakening thresholds and without overwriting the only original.
+12. Validate the exported artifact, not only the editor state.
+13. Compare baseline versus output and run all mandatory pose tests.
+14. Record claims and evidence separately.
+15. Run an independent review.
+16. Compute the scoped audit and release decisions with the fail-closed gates.
+
+## Blender environment rules
+
+- Production automation uses Blender `4.5.12 LTS` until a reviewed migration changes `blender_env/environment.lock.json`.
+- Downloads must be obtained from the official Blender release directory and verified against its SHA-256 manifest before extraction.
+- Automated runs must use `--background --factory-startup --disable-autoexec --python-exit-code 1`.
+- Never enable embedded Python execution for an uploaded or external `.blend` file.
+- Unit System must be `None`, Rotation must be `Degrees`, and 1 Blender Unit is treated as 1 stud.
+- Blender's native workspace remains `+Z` up; Studio contracts are evaluated as `+Y` up after import/export conversion.
+- Use the generated workspace collections: immutable source, working copy, rig/cages/attachments, evidence, quarantine, and export.
+- The environment report and workspace validation report are mandatory evidence for Blender-generated claims.
+- A different Blender version produces a different environment identity and requires fresh regression tests.
 
 ## Scoped audit rules
 
