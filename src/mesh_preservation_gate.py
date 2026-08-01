@@ -12,6 +12,8 @@ REQUIRED_BODY_POSES = {
     "neck_left_45", "neck_right_45",
 }
 
+REQUIRED_HEAD_POSES = {"blink_left", "blink_right", "mouth_open", "smile", "frown"}
+
 FORBIDDEN_DEFAULT = {
     "decimate_apply", "remesh_apply", "voxel_remesh", "weld_apply",
     "merge_by_distance", "boolean_apply", "subdivision_apply", "shrinkwrap_apply",
@@ -75,6 +77,10 @@ def evaluate(document: dict[str, Any], root: Path) -> dict[str, Any]:
     baseline = document["baseline"]
     output = document["output"]
     auth = document["authorization"]
+    if scope == "texture_only" and auth["rest_shape_change_authorized"]:
+        rejected.append("TEXTURE_SCOPE_AUTHORIZES_SHAPE_CHANGE")
+    if scope == "geometry_local_fix" and not auth["rest_shape_change_authorized"]:
+        rejected.append("LOCAL_FIX_WITHOUT_SHAPE_AUTHORIZATION")
 
     topology_keys = ("vertex_count", "edge_count", "face_count", "topology_sha256", "vertex_order_sha256")
     render_lock_keys = topology_keys + ("rest_position_sha256", "uv_sha256")
@@ -104,6 +110,24 @@ def evaluate(document: dict[str, Any], root: Path) -> dict[str, Any]:
         cages = document["cages"]
         if not cages["topology_unchanged"] or not cages["vertex_order_unchanged"] or not cages["uv_unchanged"]:
             rejected.append("CAGE_TEMPLATE_CONTRACT_BROKEN")
+        if baseline["cage_topology_sha256"] != output["cage_topology_sha256"]:
+            rejected.append("CAGE_TOPOLOGY_HASH_CHANGED")
+        if baseline["cage_uv_sha256"] != output["cage_uv_sha256"]:
+            rejected.append("CAGE_UV_HASH_CHANGED")
+
+    controls = document["deformation_controls"]
+    if controls["armature_transform_applied_after_binding"] and "armature_transform_after_binding" not in auth["authorized_modifier_ops"]:
+        rejected.append("BLIND_ARMATURE_TRANSFORM_APPLY")
+    corrective = controls["corrective_smooth"]
+    if corrective["used"]:
+        if not 0.0 <= corrective["factor"] <= 1.0:
+            rejected.append("CORRECTIVE_SMOOTH_FACTOR_OUT_OF_RANGE")
+        if not corrective["stack_after_armature"]:
+            rejected.append("CORRECTIVE_SMOOTH_WRONG_STACK_ORDER")
+        if not corrective["restricted_by_vertex_group"]:
+            rejected.append("CORRECTIVE_SMOOTH_NOT_LOCAL")
+        if corrective["bind_required"] and not corrective["bind_completed"]:
+            blocked.append("CORRECTIVE_SMOOTH_BIND_MISSING")
 
     geometry = document["geometry"]
     if geometry["unapproved_moved_vertex_count"] > 0:
@@ -143,12 +167,17 @@ def evaluate(document: dict[str, Any], root: Path) -> dict[str, Any]:
     for op in sorted(unauthorized_forbidden):
         rejected.append(f"FORBIDDEN_OPERATION:{op}")
 
-    if document["pipeline_id"] in {"r15_final_body", "dynamic_head"}:
+    required_poses: set[str] = set()
+    if document["pipeline_id"] == "r15_final_body":
+        required_poses = REQUIRED_BODY_POSES
+    elif document["pipeline_id"] == "dynamic_head":
+        required_poses = REQUIRED_HEAD_POSES
+    if required_poses:
         pose_by_id = {item["pose_id"]: item for item in document["pose_tests"]}
-        missing_poses = REQUIRED_BODY_POSES - set(pose_by_id)
+        missing_poses = required_poses - set(pose_by_id)
         for pose_id in sorted(missing_poses):
             blocked.append(f"POSE_MISSING:{pose_id}")
-        for pose_id in sorted(REQUIRED_BODY_POSES & set(pose_by_id)):
+        for pose_id in sorted(required_poses & set(pose_by_id)):
             pose = pose_by_id[pose_id]
             if pose["status"] in {"BLOCKED", "NOT_RUN"}:
                 blocked.append(f"POSE_NOT_AVAILABLE:{pose_id}")
