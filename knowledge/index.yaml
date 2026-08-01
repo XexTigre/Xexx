@@ -1,4 +1,4 @@
-version: 2.2.0
+version: 2.3.0
 entrypoints:
   router: specs/CROSS_SPEC_MATRIX.md
   policy: policies/cross_spec_policy.yaml
@@ -27,6 +27,11 @@ entrypoints:
   orientation_50view_policy: policies/orientation_50view_delivery_policy.yaml
   orientation_50view_schema: schemas/orientation_50view_delivery.schema.json
   orientation_50view_gate: src/orientation_50view_gate.py
+  face_visibility_spec: specs/FACE_VISIBILITY_AND_MATERIAL_OCCLUSION_SPEC.md
+  face_visibility_policy: policies/face_visibility_policy.yaml
+  face_visibility_schema: schemas/face_visibility_contract.schema.json
+  face_visibility_gate: src/face_visibility_gate.py
+  face_visibility_sources: sources/face_visibility_primary_sources.yaml
   studio_avatar_previewer_stylelink_fix: roblox_studio/fix_avatar_previewer_stylelinks.lua
   blender_environment_lock: blender_env/environment.lock.json
   blender_environment_readme: blender_env/README.md
@@ -49,6 +54,7 @@ enhanced_evidence_lessons: knowledge/ENHANCED_EVIDENCE_VISUALIZATION_LESSONS.md
 exponential_visual_lessons: knowledge/EXPONENTIAL_VISUAL_VALIDATION_LESSONS.md
 rigging_50_source_lessons: knowledge/NON_DESTRUCTIVE_RIGGING_50_SOURCE_LESSONS.md
 true_3d_mouth_lessons: knowledge/TRUE_3D_MOUTH_V3_LESSONS.md
+face_visibility_lessons: knowledge/FACE_PATCH_OCCLUSION_FAILURE_LESSONS.md
 studio_backwards_delivery_lessons: knowledge/STUDIO_BACKWARDS_DELIVERY_FAILURE_LESSONS.md
 studio_avatar_previewer_stylelink_lessons: knowledge/STUDIO_AVATAR_PREVIEWER_STYLELINK_WORKAROUND.md
 blender_environment_lessons: knowledge/BLENDER_EXECUTION_ENVIRONMENT.md
@@ -64,6 +70,8 @@ true_3d_mouth_case: examples/RBX_ANIME_DOLL_3D_MOUTH_V3_contract.json
 true_3d_mouth_review: reports/RBX_ANIME_DOLL_3D_MOUTH_V3_REVIEW.md
 orientation_50view_case: examples/RBX_ANIME_DOLL_V15_orientation_50view_summary.json
 orientation_50view_review: reports/RBX_ANIME_DOLL_V15_FINAL_REVIEW.md
+face_visibility_failure_case: examples/RBX_ANIME_DOLL_V15_face_visibility_failure.json
+face_visibility_failure_review: reports/RBX_ANIME_DOLL_V15_FACE_VISIBILITY_FAILURE.md
 exact_texture_transform_case: examples/RBX_ANIME_DOLL_PRESERVED_BAKED_V2_manifest.json
 exact_texture_transform_review: reports/RBX_ANIME_DOLL_PRESERVED_BAKED_V2_REVIEW.md
 lessons: knowledge/ROBLOX_AVATAR_CROSS_KNOWLEDGE.md
