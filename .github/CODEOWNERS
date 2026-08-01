@@ -4,5 +4,11 @@
 /policies/ @XexTigre
 /sources/ @XexTigre
 /src/ @XexTigre
+/tests/ @XexTigre
+/specs/ @XexTigre
+/knowledge/ @XexTigre
+/reports/ @XexTigre
+/examples/ @XexTigre
 /.github/workflows/ @XexTigre
 /AGENTS.md @XexTigre
+/README.md @XexTigre
