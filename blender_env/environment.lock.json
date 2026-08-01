@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "environment_id": "roblox-blender-4.5-lts",
+  "blender": {
+    "version": "4.5.12",
+    "release_series": "4.5 LTS",
+    "source_commit": "84afd5f785f7",
+    "release_base_url": "https://download.blender.org/release/Blender4.5",
+    "checksum_manifest": "blender-4.5.12.sha256",
+    "artifacts": {
+      "linux_x64": "blender-4.5.12-linux-x64.tar.xz",
+      "windows_x64": "blender-4.5.12-windows-x64.zip"
+    }
+  },
+  "security": {
+    "factory_startup": true,
+    "automatic_python_execution": false,
+    "verify_release_checksum": true,
+    "network_access_inside_blender": false,
+    "untrusted_blend_files": "open_with_autoexec_disabled"
+  },
+  "execution": {
+    "required_flags": [
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "--python-exit-code",
+      "1"
+    ],
+    "report_directory": "artifacts/blender_reports",
+    "workspace_file": "artifacts/ROBLOX_CONTRACT_WORKSPACE_4_5.blend"
+  },
+  "roblox_workspace": {
+    "blender_unit_system": "NONE",
+    "rotation_unit": "DEGREES",
+    "one_blender_unit_equals_one_stud": true,
+    "blender_native_up_axis": "+Z",
+    "studio_up_axis": "+Y",
+    "avatar_setup_front_axis": "-Z",
+    "r15_final_front_axis": "+Z",
+    "glb_export_scale": 1.0,
+    "texture_limit_marketplace": [2048, 2048]
+  },
+  "prohibited_defaults": [
+    "global_smooth",
+    "voxel_remesh",
+    "remesh_apply",
+    "decimate_apply_global",
+    "merge_by_distance_global",
+    "weld_global",
+    "boolean_global",
+    "automatic_weights_as_final",
+    "manual_release_override"
+  ]
+}
