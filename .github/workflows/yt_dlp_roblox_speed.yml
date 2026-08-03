@@ -1,0 +1,69 @@
+name: yt-dlp Roblox speed analysis
+
+on:
+  push:
+    branches:
+      - 'analysis/yt-dlp-roblox-speed-*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Node para EJS do YouTube
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar yt-dlp, FFmpeg e análise
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --upgrade pip
+          python -m pip install --pre --upgrade "yt-dlp[default,curl-cffi]" opencv-python-headless numpy
+          mkdir -p temp/yt_dlp_roblox_speed/results
+          {
+            yt-dlp --version
+            ffmpeg -version | head -n 1
+            node --version
+            python --version
+          } > temp/yt_dlp_roblox_speed/results/tool_versions.txt
+
+      - name: Buscar, baixar e analisar todos os frames
+        shell: bash
+        run: |
+          python temp/yt_dlp_roblox_speed/analyze.py || true
+
+      - name: Remover mídia protegida e preservar somente métricas
+        if: always()
+        shell: bash
+        run: |
+          rm -rf temp/yt_dlp_roblox_speed/videos
+
+      - name: Gravar resultado auditável
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add temp/yt_dlp_roblox_speed/results
+          if ! git diff --cached --quiet; then
+            git commit -m 'Salva análise revisada de aceleração das trends Roblox'
+            git push origin HEAD:${{ github.ref_name }}
+          fi
