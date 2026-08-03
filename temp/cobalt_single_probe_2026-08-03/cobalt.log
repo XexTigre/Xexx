@@ -1,0 +1,15 @@
+(node:1) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1m[36mcobalt [0m[0m[1mAPI ^ω^[0m
+~~~~~~
+[1mversion: [0m11.7.1
+[1mcommit: [0ma636575b09de1fc55d9b8cd98cac88f5f2f16b42
+[1mbranch: [0mmain
+[1mremote: [0mimputnet/cobalt
+[1mstart time: [0mMon, 03 Aug 2026 20:27:16 GMT
+~~~~~~
+[1murl: [0m[1m[36mhttp://127.0.0.1:9000/[0m[0m
+[1mport: [0m9000
+
+[32m[✓][0m internal tunnel handler running on 127.0.0.1:45395
