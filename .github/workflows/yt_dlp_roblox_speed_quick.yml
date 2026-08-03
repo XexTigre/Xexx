@@ -1,0 +1,45 @@
+name: yt-dlp Roblox speed quick
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Instalar ferramentas
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --pre --upgrade "yt-dlp[default,curl-cffi]" opencv-python-headless numpy
+          mkdir -p temp/yt_dlp_roblox_speed/results_v3
+          { yt-dlp --version; ffmpeg -version | head -n 1; node --version; } > temp/yt_dlp_roblox_speed/results_v3/tool_versions.txt
+      - name: Buscar e analisar
+        run: python temp/yt_dlp_roblox_speed/analyze_v3.py || true
+      - name: Remover mídia
+        if: always()
+        run: rm -rf temp/yt_dlp_roblox_speed/videos_v3
+      - name: Publicar métricas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yt-dlp-roblox-speed-results-v3
+          path: temp/yt_dlp_roblox_speed/results_v3/
+          if-no-files-found: error
+          retention-days: 7
