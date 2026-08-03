@@ -1,0 +1,66 @@
+name: Internet Archive Roblox full analysis
+
+on:
+  push:
+    branches:
+      - 'ia-roblox-analysis-*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  WORK_DIR: /tmp/roblox_ia_trends
+  RESULT_DIR: temp/roblox_ia_analysis_2026-08-03
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install FFmpeg and analysis libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --upgrade pip
+          python -m pip install opencv-python-headless numpy pillow openai-whisper
+      - name: Select and download three recent trend-format Roblox videos
+        id: download
+        continue-on-error: true
+        shell: bash
+        run: |
+          mkdir -p "$RESULT_DIR"
+          set +e
+          python temp/roblox_trend_pipeline/download_ia_selected.py 2>&1 | tee "$RESULT_DIR/download_execution.log"
+          code=${PIPESTATUS[0]}
+          echo "exit_code=$code" > "$RESULT_DIR/download_exit_status.txt"
+          exit "$code"
+      - name: Analyze every decoded frame, audio and transcription signals
+        id: analysis
+        if: always()
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          python temp/roblox_trend_pipeline/analyze_ia_selected.py 2>&1 | tee "$RESULT_DIR/analysis_execution.log"
+          code=${PIPESTATUS[0]}
+          echo "exit_code=$code" > "$RESULT_DIR/analysis_exit_status.txt"
+          exit "$code"
+      - name: Commit auditable outputs
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$RESULT_DIR"
+          if ! git diff --cached --quiet; then
+            git commit -m 'Salva análise frame a frame de trends Roblox do Internet Archive'
+            git push origin HEAD:${{ github.ref_name }}
+          fi
