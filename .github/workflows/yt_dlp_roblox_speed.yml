@@ -1,0 +1,86 @@
+name: yt-dlp Roblox speed analysis
+
+on:
+  push:
+    branches:
+      - 'analysis/yt-dlp-roblox-speed-*'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 1
+
+      - name: Node para EJS do YouTube
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar yt-dlp, FFmpeg e análise
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --upgrade pip
+          python -m pip install --pre --upgrade "yt-dlp[default,curl-cffi]" opencv-python-headless numpy
+          mkdir -p temp/yt_dlp_roblox_speed/results_v2
+          {
+            yt-dlp --version
+            ffmpeg -version | head -n 1
+            node --version
+            python --version
+          } > temp/yt_dlp_roblox_speed/results_v2/tool_versions.txt
+
+      - name: Buscar, baixar e analisar todos os frames
+        shell: bash
+        run: |
+          python temp/yt_dlp_roblox_speed/analyze_v2.py || true
+
+      - name: Exibir revisão e erros principais
+        if: always()
+        shell: bash
+        run: |
+          cat temp/yt_dlp_roblox_speed/results_v2/APRENDIZADO_TRENDS_ROBLOX_ACELERACAO.md || true
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('temp/yt_dlp_roblox_speed/results_v2/failures.json')
+          if p.exists():
+              data=json.loads(p.read_text())
+              print('Falhas:',len(data))
+              for row in data[:5]:
+                  print(row.get('candidate',{}).get('id'), row.get('candidate',{}).get('title'))
+                  for a in row.get('attempts',[]):
+                      print((a.get('stderr_tail') or '')[-900:])
+          PY
+
+      - name: Remover mídia e manter somente métricas
+        if: always()
+        shell: bash
+        run: rm -rf temp/yt_dlp_roblox_speed/videos_v2
+
+      - name: Publicar resultados auditáveis
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yt-dlp-roblox-speed-results-v2
+          path: temp/yt_dlp_roblox_speed/results_v2/
+          if-no-files-found: error
+          retention-days: 7

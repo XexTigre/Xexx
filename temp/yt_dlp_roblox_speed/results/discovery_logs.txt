@@ -1,0 +1,13 @@
+$ yt-dlp --ignore-config --no-warnings --remote-components ejs:github --js-runtimes node --extractor-retries 3 --fragment-retries 3 --retries 3 --dump-json --skip-download --dateafter 20260720 --match-filter duration >= 5 & duration <= 120 & live_status != is_live ytsearchdate30:roblox shorts
+RC=1
+ERROR: Unable to handle request: Unsupported url scheme: "ytsearchdate30" (requests, urllib, websockets, curl_cffi)
+
+
+$ yt-dlp --ignore-config --no-warnings --remote-components ejs:github --js-runtimes node --extractor-retries 3 --fragment-retries 3 --retries 3 --dump-json --skip-download --dateafter 20260720 --match-filter duration >= 5 & duration <= 120 & live_status != is_live ytsearchdate30:roblox edit shorts
+RC=1
+ERROR: Unable to handle request: Unsupported url scheme: "ytsearchdate30" (requests, urllib, websockets, curl_cffi)
+
+
+$ yt-dlp --ignore-config --no-warnings --remote-components ejs:github --js-runtimes node --extractor-retries 3 --fragment-retries 3 --retries 3 --dump-json --skip-download --dateafter 20260720 --match-filter duration >= 5 & duration <= 120 & live_status != is_live ytsearchdate30:roblox trend shorts
+RC=1
+ERROR: Unable to handle request: Unsupported url scheme: "ytsearchdate30" (requests, urllib, websockets, curl_cffi)
