@@ -2,6 +2,12 @@
   {
     "slug": "pega_pega_aug02",
     "video_id": "ViAD2FfHsRc",
+    "instance": "https://piped-api.garudalinux.org",
+    "error": "<urlopen error [Errno -5] No address associated with hostname>"
+  },
+  {
+    "slug": "pega_pega_aug02",
+    "video_id": "ViAD2FfHsRc",
     "instance": "https://pipedapi.syncpundit.io",
     "error": "HTTP Error 403: Forbidden"
   },
@@ -14,8 +20,8 @@
   {
     "slug": "pega_pega_aug02",
     "video_id": "ViAD2FfHsRc",
-    "instance": "https://piped-api.garudalinux.org",
-    "error": "<urlopen error [Errno -5] No address associated with hostname>"
+    "instance": "https://pipedapi.moomoo.me",
+    "error": "HTTP Error 502: Bad Gateway"
   },
   {
     "slug": "pega_pega_aug02",
@@ -32,12 +38,6 @@
   {
     "slug": "pega_pega_aug02",
     "video_id": "ViAD2FfHsRc",
-    "instance": "https://pipedapi.moomoo.me",
-    "error": "HTTP Error 502: Bad Gateway"
-  },
-  {
-    "slug": "pega_pega_aug02",
-    "video_id": "ViAD2FfHsRc",
     "instance": "https://api-piped.mha.fi",
     "error": "HTTP Error 522: <none>"
   },
@@ -50,8 +50,8 @@
   {
     "slug": "skyfall_aug01",
     "video_id": "A7sRDc3W6QQ",
-    "instance": "https://pipedapi.kavin.rocks",
-    "error": "HTTP Error 526: <none>"
+    "instance": "https://piped-api.garudalinux.org",
+    "error": "<urlopen error [Errno -5] No address associated with hostname>"
   },
   {
     "slug": "skyfall_aug01",
@@ -62,8 +62,8 @@
   {
     "slug": "skyfall_aug01",
     "video_id": "A7sRDc3W6QQ",
-    "instance": "https://piped-api.garudalinux.org",
-    "error": "<urlopen error [Errno -5] No address associated with hostname>"
+    "instance": "https://pipedapi.kavin.rocks",
+    "error": "HTTP Error 526: <none>"
   },
   {
     "slug": "skyfall_aug01",
