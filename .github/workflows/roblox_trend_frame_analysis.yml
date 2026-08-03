@@ -1,0 +1,208 @@
+name: Roblox trend frame analysis
+
+on:
+  push:
+    branches:
+      - 'analysis/roblox-trends-*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  WORK_DIR: /tmp/roblox_trends
+  RESULT_DIR: temp/roblox_trend_analysis_2026-08-03
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --upgrade pip
+          python -m pip install yt-dlp opencv-python-headless numpy pillow openai-whisper
+
+      - name: Download public samples
+        shell: bash
+        run: |
+          set -u
+          mkdir -p "$WORK_DIR/videos" "$RESULT_DIR"
+          cat > "$WORK_DIR/sources.tsv" <<'EOF'
+          pega_pega_aug02	ViAD2FfHsRc	https://www.youtube.com/shorts/ViAD2FfHsRc
+          skyfall_aug01	A7sRDc3W6QQ	https://www.youtube.com/shorts/A7sRDc3W6QQ
+          no_batidao_2026	znoKsfh8UDY	https://www.youtube.com/shorts/znoKsfh8UDY
+          EOF
+          : > "$RESULT_DIR/download_status.tsv"
+          while IFS=$'\t' read -r slug video_id url; do
+            if yt-dlp --no-playlist --restrict-filenames --retries 5 --fragment-retries 5 \
+              --extractor-args 'youtube:player_client=android_vr,web_safari' \
+              -f 'bv*[height<=720]+ba/b[height<=720]/b' --merge-output-format mp4 \
+              --write-info-json -o "$WORK_DIR/videos/${slug}.%(ext)s" "$url"; then
+              printf '%s\t%s\tOK\n' "$slug" "$video_id" >> "$RESULT_DIR/download_status.tsv"
+            else
+              printf '%s\t%s\tFAILED\n' "$slug" "$video_id" >> "$RESULT_DIR/download_status.tsv"
+            fi
+          done < "$WORK_DIR/sources.tsv"
+
+      - name: Analyze every frame, audio and transcription
+        shell: bash
+        run: |
+          cat > "$WORK_DIR/analyze.py" <<'PY'
+          import csv, json, math, os, re, subprocess, sys
+          from pathlib import Path
+          import cv2
+          import numpy as np
+          from PIL import Image
+          import whisper
+
+          work = Path(os.environ['WORK_DIR'])
+          result = Path(os.environ['RESULT_DIR'])
+          videos = work / 'videos'
+          result.mkdir(parents=True, exist_ok=True)
+
+          sources = {}
+          with (work/'sources.tsv').open(encoding='utf-8') as f:
+              for line in f:
+                  slug, video_id, url = line.rstrip('\n').split('\t')
+                  sources[slug] = {'video_id': video_id, 'url': url}
+
+          def ffprobe(path):
+              p = subprocess.run(['ffprobe','-v','error','-show_entries',
+                  'format=duration,size,bit_rate:stream=index,codec_type,codec_name,width,height,r_frame_rate,avg_frame_rate,sample_rate,channels',
+                  '-of','json',str(path)],capture_output=True,text=True,check=True)
+              return json.loads(p.stdout)
+
+          def flow_score(prev_gray, gray):
+              if prev_gray is None: return 0.0
+              a=cv2.resize(prev_gray,(160,90)); b=cv2.resize(gray,(160,90))
+              flow=cv2.calcOpticalFlowFarneback(a,b,None,0.5,3,15,3,5,1.2,0)
+              return float(np.mean(np.linalg.norm(flow,axis=2)))
+
+          def sheet(paths, out, cols=4, thumb=(180,320)):
+              imgs=[]
+              for p in paths:
+                  im=Image.open(p).convert('RGB'); im.thumbnail(thumb)
+                  c=Image.new('RGB',thumb,'white'); c.paste(im,((thumb[0]-im.width)//2,(thumb[1]-im.height)//2)); imgs.append(c)
+              if not imgs: return
+              rows=math.ceil(len(imgs)/cols); sh=Image.new('RGB',(cols*thumb[0],rows*thumb[1]),'white')
+              for i,im in enumerate(imgs): sh.paste(im,((i%cols)*thumb[0],(i//cols)*thumb[1]))
+              sh.save(out,quality=78,optimize=True)
+
+          try:
+              model=whisper.load_model('tiny')
+              whisper_error=None
+          except Exception as e:
+              model=None; whisper_error=str(e)
+
+          master=[]
+          for slug, src in sources.items():
+              matches=sorted(videos.glob(slug+'.*.mp4')) + sorted(videos.glob(slug+'.mp4'))
+              if not matches:
+                  master.append({'slug':slug,**src,'status':'DOWNLOAD_FAILED'})
+                  continue
+              video=matches[0]
+              out=result/slug; keydir=out/'keyframes'; out.mkdir(parents=True,exist_ok=True); keydir.mkdir(parents=True,exist_ok=True)
+              probe=ffprobe(video); (out/'ffprobe.json').write_text(json.dumps(probe,indent=2),encoding='utf-8')
+              cap=cv2.VideoCapture(str(video)); fps=float(cap.get(cv2.CAP_PROP_FPS) or 30.0)
+              width=int(cap.get(cv2.CAP_PROP_FRAME_WIDTH) or 0); height=int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT) or 0)
+              frame_count=int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
+              rows=[]; prev_gray=None; prev_hist=None; frame_idx=0; last_key=-99999; keys=[]
+              motion=[]; histc=[]; bright=[]; sat=[]; edges=[]
+              while True:
+                  ok,frame=cap.read()
+                  if not ok: break
+                  gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY); hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
+                  br=float(gray.mean()); sa=float(hsv[:,:,1].mean()); ed=float((cv2.Canny(gray,100,200)>0).mean())
+                  hist=cv2.calcHist([hsv],[0,1],None,[24,16],[0,180,0,256]); cv2.normalize(hist,hist)
+                  hd=0.0 if prev_hist is None else float(cv2.compareHist(prev_hist,hist,cv2.HISTCMP_BHATTACHARYYA))
+                  mo=flow_score(prev_gray,gray); ts=frame_idx/fps
+                  rows.append([frame_idx,round(ts,4),round(br,4),round(sa,4),round(ed,6),round(hd,6),round(mo,6)])
+                  motion.append(mo); histc.append(hd); bright.append(br); sat.append(sa); edges.append(ed)
+                  periodic=frame_idx % max(1,round(fps*1.25))==0
+                  cut=hd>0.40 and frame_idx-last_key>max(1,round(fps*0.30))
+                  if periodic or cut:
+                      small=cv2.resize(frame,(320,round(320*height/max(width,1))))
+                      p=keydir/f'{frame_idx:06d}_{ts:07.3f}s.jpg'; cv2.imwrite(str(p),small,[int(cv2.IMWRITE_JPEG_QUALITY),72]); keys.append(p); last_key=frame_idx
+                  prev_gray=gray; prev_hist=hist; frame_idx+=1
+              cap.release()
+              with (out/'frame_metrics.csv').open('w',newline='',encoding='utf-8') as f:
+                  w=csv.writer(f); w.writerow(['frame','timestamp_s','brightness','saturation','edge_density','histogram_change','motion_score']); w.writerows(rows)
+              ast=subprocess.run(['ffmpeg','-hide_banner','-i',str(video),'-af','astats=metadata=1:reset=1,ametadata=print','-f','null','-'],capture_output=True,text=True)
+              (out/'ffmpeg_audio_stats.txt').write_text(ast.stderr[-120000:],encoding='utf-8')
+              trans={'attempted':model is not None,'raw_text_stored':False,'model_error':whisper_error}
+              if model is not None:
+                  try:
+                      tr=model.transcribe(str(video),fp16=False,verbose=False)
+                      segs=tr.get('segments',[])
+                      trans.update({'language':tr.get('language'),'segments':len(segs),
+                        'word_count':sum(len((s.get('text') or '').split()) for s in segs),
+                        'mean_avg_logprob':float(np.mean([s.get('avg_logprob',-10) for s in segs])) if segs else None,
+                        'mean_no_speech_prob':float(np.mean([s.get('no_speech_prob',1) for s in segs])) if segs else None,
+                        'speech_windows':[{'start':round(float(s.get('start',0)),2),'end':round(float(s.get('end',0)),2),'words':len((s.get('text') or '').split())} for s in segs]})
+                  except Exception as e: trans['error']=str(e)
+              (out/'transcription_metrics.json').write_text(json.dumps(trans,indent=2),encoding='utf-8')
+              selected=keys[:16]; sheet(selected,out/'contact_sheet.jpg')
+              sm={'slug':slug,**src,'status':'ANALYZED','file':video.name,'fps':fps,'frames_reported':frame_count,'frames_processed':frame_idx,
+                  'duration_s':frame_idx/fps if fps else 0,'resolution':[width,height],
+                  'brightness_mean':float(np.mean(bright)) if bright else None,'brightness_std':float(np.std(bright)) if bright else None,
+                  'saturation_mean':float(np.mean(sat)) if sat else None,'edge_density_mean':float(np.mean(edges)) if edges else None,
+                  'motion_mean':float(np.mean(motion)) if motion else None,'motion_p90':float(np.percentile(motion,90)) if motion else None,
+                  'hist_change_mean':float(np.mean(histc)) if histc else None,'detected_cuts':int(sum(v>0.40 for v in histc)),
+                  'estimated_mean_shot_s':(frame_idx/fps)/max(1,sum(v>0.40 for v in histc)+1) if fps else None,'keyframes_saved':len(keys),'transcription':trans}
+              (out/'summary.json').write_text(json.dumps(sm,indent=2),encoding='utf-8'); master.append(sm)
+
+          (result/'master_summary.json').write_text(json.dumps(master,indent=2),encoding='utf-8')
+          analyzed=[x for x in master if x.get('status')=='ANALYZED']
+          lines=['# Análise técnica de trends Roblox — 3 de agosto de 2026','',
+            '## Status da coleta','',f'- Fontes solicitadas: {len(master)}',f'- Vídeos baixados e analisados: {len(analyzed)}',
+            f'- Vídeos não baixados: {len(master)-len(analyzed)}','',
+            '## Método verificável','',
+            '- FFprobe para metadados de contêiner, streams, FPS e resolução.',
+            '- OpenCV percorreu cada frame decodificado e mediu brilho, saturação, densidade de bordas, mudança de histograma e fluxo óptico.',
+            '- FFmpeg `astats` mediu o áudio.',
+            '- Whisper tiny estimou idioma, janelas de fala e contagem de palavras; o texto bruto não foi preservado para evitar reprodução de letras protegidas.',
+            '- Keyframes foram amostrados periodicamente e em cortes detectados.','',
+            '## Resultados por vídeo','']
+          for x in master:
+              lines += [f"### {x['slug']}",f"- URL: {x['url']}",f"- Status: {x['status']}"]
+              if x.get('status')=='ANALYZED':
+                  lines += [f"- Duração: {x['duration_s']:.2f} s",f"- Resolução/FPS: {x['resolution'][0]}×{x['resolution'][1]} a {x['fps']:.3f} fps",
+                    f"- Frames processados: {x['frames_processed']}",f"- Cortes detectados: {x['detected_cuts']}",f"- Plano médio estimado: {x['estimated_mean_shot_s']:.2f} s",
+                    f"- Movimento médio / P90: {x['motion_mean']:.4f} / {x['motion_p90']:.4f}",f"- Saturação média: {x['saturation_mean']:.2f}",
+                    f"- Densidade média de bordas: {x['edge_density_mean']:.4f}",f"- Idioma estimado: {x['transcription'].get('language','não identificado')}",
+                    f"- Segmentos / palavras detectadas: {x['transcription'].get('segments',0)} / {x['transcription'].get('word_count',0)}"]
+              lines.append('')
+          lines += ['## Schema do aprendizado','',
+            '```yaml','source_video: [slug, video_id, url, status, duration_s, resolution, fps]','frame_observation: [frame, timestamp_s, brightness, saturation, edge_density, histogram_change, motion_score]','audio_observation: [ffmpeg_astats, speech_windows, language, word_count, confidence]','edit_pattern: [detected_cuts, estimated_mean_shot_s, motion_mean, motion_p90, keyframes]','validation: [frames_reported, frames_processed, raw_text_stored, errors]','```','',
+            '## Revisão automática','',
+            '- PASS somente quando `frames_processed > 0`, o CSV existir, o resumo JSON existir e a contagem processada for compatível com a contagem reportada.',
+            '- Qualquer falha de download permanece marcada como `DOWNLOAD_FAILED`; não é convertida em análise por título ou miniatura.','']
+          (result/'ANALISE_TRENDS_ROBLOX_FFMPEG.md').write_text('\n'.join(lines),encoding='utf-8')
+          if not analyzed:
+              sys.exit('Nenhum vídeo pôde ser analisado')
+          PY
+          python "$WORK_DIR/analyze.py"
+
+      - name: Commit verified results
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$RESULT_DIR"
+          if ! git diff --cached --quiet; then
+            git commit -m 'Salva análise FFmpeg das trends Roblox 2026-08-03'
+            git push origin HEAD:${{ github.ref_name }}
+          fi
