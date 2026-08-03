@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "pega_pega_aug02",
+    "video_id": "ViAD2FfHsRc",
+    "instance": "https://yt.chocolatemoo53.com",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "slug": "pega_pega_aug02",
+    "video_id": "ViAD2FfHsRc",
+    "instance": "https://inv.nadeko.net",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "slug": "pega_pega_aug02",
+    "video_id": "ViAD2FfHsRc",
+    "instance": "https://invidious.nerdvpn.de",
+    "error": "HTTP Error 401: Unauthorized"
+  },
+  {
+    "slug": "pega_pega_aug02",
+    "video_id": "ViAD2FfHsRc",
+    "instance": "https://invidious.tiekoetter.com",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "slug": "skyfall_aug01",
+    "video_id": "A7sRDc3W6QQ",
+    "instance": "https://yt.chocolatemoo53.com",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "slug": "skyfall_aug01",
+    "video_id": "A7sRDc3W6QQ",
+    "instance": "https://invidious.tiekoetter.com",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "slug": "skyfall_aug01",
+    "video_id": "A7sRDc3W6QQ",
+    "instance": "https://invidious.nerdvpn.de",
+    "error": "HTTP Error 401: Unauthorized"
+  },
+  {
+    "slug": "skyfall_aug01",
+    "video_id": "A7sRDc3W6QQ",
+    "instance": "https://inv.nadeko.net",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "slug": "no_batidao_2026",
+    "video_id": "znoKsfh8UDY",
+    "instance": "https://yt.chocolatemoo53.com",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "slug": "no_batidao_2026",
+    "video_id": "znoKsfh8UDY",
+    "instance": "https://invidious.tiekoetter.com",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "slug": "no_batidao_2026",
+    "video_id": "znoKsfh8UDY",
+    "instance": "https://inv.nadeko.net",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "slug": "no_batidao_2026",
+    "video_id": "znoKsfh8UDY",
+    "instance": "https://invidious.nerdvpn.de",
+    "error": "HTTP Error 401: Unauthorized"
+  }
+]
