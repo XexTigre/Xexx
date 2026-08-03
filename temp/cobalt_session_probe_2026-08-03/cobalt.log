@@ -1,0 +1,26 @@
+(node:1) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1m[36mcobalt [0m[0m[1mAPI ^ω^[0m
+~~~~~~
+[1mversion: [0m11.7.1
+[1mcommit: [0ma636575b09de1fc55d9b8cd98cac88f5f2f16b42
+[1mbranch: [0mmain
+[1mremote: [0mimputnet/cobalt
+[1mstart time: [0mMon, 03 Aug 2026 18:02:23 GMT
+~~~~~~
+[1murl: [0m[1m[36mhttp://127.0.0.1:9000/[0m[0m
+[1mport: [0m9000
+
+[32m[✓][0m internal tunnel handler running on 127.0.0.1:46145
+[93m[!][0m Failed loading poToken & visitor_data at 2026-08-03T18:02:23.586Z.
+Error: [TypeError: fetch failed] {
+  [cause]: Error: connect ECONNREFUSED 172.18.0.2:8080
+      at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1645:16) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '172.18.0.2',
+    port: 8080
+  }
+}
