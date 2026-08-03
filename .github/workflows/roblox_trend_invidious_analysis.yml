@@ -3,8 +3,7 @@ name: Roblox trend Invidious analysis
 on:
   push:
     branches:
-      - 'analysis/roblox-trends-invidious-*'
-  pull_request:
+      - 'invidious-run-*'
   workflow_dispatch:
 
 permissions:
@@ -21,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref || github.ref_name }}
+          ref: ${{ github.ref_name }}
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
@@ -46,6 +45,6 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add "$RESULT_DIR"
           if ! git diff --cached --quiet; then
-            git commit -m 'Salva execução Invidious das trends Roblox'
-            git push origin HEAD:${{ github.head_ref || github.ref_name }}
+            git commit -m 'Salva execução Invidious isolada das trends Roblox'
+            git push origin HEAD:${{ github.ref_name }}
           fi
