@@ -1,0 +1,14 @@
+HTTP/1.1 400 Bad Request
+Access-Control-Allow-Origin: *
+Access-Control-Expose-Headers: Ratelimit-Limit,Ratelimit-Policy,Ratelimit-Remaining,Ratelimit-Reset
+RateLimit-Policy: 20;w=60
+RateLimit-Limit: 20
+RateLimit-Remaining: 19
+RateLimit-Reset: 60
+Content-Type: application/json; charset=utf-8
+Content-Length: 61
+ETag: W/"3d-unphnpmyTEfeOLGVkjp+v5acwus"
+Date: Mon, 03 Aug 2026 18:00:53 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
