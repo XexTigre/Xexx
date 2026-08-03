@@ -1,0 +1,40 @@
+name: Roblox trend download only
+
+on:
+  push:
+    branches:
+      - 'download-run-*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  WORK_DIR: /tmp/roblox_trends
+  RESULT_DIR: temp/roblox_trend_download_diagnostic_2026-08-03
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Verify FFmpeg
+        run: ffmpeg -version | head -1
+      - name: Download through Invidious
+        continue-on-error: true
+        run: python temp/roblox_trend_pipeline/download_invidious_fast.py
+      - name: Save diagnostic
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$RESULT_DIR"
+          if ! git diff --cached --quiet; then
+            git commit -m 'Salva diagnóstico leve de download das trends Roblox'
+            git push origin HEAD:${{ github.ref_name }}
+          fi
