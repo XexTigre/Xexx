@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'cobalt-min-run-*'
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -21,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref_name }}
+          ref: ${{ github.head_ref || github.ref_name }}
           fetch-depth: 0
       - name: Start Cobalt
         run: |
@@ -45,5 +46,5 @@ jobs:
           git add "$RESULT_DIR"
           if ! git diff --cached --quiet; then
             git commit -m 'Salva diagnóstico mínimo do Cobalt'
-            git push origin HEAD:${{ github.ref_name }}
+            git push origin HEAD:${{ github.head_ref || github.ref_name }}
           fi
