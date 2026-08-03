@@ -1,0 +1,49 @@
+name: Roblox Cobalt minimal diagnostic
+
+on:
+  push:
+    branches:
+      - 'cobalt-min-run-*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  WORK_DIR: /tmp/roblox_cobalt_min
+  RESULT_DIR: temp/roblox_cobalt_minimal_2026-08-03
+  COBALT_API: http://127.0.0.1:9000/
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Start Cobalt
+        run: |
+          docker run -d --name cobalt -p 9000:9000 \
+            -e API_URL=http://127.0.0.1:9000/ \
+            ghcr.io/imputnet/cobalt:11
+      - name: Test minimal payloads
+        continue-on-error: true
+        run: python temp/roblox_trend_pipeline/download_cobalt_minimal.py
+      - name: Capture logs
+        if: always()
+        run: |
+          mkdir -p "$RESULT_DIR"
+          docker logs cobalt > "$RESULT_DIR/cobalt_container.log" 2>&1 || true
+      - name: Save diagnostic
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$RESULT_DIR"
+          if ! git diff --cached --quiet; then
+            git commit -m 'Salva diagnóstico mínimo do Cobalt'
+            git push origin HEAD:${{ github.ref_name }}
+          fi
