@@ -1,0 +1,49 @@
+name: Internet Archive Roblox review montage
+
+on:
+  push:
+    branches:
+      - 'ia-roblox-review-*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  RESULT_DIR: temp/roblox_ia_analysis_2026-08-03
+
+jobs:
+  montage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Build small visual review montage
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          mapfile -t sheets < <(find "$RESULT_DIR" -mindepth 2 -maxdepth 2 -name contact_sheet.jpg | sort)
+          test "${#sheets[@]}" -eq 3
+          mkdir -p /tmp/review
+          for i in 0 1 2; do
+            ffmpeg -y -hide_banner -loglevel error -i "${sheets[$i]}" -vf 'scale=320:-2' -q:v 18 "/tmp/review/sheet_$i.jpg"
+          done
+          ffmpeg -y -hide_banner -loglevel error \
+            -i /tmp/review/sheet_0.jpg -i /tmp/review/sheet_1.jpg -i /tmp/review/sheet_2.jpg \
+            -filter_complex '[0:v][1:v][2:v]vstack=inputs=3[out]' -map '[out]' -q:v 20 \
+            "$RESULT_DIR/review_montage_tiny.jpg"
+          sha256sum "$RESULT_DIR/review_montage_tiny.jpg" > "$RESULT_DIR/review_montage_tiny.sha256"
+      - name: Commit montage
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$RESULT_DIR/review_montage_tiny.jpg" "$RESULT_DIR/review_montage_tiny.sha256"
+          if ! git diff --cached --quiet; then
+            git commit -m 'Adiciona montagem leve para revisão visual das trends Roblox'
+            git push origin HEAD:${{ github.ref_name }}
+          fi
