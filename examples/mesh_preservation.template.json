@@ -1,0 +1,100 @@
+{
+  "contract_version": "1.2.0",
+  "pipeline_id": "r15_final_body",
+  "change_scope": "geometry_local_fix",
+  "artifact": {
+    "source_path": "input.glb",
+    "source_sha256": "SOURCE_SHA256_HERE",
+    "output_path": "output.glb",
+    "output_sha256": "OUTPUT_SHA256_HERE"
+  },
+  "baseline": {
+    "vertex_count": 0,
+    "edge_count": 0,
+    "face_count": 0,
+    "triangle_count": 0,
+    "topology_sha256": "TOPOLOGY_SHA256_HERE",
+    "vertex_order_sha256": "VERTEX_ORDER_SHA256_HERE",
+    "rest_position_sha256": "REST_POSITION_SHA256_HERE",
+    "uv_sha256": "UV_SHA256_HERE",
+    "rig_sha256": "RIG_SHA256_HERE",
+    "cage_topology_sha256": "CAGE_TOPOLOGY_SHA256_HERE",
+    "cage_uv_sha256": "CAGE_UV_SHA256_HERE",
+    "attachment_sha256": "ATTACHMENT_SHA256_HERE"
+  },
+  "output": {
+    "vertex_count": 0,
+    "edge_count": 0,
+    "face_count": 0,
+    "triangle_count": 0,
+    "topology_sha256": "TOPOLOGY_SHA256_HERE",
+    "vertex_order_sha256": "VERTEX_ORDER_SHA256_HERE",
+    "rest_position_sha256": "OUTPUT_REST_POSITION_SHA256_HERE",
+    "uv_sha256": "UV_SHA256_HERE",
+    "rig_sha256": "RIG_SHA256_HERE",
+    "cage_topology_sha256": "CAGE_TOPOLOGY_SHA256_HERE",
+    "cage_uv_sha256": "CAGE_UV_SHA256_HERE",
+    "attachment_sha256": "ATTACHMENT_SHA256_HERE"
+  },
+  "authorization": {
+    "topology_change_authorized": false,
+    "uv_change_authorized": false,
+    "rest_shape_change_authorized": true,
+    "authorized_modifier_ops": [],
+    "edit_mask_sha256": "EDIT_MASK_SHA256_HERE"
+  },
+  "deformation_controls": {
+    "armature_transform_applied_after_binding": false,
+    "corrective_smooth": {
+      "used": false,
+      "stack_after_armature": true,
+      "factor": 0.0,
+      "restricted_by_vertex_group": true,
+      "pin_boundaries": true,
+      "bind_required": false,
+      "bind_completed": true
+    }
+  },
+  "geometry": {
+    "unapproved_moved_vertex_count": 0,
+    "max_unapproved_vertex_delta_stud": 0,
+    "new_boundary_edge_count": 0,
+    "new_non_manifold_edge_count": 0,
+    "new_self_intersection_count": 0,
+    "silhouette_iou_outside_mask": 1,
+    "contour_chamfer_p95_px": 0,
+    "rest_volume_ratio": 1,
+    "symmetric_region_error_p95_stud": 0
+  },
+  "rigging": {
+    "max_influences_observed": 4,
+    "root_influenced_vertex_count": 0,
+    "unweighted_deform_vertex_count": 0,
+    "normalized_weight_sum_error_max": 0,
+    "armature_rest_pose_unchanged": true,
+    "preserve_volume_changed": false,
+    "weight_transfer_method": "none"
+  },
+  "cages": {
+    "present": true,
+    "topology_unchanged": true,
+    "vertex_order_unchanged": true,
+    "uv_unchanged": true
+  },
+  "attachments": {
+    "names_unchanged": true,
+    "transforms_unchanged": true
+  },
+  "modifier_operations": [],
+  "pose_tests": [],
+  "evidence": [],
+  "review": {
+    "generator_id": "generator",
+    "validator_id": "validator",
+    "reviewer_id": "reviewer"
+  },
+  "decision": {
+    "status": "BLOCKED",
+    "manual_override": false
+  }
+}

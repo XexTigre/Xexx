@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xextigre.github.io/roblox-contract-brain/face-visibility-contract.schema.json",
+  "type": "object",
+  "required": ["schema_version", "artifact", "decision", "release_eligible", "findings"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "artifact": {
+      "type": "object",
+      "required": ["path", "sha256", "front_axis"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "front_axis": {"enum": ["+Z", "-Z"]}
+      },
+      "additionalProperties": true
+    },
+    "mouth_envelope": {"type": "object"},
+    "materials": {"type": "array"},
+    "frontmost_grid": {
+      "type": "object",
+      "required": ["grid_x", "grid_y", "sample_count", "counts", "suspicious_patch_ratio", "mouthbag_ratio"],
+      "properties": {
+        "grid_x": {"const": 29},
+        "grid_y": {"const": 17},
+        "sample_count": {"type": "integer", "minimum": 1},
+        "counts": {"type": "object"},
+        "suspicious_patch_ratio": {"type": "number", "minimum": 0, "maximum": 1},
+        "mouthbag_ratio": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": true
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "severity"],
+        "properties": {
+          "code": {"type": "string", "minLength": 1},
+          "severity": {"enum": ["ERROR", "BLOCKER", "WARNING"]}
+        },
+        "additionalProperties": true
+      }
+    },
+    "decision": {"enum": ["FACE_VISIBILITY_LOCAL_PASS", "REJECTED", "BLOCKED"]},
+    "release_eligible": {"const": false},
+    "platform_gates": {"type": "object"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"decision": {"const": "FACE_VISIBILITY_LOCAL_PASS"}}},
+      "then": {
+        "properties": {
+          "findings": {
+            "not": {
+              "contains": {
+                "properties": {"severity": {"enum": ["ERROR", "BLOCKER"]}},
+                "required": ["severity"]
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": true
+}

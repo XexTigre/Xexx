@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "artifact": {
+    "file": "RBX_ANIME_DOLL_AVATAR_SETUP_SAFE_REPAIR_V2.glb",
+    "sha256": "b551a526e6d613132fb6b5dd2ae3a6c0cf4ff44a980a31c00906fcadc976a142",
+    "pipeline": "avatar_setup_body_input_candidate"
+  },
+  "coordinates": {
+    "front_axis": "-Z",
+    "up_axis": "+Y",
+    "node_transforms_identity": true
+  },
+  "geometry": {
+    "triangles_total": 9864,
+    "triangle_budget_max": 10742,
+    "triangle_margin": 878,
+    "all_nodes_geometric_watertight": true,
+    "silhouette_iou_12_min": 0.9955061926856892,
+    "silhouette_iou_12_mean": 0.9980215529442086
+  },
+  "texture": {
+    "embedded_jpeg_byte_exact": true,
+    "decoded_pixels_exact": true
+  },
+  "changes": {
+    "face_accessories_quarantined": [
+      "LeftFaceLash_Accessory",
+      "RightFaceLash_Accessory"
+    ],
+    "head_components_added": [
+      "MouthBag_Component",
+      "UpperTeeth_Component",
+      "LowerTeeth_Component",
+      "Tongue_Component"
+    ],
+    "neck": {
+      "localized_centroid_subdivision": true,
+      "scale_xz": 1.02,
+      "translation_stud": [-0.005, 0.0, -0.05],
+      "global_smooth": false,
+      "remesh": false
+    }
+  },
+  "validation": {
+    "glb_header_and_buffer_ranges": "PASS",
+    "trimesh_reopen": "PASS",
+    "texture_hash": "PASS",
+    "geometric_position_topology": "PASS",
+    "silhouette_preservation": "PASS",
+    "khronos_validator": "NOT_RUN",
+    "avatar_setup": "NOT_RUN",
+    "roblox_studio": "NOT_RUN",
+    "release_eligible": false
+  },
+  "decision": "CANDIDATE_LOCAL_REVIEWED"
+}

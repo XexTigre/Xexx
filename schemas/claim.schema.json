@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xextigre.github.io/roblox-contract-brain/schemas/claim.schema.json",
+  "title": "Evidence-bound technical claim",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["claim_id", "requirement_id", "status", "artifact_sha256", "evidence_ids", "evaluator_id", "measured_at"],
+  "properties": {
+    "claim_id": {"type": "string", "pattern": "^[A-Za-z0-9._-]+$"},
+    "requirement_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["VERIFIED", "FAILED", "UNKNOWN", "NOT_RUN"]},
+    "artifact_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "evidence_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "evaluator_id": {"type": "string", "minLength": 1},
+    "measured_at": {"type": "string", "format": "date-time"},
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value", "unit", "operator", "threshold"],
+      "properties": {
+        "name": {"type": "string"},
+        "value": {"type": "number"},
+        "unit": {"type": "string"},
+        "operator": {"enum": ["eq", "ne", "lt", "lte", "gt", "gte"]},
+        "threshold": {"type": "number"}
+      }
+    },
+    "notes": {"type": "string"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "VERIFIED"}}},
+      "then": {"properties": {"evidence_ids": {"minItems": 1}}, "required": ["measurement"]}
+    },
+    {
+      "if": {"properties": {"status": {"enum": ["UNKNOWN", "NOT_RUN"]}}},
+      "then": {"not": {"required": ["measurement"]}}
+    }
+  ]
+}

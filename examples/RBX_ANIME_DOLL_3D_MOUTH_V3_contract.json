@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "pipeline": "avatar_setup_body_input_true_3d_mouth",
+  "clean_artifact": {
+    "file": "RBX_ANIME_DOLL_AVATAR_SETUP_3D_MOUTH_V3.glb",
+    "sha256": "3515fb360b134114cb6180f74eeecd61fcc0159cb61aeccd67bbfac48e20d299",
+    "front_axis": "-Z",
+    "up_axis": "+Y",
+    "geometry_nodes": 22,
+    "triangles": 9913,
+    "triangle_limit": 10742,
+    "contains_2d_decal": false,
+    "contains_preexisting_visible_cage": false
+  },
+  "rigged_local_proof": {
+    "file": "RBX_ANIME_DOLL_3D_MOUTH_RIGGED_FACS17_V3.glb",
+    "sha256": "cb4003ee33704640a5e280a24c1d3c68ef7855a84e1feb27890a8d024b1f1fa3",
+    "joint_count": 51,
+    "skin_count": 1,
+    "root_face_joint": "DynamicHead",
+    "neutral_plus_facs_frames": 18,
+    "max_influences": 4,
+    "root_weight_count": 0
+  },
+  "required_components": [
+    "UpperLip",
+    "LowerLip",
+    "MouthBag",
+    "UpperTeeth",
+    "LowerTeeth",
+    "Tongue"
+  ],
+  "evidence_contract": {
+    "neutral_angles": 50,
+    "jawdrop_angles": 50,
+    "pucker_angles": 50,
+    "internal_jawdrop_angles": 50,
+    "blender_version": "4.5.12",
+    "khronos_errors_max": 0,
+    "motion_video_required": true
+  },
+  "decision": {
+    "status": "LOCAL_MOUTH_V3_ALL_REQUESTED_PROOF_GATES_PASS",
+    "release_eligible": false,
+    "platform_gates": {
+      "avatar_setup": "NOT_RUN",
+      "studio_playtest": "NOT_RUN",
+      "ugc_validation": "NOT_RUN"
+    }
+  }
+}

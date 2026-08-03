@@ -1,0 +1,42 @@
+version: 1.0.0
+scope: orientation_avatar_setup_final_body_and_visual_evidence
+sources:
+  - id: ROBLOX_AVATAR_SETUP_REQUIREMENTS
+    authority: official
+    url: https://create.roblox.com/docs/avatar-setup/auto-setup-requirements
+    supports:
+      - Avatar Setup input requirements
+      - body symmetry and centering
+      - watertight exception for eyes and mouth
+      - distinct eyes and mouth components
+  - id: ROBLOX_AVATAR_SETUP
+    authority: official
+    url: https://create.roblox.com/docs/avatar-setup
+    supports:
+      - Manually Align Front uses negative Z
+      - automatic front detection can fail
+      - check face and animation previews
+  - id: ROBLOX_CHARACTER_BODY_SPECIFICATIONS
+    authority: official
+    url: https://create.roblox.com/docs/avatar/character-bodies/specifications
+    supports:
+      - final body faces positive Z with positive Y up
+      - 15 named body meshes
+      - frozen transforms and body symmetry
+  - id: ROBLOX_DYNAMIC_HEAD_SPECIFICATIONS
+    authority: official
+    url: https://create.roblox.com/docs/avatar/dynamic-heads/specifications
+    supports:
+      - head cage landmarks for both eyes and mouth
+      - mouth animation validation
+  - id: BLENDER_4_5_12
+    authority: official
+    url: https://download.blender.org/release/Blender4.5/
+    supports:
+      - pinned Blender runtime used for render and round-trip evidence
+project_rules:
+  views_per_region: 50
+  region_count: 19
+  total_raw_views: 950
+  symmetry_p95_stud_max: 0.001
+  authority: internal_project_policy_not_official_roblox

@@ -1,0 +1,67 @@
+{
+  "schema_version": "2.0.0",
+  "source": {
+    "file": "Meshy_AI_GLF_FINAL_R6_VISUAL_ROLLBACK_PRESERVED_v1 (2).glb",
+    "sha256": "40adc2fdf158cc7d91b3b543309ef5c58f2a87d2ded3efdd21988c3bf8ff6321"
+  },
+  "artifacts": {
+    "plusz_baked": {
+      "file": "RBX_ANIME_DOLL_PRESERVED_PLUSZ_BAKED.glb",
+      "sha256": "264718e251aec72081f5179504d62ec6771fe7782d5930d4d3718b67bf1288f6"
+    },
+    "avatar_setup_negz_baked": {
+      "file": "RBX_ANIME_DOLL_AVATAR_SETUP_NEGZ_BAKED.glb",
+      "sha256": "b3b5bcb4fa0f1cb7574bd242e24ea9e6b9fae9289c192a6d77dc979ebc2317e7"
+    }
+  },
+  "preservation": {
+    "source_texture_sha256": "193701f1f7d3c85f16da09d0ce8b26b8c0c85ed6771d694eabd62be73faa35a6",
+    "plusz_texture_sha256": "193701f1f7d3c85f16da09d0ce8b26b8c0c85ed6771d694eabd62be73faa35a6",
+    "negz_texture_sha256": "193701f1f7d3c85f16da09d0ce8b26b8c0c85ed6771d694eabd62be73faa35a6",
+    "source_uv_sha256": "1110a2d175a85775ec398f07879b2e275ae70b47995ec2bcdedbbcafe6e3f98a",
+    "plusz_uv_sha256": "1110a2d175a85775ec398f07879b2e275ae70b47995ec2bcdedbbcafe6e3f98a",
+    "negz_uv_sha256": "1110a2d175a85775ec398f07879b2e275ae70b47995ec2bcdedbbcafe6e3f98a",
+    "source_indices_sha256": "9e9fd8befd6fd2b946386e0b0d1ea8466d46dae4d2a3363c6a7c2b981165023f",
+    "plusz_indices_sha256": "9e9fd8befd6fd2b946386e0b0d1ea8466d46dae4d2a3363c6a7c2b981165023f",
+    "negz_indices_sha256": "9e9fd8befd6fd2b946386e0b0d1ea8466d46dae4d2a3363c6a7c2b981165023f",
+    "texture_byte_exact_plusz": true,
+    "texture_byte_exact_negz": true,
+    "uv_exact_plusz": true,
+    "uv_exact_negz": true,
+    "topology_exact_plusz": true,
+    "topology_exact_negz": true
+  },
+  "geometry": {
+    "vertices": 6363,
+    "triangles": 9764,
+    "dimensions_stud": [3.349859, 6.5, 1.092715],
+    "bounds_min": [-1.67493, 0.0, -0.546358],
+    "bounds_max": [1.67493, 6.5, 0.546358],
+    "connected_components": 139,
+    "boundary_edges": 2684,
+    "non_manifold_edges": 0,
+    "node_transforms_identity": true
+  },
+  "status": {
+    "texture_preservation": "PASS",
+    "uv_preservation": "PASS",
+    "topology_preservation": "PASS",
+    "rigid_transform_only": "PASS",
+    "avatar_setup_readiness": "FAIL",
+    "r15_final_readiness": "BLOCKED",
+    "roblox_studio": "NOT_RUN",
+    "release_eligible": false
+  },
+  "reason_codes": [
+    "BODY_NOT_CONTIGUOUS",
+    "OPEN_BOUNDARIES_PRESENT",
+    "HEAD_COMPONENTS_NOT_SEMANTICALLY_VERIFIED",
+    "RIG_CAGES_ATTACHMENTS_ABSENT",
+    "STUDIO_NOT_RUN"
+  ],
+  "evidence": {
+    "AZIMUTH_12_ACTUAL_GLB.png": "4fbd38fc4558e3da4d0faac4cd760a4f6ead3e8de539b2967630e9323bf06aa2",
+    "MEASUREMENTS_WITH_GUIDES.png": "78dc138eede159a4980155b847ddc1159634537db7c9a520b8876c36f15db2aa",
+    "TEXTURE_BYTE_EXACT_PROOF.png": "1e841a451054a9f7ae28d28aa15b8811a26371a167a30405ca3330e5068b3fe4"
+  }
+}

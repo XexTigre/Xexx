@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "artifact": {
+    "path": "RBX_ANIME_DOLL_AVATAR_SETUP_FRONT_3D_MOUTH_SYMMETRIC_V15.glb",
+    "sha256": "75a2dd5c6403b5846264a1f5730444d530aa669e193028f69a9f2ba0026d9bdd",
+    "front_axis": "+Z"
+  },
+  "evidence_screenshot": {
+    "path": "user_evidence/V15_GRAY_MOUTH_STUDIO.png",
+    "sha256": "f3dc7adf5aa819062883c6fb05c78a4806aaa91f1ee404de34fa7a62aeb4d719"
+  },
+  "mouth_envelope": {
+    "x": [-0.1464951134, 0.1464593804],
+    "y": [5.5887242508, 5.6550697136],
+    "lip_front_depth": 0.4556922317,
+    "lip_width": 0.2729544938,
+    "lip_height": 0.0563454628
+  },
+  "frontmost_grid": {
+    "grid_x": 29,
+    "grid_y": 17,
+    "sample_count": 493,
+    "counts": {
+      "Head_Geo_Input::MouthRepairSkin3D": 227,
+      "LowerLip_Component::Lips3D_NearBlack": 92,
+      "UpperLip_Component::Lips3D_NearBlack": 83,
+      "Head_Geo_Input::BodyTexture": 32,
+      "LowerTeeth_Component::Teeth3D_OffWhite": 24,
+      "UpperTeeth_Component::Teeth3D_OffWhite": 18,
+      "MouthBag_Component::MouthBag3D_Dark": 17
+    },
+    "suspicious_patch_ratio": 0.4604462475,
+    "mouthbag_ratio": 0.0344827586
+  },
+  "findings": [
+    {"code": "FACE_PATCH_WIDER_THAN_LIPS", "severity": "ERROR", "width_ratio": 2.1031480757},
+    {"code": "OPAQUE_UNTEXTURED_FACE_PATCH", "severity": "ERROR", "node": "Head_Geo_Input", "material": "MouthRepairSkin3D", "double_sided": true},
+    {"code": "DOUBLE_SIDED_FACE_PATCH", "severity": "ERROR", "node": "Head_Geo_Input", "material": "MouthRepairSkin3D"},
+    {"code": "FACE_PATCH_OCCLUDES_MOUTH", "severity": "ERROR", "frontmost_samples": 227, "sample_count": 493, "ratio": 0.4604462475},
+    {"code": "MOUTHBAG_VISIBLE_FROM_EXTERNAL_FRONT", "severity": "ERROR", "frontmost_samples": 17, "sample_count": 493, "ratio": 0.0344827586}
+  ],
+  "decision": "REJECTED",
+  "release_eligible": false,
+  "platform_gates": {
+    "roblox_avatar_setup_exact_hash": "NOT_RUN",
+    "roblox_studio_exact_hash": "NOT_RUN",
+    "ugc_marketplace_validation": "NOT_RUN"
+  }
+}

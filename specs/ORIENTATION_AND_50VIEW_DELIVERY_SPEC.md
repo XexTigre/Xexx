@@ -1,0 +1,3 @@
+# Orientation and 50-View Delivery Specification
+
+Every delivery is bound to one GLB SHA-256. Yaw 0 must show the front and yaw 180 the back. Generate 50 Blender views for each of 19 regions: full body, head, both eyes, external/internal mouth, neck, torsos, arms, hands, upper/lower legs and feet. Save raw PNGs, boards, symmetry metrics, `.blend`, Blender round-trip GLB and machine-readable reports. Missing evidence blocks delivery. An empirical axis correction requires the user's Studio screenshot and a new exact-hash Studio test. Local Blender evidence never means Avatar Setup, Studio or UGC PASS.

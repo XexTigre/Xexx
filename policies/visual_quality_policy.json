@@ -1,0 +1,42 @@
+{
+  "policy_version": "1.0.0",
+  "official_roblox_constraints": {
+    "avatar_texture_max_px": 2048,
+    "avatar_total_triangle_max": 10742,
+    "up_axis": "+Y",
+    "avatar_setup_input_front_axis": "-Z",
+    "r15_final_front_axis": "+Z",
+    "origin": "ground_center",
+    "profile_bounds_studs": {
+      "Normal": {"x": [1.35, 8.6], "y": [3.6, 9.5], "z": [0.7, 2.25]},
+      "Slender": {"x": [1.35, 6.0], "y": [3.6, 9.5], "z": [0.7, 2.0]},
+      "Classic": {"x": [1.35, 8.0], "y": [3.6, 9.1], "z": [0.7, 2.0]}
+    }
+  },
+  "project_quality_thresholds": {
+    "render_width_min_px": 1024,
+    "render_height_min_px": 1024,
+    "crop_margin_ratio_target": 0.03,
+    "crop_margin_ratio_tolerance": 0.005,
+    "clipped_pixels_max": 0,
+    "silhouette_iou_min": 0.97,
+    "contour_chamfer_px_max": 1.5,
+    "ssim_min": 0.95,
+    "lpips_max": 0.08,
+    "delta_e_2000_p95_max": 5.0,
+    "seam_band_delta_e_2000_p95_max": 3.0,
+    "mirror_delta_e_2000_p95_max": 4.0,
+    "uv_overlap_area_ratio_max": 0.0,
+    "uv_island_min_gutter_px_at_2048": 16.0,
+    "uv_texture_border_clearance_px_at_2048": 16.0,
+    "uv_bleed_px_at_2048": 8.0
+  },
+  "fail_closed_rules": [
+    "Missing evidence produces BLOCKED, never PASS.",
+    "A hash mismatch produces REJECTED.",
+    "The generator, validator, and reviewer must be independent identifiers.",
+    "Studio-only claims require Studio evidence tied to the same artifact hash.",
+    "Centimeters are annotation only; export and validation use studs.",
+    "No visible texture margin means sufficient UV gutter and bleed, not zero UV padding."
+  ]
+}

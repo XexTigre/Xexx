@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0.0",
+  "asset": {
+    "asset_id": "replace-me",
+    "artifact_path": "outputs/asset.glb",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "pipeline": "avatar_setup_input",
+    "format": "glb",
+    "triangles": 0,
+    "mesh_count": 1,
+    "component_count": 1,
+    "generator_id": "generator-agent"
+  },
+  "reference": {
+    "image_path": "references/board.png",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "width_px": 1536,
+    "height_px": 1024,
+    "measurement_basis": "normalized_ratios",
+    "intentional_asymmetry_masks": []
+  },
+  "coordinate_contract": {
+    "up_axis": "+Y",
+    "origin": "ground_center",
+    "asset_front_axis": "-Z",
+    "required_front_axis": "-Z",
+    "centered_on_y_axis": true
+  },
+  "scale_contract": {
+    "unit": "stud",
+    "profile": "Classic",
+    "bounds": {"x": 3.0, "y": 6.5, "z": 1.2},
+    "node_transform_baked": true,
+    "real_world_cm_is_annotation_only": true
+  },
+  "geometry": {
+    "watertight": true,
+    "boundary_edge_count": 0,
+    "non_manifold_edge_count": 0,
+    "allowed_open_components": ["left_eye", "right_eye", "mouth_bag"],
+    "pose": "A"
+  },
+  "render_protocol": {
+    "mode": "intensive_62",
+    "camera": "orthographic",
+    "width_px": 1024,
+    "height_px": 1024,
+    "crop_margin_ratio": 0.03,
+    "clipped_pixels": 0,
+    "passes": ["beauty", "flat_albedo", "silhouette", "wireframe", "normal", "uv_checker", "seam_heatmap", "texel_density"],
+    "views": []
+  },
+  "uv_contract": {
+    "texture_width_px": 2048,
+    "texture_height_px": 2048,
+    "overlap_area_ratio": 0.0,
+    "island_min_gutter_px": 16.0,
+    "texture_border_clearance_px": 16.0,
+    "bleed_px": 8.0,
+    "island_count": 1
+  },
+  "pixel_metrics": {
+    "silhouette_iou": {"value": null, "threshold": 0.97, "comparison": ">=", "status": "NOT_RUN", "evidence_ids": [], "source_class": "project_quality_policy"},
+    "contour_chamfer_px": {"value": null, "threshold": 1.5, "comparison": "<=", "status": "NOT_RUN", "evidence_ids": [], "source_class": "project_quality_policy"},
+    "ssim": {"value": null, "threshold": 0.95, "comparison": ">=", "status": "NOT_RUN", "evidence_ids": [], "source_class": "research_metric"},
+    "lpips": {"value": null, "threshold": 0.08, "comparison": "<=", "status": "NOT_RUN", "evidence_ids": [], "source_class": "research_metric"},
+    "delta_e_2000_p95": {"value": null, "threshold": 5.0, "comparison": "<=", "status": "NOT_RUN", "evidence_ids": [], "source_class": "research_metric"},
+    "seam_band_delta_e_2000_p95": {"value": null, "threshold": 3.0, "comparison": "<=", "status": "NOT_RUN", "evidence_ids": [], "source_class": "project_quality_policy"},
+    "mirror_delta_e_2000_p95": {"value": null, "threshold": 4.0, "comparison": "<=", "status": "NOT_RUN", "evidence_ids": [], "source_class": "project_quality_policy"}
+  },
+  "evidence": [],
+  "review": {
+    "generator_id": "generator-agent",
+    "validator_id": "validator-agent",
+    "reviewer_id": "human-or-independent-agent",
+    "reviewed_at": "2026-08-01T00:00:00Z"
+  },
+  "decision": {
+    "status": "BLOCKED",
+    "computed_by": "visual_audit_gate.py",
+    "manual_override": false,
+    "reason_codes": ["NOT_RUN"],
+    "decision_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  }
+}

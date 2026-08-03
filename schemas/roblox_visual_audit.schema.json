@@ -1,0 +1,286 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/roblox_visual_audit.schema.json",
+  "title": "Roblox 3D Pixel-Intensive Visual Audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "asset",
+    "reference",
+    "coordinate_contract",
+    "scale_contract",
+    "geometry",
+    "render_protocol",
+    "uv_contract",
+    "pixel_metrics",
+    "evidence",
+    "review",
+    "decision"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["asset_id", "artifact_path", "sha256", "pipeline", "format", "triangles", "mesh_count", "component_count"],
+      "properties": {
+        "asset_id": {"type": "string", "minLength": 1},
+        "artifact_path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "pipeline": {
+          "enum": ["avatar_setup_input", "r15_final", "dynamic_head_final", "rigid_accessory", "layered_accessory"]
+        },
+        "format": {"enum": ["glb", "gltf", "fbx"]},
+        "triangles": {"type": "integer", "minimum": 0},
+        "mesh_count": {"type": "integer", "minimum": 1},
+        "component_count": {"type": "integer", "minimum": 1},
+        "generator_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["image_path", "sha256", "width_px", "height_px", "measurement_basis", "intentional_asymmetry_masks"],
+      "properties": {
+        "image_path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "width_px": {"type": "integer", "minimum": 256},
+        "height_px": {"type": "integer", "minimum": 256},
+        "measurement_basis": {
+          "enum": ["roblox_studs", "normalized_ratios", "centimeters_reference_only"]
+        },
+        "intentional_asymmetry_masks": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "coordinate_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["up_axis", "origin", "asset_front_axis", "required_front_axis", "centered_on_y_axis"],
+      "properties": {
+        "up_axis": {"const": "+Y"},
+        "origin": {"const": "ground_center"},
+        "asset_front_axis": {"enum": ["+Z", "-Z"]},
+        "required_front_axis": {"enum": ["+Z", "-Z"]},
+        "centered_on_y_axis": {"type": "boolean"}
+      }
+    },
+    "scale_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unit", "profile", "bounds", "node_transform_baked", "real_world_cm_is_annotation_only"],
+      "properties": {
+        "unit": {"const": "stud"},
+        "profile": {"enum": ["Normal", "Slender", "Classic"]},
+        "bounds": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["x", "y", "z"],
+          "properties": {
+            "x": {"type": "number", "exclusiveMinimum": 0},
+            "y": {"type": "number", "exclusiveMinimum": 0},
+            "z": {"type": "number", "exclusiveMinimum": 0}
+          }
+        },
+        "node_transform_baked": {"type": "boolean"},
+        "real_world_cm_is_annotation_only": {"const": true}
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["watertight", "boundary_edge_count", "non_manifold_edge_count", "allowed_open_components", "pose"],
+      "properties": {
+        "watertight": {"type": "boolean"},
+        "boundary_edge_count": {"type": "integer", "minimum": 0},
+        "non_manifold_edge_count": {"type": "integer", "minimum": 0},
+        "allowed_open_components": {
+          "type": "array",
+          "items": {"enum": ["left_eye", "right_eye", "mouth_bag"]},
+          "uniqueItems": true
+        },
+        "pose": {"enum": ["A", "T", "I", "other"]}
+      }
+    },
+    "render_protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "camera", "width_px", "height_px", "crop_margin_ratio", "clipped_pixels", "passes", "views"],
+      "properties": {
+        "mode": {"enum": ["minimum_12", "intensive_62"]},
+        "camera": {"const": "orthographic"},
+        "width_px": {"type": "integer", "minimum": 1024},
+        "height_px": {"type": "integer", "minimum": 1024},
+        "crop_margin_ratio": {"type": "number", "minimum": 0.02, "maximum": 0.05},
+        "clipped_pixels": {"type": "integer", "minimum": 0},
+        "passes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": ["beauty", "flat_albedo", "silhouette", "wireframe", "normal", "uv_checker", "seam_heatmap", "texel_density"]
+          },
+          "allOf": [
+            {"contains": {"const": "beauty"}},
+            {"contains": {"const": "flat_albedo"}},
+            {"contains": {"const": "silhouette"}},
+            {"contains": {"const": "wireframe"}},
+            {"contains": {"const": "normal"}},
+            {"contains": {"const": "uv_checker"}},
+            {"contains": {"const": "seam_heatmap"}}
+          ]
+        },
+        "views": {
+          "type": "array",
+          "minItems": 12,
+          "items": {"$ref": "#/$defs/view"}
+        }
+      }
+    },
+    "uv_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "texture_width_px",
+        "texture_height_px",
+        "overlap_area_ratio",
+        "island_min_gutter_px",
+        "texture_border_clearance_px",
+        "bleed_px",
+        "island_count"
+      ],
+      "properties": {
+        "texture_width_px": {"type": "integer", "minimum": 1, "maximum": 4096},
+        "texture_height_px": {"type": "integer", "minimum": 1, "maximum": 4096},
+        "overlap_area_ratio": {"type": "number", "minimum": 0, "maximum": 1},
+        "island_min_gutter_px": {"type": "number", "minimum": 0},
+        "texture_border_clearance_px": {"type": "number", "minimum": 0},
+        "bleed_px": {"type": "number", "minimum": 0},
+        "island_count": {"type": "integer", "minimum": 1}
+      }
+    },
+    "pixel_metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "silhouette_iou",
+        "contour_chamfer_px",
+        "ssim",
+        "lpips",
+        "delta_e_2000_p95",
+        "seam_band_delta_e_2000_p95",
+        "mirror_delta_e_2000_p95"
+      ],
+      "properties": {
+        "silhouette_iou": {"$ref": "#/$defs/metric"},
+        "contour_chamfer_px": {"$ref": "#/$defs/metric"},
+        "ssim": {"$ref": "#/$defs/metric"},
+        "lpips": {"$ref": "#/$defs/metric"},
+        "delta_e_2000_p95": {"$ref": "#/$defs/metric"},
+        "seam_band_delta_e_2000_p95": {"$ref": "#/$defs/metric"},
+        "mirror_delta_e_2000_p95": {"$ref": "#/$defs/metric"}
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/evidence"}
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generator_id", "validator_id", "reviewer_id", "reviewed_at"],
+      "properties": {
+        "generator_id": {"type": "string", "minLength": 1},
+        "validator_id": {"type": "string", "minLength": 1},
+        "reviewer_id": {"type": "string", "minLength": 1},
+        "reviewed_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "computed_by", "manual_override", "reason_codes", "decision_sha256"],
+      "properties": {
+        "status": {"enum": ["APPROVED", "REJECTED", "BLOCKED"]},
+        "computed_by": {"type": "string", "minLength": 1},
+        "manual_override": {"const": false},
+        "reason_codes": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "decision_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"asset": {"properties": {"pipeline": {"const": "avatar_setup_input"}}}}},
+      "then": {"properties": {"coordinate_contract": {"properties": {"required_front_axis": {"const": "-Z"}}}}}
+    },
+    {
+      "if": {"properties": {"asset": {"properties": {"pipeline": {"const": "r15_final"}}}}},
+      "then": {"properties": {"coordinate_contract": {"properties": {"required_front_axis": {"const": "+Z"}}}}}
+    },
+    {
+      "if": {"properties": {"render_protocol": {"properties": {"mode": {"const": "intensive_62"}}}}},
+      "then": {"properties": {"render_protocol": {"properties": {"views": {"minItems": 62}}}}}
+    }
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "view": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["view_id", "yaw_deg", "pitch_deg", "roll_deg", "evidence_ids"],
+      "properties": {
+        "view_id": {"type": "string", "minLength": 1},
+        "yaw_deg": {"type": "number", "minimum": 0, "exclusiveMaximum": 360},
+        "pitch_deg": {"type": "number", "minimum": -90, "maximum": 90},
+        "roll_deg": {"type": "number", "minimum": -180, "maximum": 180},
+        "evidence_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        }
+      }
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "threshold", "comparison", "status", "evidence_ids", "source_class"],
+      "properties": {
+        "value": {"type": ["number", "null"]},
+        "threshold": {"type": "number"},
+        "comparison": {"enum": [">=", "<=", "=="]},
+        "status": {"enum": ["PASS", "FAIL", "BLOCKED", "NOT_RUN"]},
+        "evidence_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "source_class": {"enum": ["official_roblox", "project_quality_policy", "research_metric"]}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "path", "sha256", "kind", "tool", "tool_version", "command", "artifact_sha256"],
+      "properties": {
+        "evidence_id": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "kind": {"enum": ["render", "mask", "heatmap", "log", "report", "texture", "studio_capture"]},
+        "tool": {"type": "string", "minLength": 1},
+        "tool_version": {"type": "string", "minLength": 1},
+        "command": {"type": "string", "minLength": 1},
+        "artifact_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

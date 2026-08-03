@@ -1,0 +1,33 @@
+version: 1.0.0
+scope: face_visibility_material_occlusion
+sources:
+  - id: ROBLOX_AVATAR_SETUP_REQUIREMENTS
+    authority: official
+    url: https://create.roblox.com/docs/avatar-setup/auto-setup-requirements
+    supports:
+      - connected mouthbag housing separate upper teeth, lower teeth and tongue
+      - watertight body except eye and mouth regions
+      - distinct face components
+  - id: ROBLOX_CREATE_BASIC_HEADS
+    authority: official
+    url: https://create.roblox.com/docs/art/characters/facial-animation/create-basic-heads
+    supports:
+      - separated lip vertices
+      - inner mouth components contained inside a mouthbag
+  - id: BLENDER_GLTF_MATERIALS
+    authority: official
+    url: https://docs.blender.org/manual/en/4.5/addons/import_export/scene_gltf2.html
+    supports:
+      - image texture becomes glTF baseColorTexture
+      - unconnected base color becomes a solid baseColorFactor
+      - backface-culling setting maps inversely to glTF doubleSided
+  - id: KHRONOS_GLTF_SPEC
+    authority: official
+    url: https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html
+    supports:
+      - material base color and double-sided semantics
+project_rules:
+  external_face_depth_grid: 29x17
+  opaque_untextured_face_patch_forbidden: true
+  mouthbag_external_frontmost_forbidden: true
+  authority: internal_project_policy_not_official_roblox

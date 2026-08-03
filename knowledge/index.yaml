@@ -1,0 +1,77 @@
+version: 2.3.0
+entrypoints:
+  router: specs/CROSS_SPEC_MATRIX.md
+  policy: policies/cross_spec_policy.yaml
+  contract_schema: schemas/cross_asset_contract.schema.json
+  preservation_spec: specs/MESH_PRESERVATION_AND_DEFORMATION_SPEC.md
+  preservation_policy: policies/mesh_preservation_policy.yaml
+  preservation_schema: schemas/mesh_preservation_contract.schema.json
+  preservation_gate: src/mesh_preservation_gate.py
+  reaudit_spec: specs/SCOPED_REAUDIT_SPEC.md
+  reaudit_policy: policies/scoped_reaudit_policy.yaml
+  reaudit_schema: schemas/scoped_reaudit.schema.json
+  reaudit_gate: src/scoped_reaudit_gate.py
+  exact_texture_transform_spec: specs/EXACT_TEXTURE_AND_TRANSFORM_SPEC.md
+  safe_topology_repair_spec: specs/SAFE_TOPOLOGY_REPAIR_SPEC.md
+  safe_repair_execution_spec: specs/SAFE_REPAIR_EXECUTION_SPEC.md
+  enhanced_evidence_spec: specs/ENHANCED_EVIDENCE_AND_VISUALIZATION_SPEC.md
+  enhanced_evidence_schema: schemas/enhanced_evidence_contract.schema.json
+  enhanced_evidence_gate: src/enhanced_evidence_gate.py
+  exponential_visual_spec: specs/EXPONENTIAL_VISUAL_VALIDATION_SPEC.md
+  exponential_visual_schema: schemas/exponential_visual_contract.schema.json
+  exponential_visual_gate: src/exponential_visual_gate.py
+  non_destructive_rig_spec: specs/NON_DESTRUCTIVE_BODY_FACE_RIG_SPEC.md
+  rigging_sources: sources/rigging_50_primary_sources.yaml
+  true_3d_mouth_spec: specs/TRUE_3D_MOUTH_FACS17_V3_SPEC.md
+  orientation_50view_spec: specs/ORIENTATION_AND_50VIEW_DELIVERY_SPEC.md
+  orientation_50view_policy: policies/orientation_50view_delivery_policy.yaml
+  orientation_50view_schema: schemas/orientation_50view_delivery.schema.json
+  orientation_50view_gate: src/orientation_50view_gate.py
+  face_visibility_spec: specs/FACE_VISIBILITY_AND_MATERIAL_OCCLUSION_SPEC.md
+  face_visibility_policy: policies/face_visibility_policy.yaml
+  face_visibility_schema: schemas/face_visibility_contract.schema.json
+  face_visibility_gate: src/face_visibility_gate.py
+  face_visibility_sources: sources/face_visibility_primary_sources.yaml
+  studio_avatar_previewer_stylelink_fix: roblox_studio/fix_avatar_previewer_stylelinks.lua
+  blender_environment_lock: blender_env/environment.lock.json
+  blender_environment_readme: blender_env/README.md
+  blender_environment_verifier: blender_env/scripts/verify_environment.py
+  blender_workspace_generator: blender_env/scripts/create_roblox_workspace.py
+pipelines:
+  avatar_setup_body_input: specs/AVATAR_SETUP_INPUT_SPEC.md
+  r15_final_body: specs/R15_FINAL_BODY_SPEC.md
+  dynamic_head: specs/DYNAMIC_HEAD_AND_CAGE_SPEC.md
+  rigid_accessory: specs/ACCESSORY_PIPELINES_SPEC.md
+  layered_accessory: specs/ACCESSORY_PIPELINES_SPEC.md
+release: specs/EXPORT_STUDIO_RELEASE_SPEC.md
+visual: specs/PIXEL_VISUAL_AUDIT_SPEC.md
+preservation: knowledge/MESH_DEFORMATION_PREVENTION.md
+reaudit_lessons: knowledge/AUDIT_TRUTH_SCOPE_LESSONS.md
+exact_texture_transform_lessons: knowledge/EXACT_TEXTURE_SAFE_TRANSFORM_LESSONS.md
+safe_component_repair_lessons: knowledge/SAFE_COMPONENT_REPAIR_WITHOUT_DEFORMATION.md
+geometric_seam_audit_lessons: knowledge/GEOMETRIC_WATERTIGHT_SEAM_AUDIT.md
+enhanced_evidence_lessons: knowledge/ENHANCED_EVIDENCE_VISUALIZATION_LESSONS.md
+exponential_visual_lessons: knowledge/EXPONENTIAL_VISUAL_VALIDATION_LESSONS.md
+rigging_50_source_lessons: knowledge/NON_DESTRUCTIVE_RIGGING_50_SOURCE_LESSONS.md
+true_3d_mouth_lessons: knowledge/TRUE_3D_MOUTH_V3_LESSONS.md
+face_visibility_lessons: knowledge/FACE_PATCH_OCCLUSION_FAILURE_LESSONS.md
+studio_backwards_delivery_lessons: knowledge/STUDIO_BACKWARDS_DELIVERY_FAILURE_LESSONS.md
+studio_avatar_previewer_stylelink_lessons: knowledge/STUDIO_AVATAR_PREVIEWER_STYLELINK_WORKAROUND.md
+blender_environment_lessons: knowledge/BLENDER_EXECUTION_ENVIRONMENT.md
+safe_repair_case: examples/RBX_ANIME_DOLL_SAFE_REPAIR_V2_manifest.json
+safe_repair_review: reports/RBX_ANIME_DOLL_SAFE_REPAIR_V2_REVIEW.md
+enhanced_evidence_case: examples/RBX_ANIME_DOLL_EVIDENCE_V3_contract.json
+enhanced_evidence_review: reports/RBX_ANIME_DOLL_EVIDENCE_V3_REVIEW.md
+exponential_visual_case: examples/RBX_ANIME_DOLL_EXPONENTIAL_V4_contract.json
+exponential_visual_review: reports/RBX_ANIME_DOLL_EXPONENTIAL_V4_REVIEW.md
+rigged_face_case: examples/RBX_ANIME_DOLL_RIGGED_FACE_V1_contract.json
+rigged_face_review: reports/RBX_ANIME_DOLL_RIGGED_FACE_V1_REVIEW.md
+true_3d_mouth_case: examples/RBX_ANIME_DOLL_3D_MOUTH_V3_contract.json
+true_3d_mouth_review: reports/RBX_ANIME_DOLL_3D_MOUTH_V3_REVIEW.md
+orientation_50view_case: examples/RBX_ANIME_DOLL_V15_orientation_50view_summary.json
+orientation_50view_review: reports/RBX_ANIME_DOLL_V15_FINAL_REVIEW.md
+face_visibility_failure_case: examples/RBX_ANIME_DOLL_V15_face_visibility_failure.json
+face_visibility_failure_review: reports/RBX_ANIME_DOLL_V15_FACE_VISIBILITY_FAILURE.md
+exact_texture_transform_case: examples/RBX_ANIME_DOLL_PRESERVED_BAKED_V2_manifest.json
+exact_texture_transform_review: reports/RBX_ANIME_DOLL_PRESERVED_BAKED_V2_REVIEW.md
+lessons: knowledge/ROBLOX_AVATAR_CROSS_KNOWLEDGE.md
