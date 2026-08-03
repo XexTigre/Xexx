@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - 'assets/public-3d-library-*'
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -17,7 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref_name }}
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Python
         uses: actions/setup-python@v5
