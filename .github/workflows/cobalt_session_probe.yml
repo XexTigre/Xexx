@@ -1,0 +1,62 @@
+name: Cobalt YouTube session probe
+
+on:
+  push:
+    branches:
+      - 'cobalt-session-probe-*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  RESULT_DIR: temp/cobalt_session_probe_2026-08-03
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Start official session generator and Cobalt
+        shell: bash
+        run: |
+          docker network create cobalt-net
+          docker run -d --name yt-session --network cobalt-net \
+            ghcr.io/imputnet/yt-session-generator:webserver
+          docker run -d --name cobalt --network cobalt-net -p 9000:9000 \
+            -e API_URL=http://127.0.0.1:9000/ \
+            -e YOUTUBE_SESSION_SERVER=http://yt-session:8080/ \
+            -e YOUTUBE_SESSION_INNERTUBE_CLIENT=WEB_EMBEDDED \
+            ghcr.io/imputnet/cobalt:11
+          for i in $(seq 1 90); do
+            if curl -sf http://127.0.0.1:9000/ >/dev/null; then break; fi
+            sleep 1
+          done
+          sleep 10
+      - name: Probe one Roblox Short
+        shell: bash
+        run: |
+          mkdir -p "$RESULT_DIR"
+          curl --max-time 90 -sS -D "$RESULT_DIR/headers.txt" \
+            -o "$RESULT_DIR/body.json" \
+            -H 'Accept: application/json' \
+            -H 'Content-Type: application/json' \
+            --data '{"url":"https://www.youtube.com/watch?v=ViAD2FfHsRc","videoQuality":"720","youtubeVideoContainer":"mp4","youtubeVideoCodec":"h264","alwaysProxy":true}' \
+            http://127.0.0.1:9000/ || true
+          docker logs yt-session > "$RESULT_DIR/yt_session.log" 2>&1 || true
+          docker logs cobalt > "$RESULT_DIR/cobalt.log" 2>&1 || true
+      - name: Save probe
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$RESULT_DIR"
+          if ! git diff --cached --quiet; then
+            git commit -m 'Salva sonda Cobalt com sessão YouTube'
+            git push origin HEAD:${{ github.ref_name }}
+          fi
