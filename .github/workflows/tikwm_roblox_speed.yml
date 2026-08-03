@@ -40,9 +40,9 @@ jobs:
             python --version
           } > temp/tikwm_roblox_speed/results/tool_versions.txt
 
-      - name: Baixar e analisar todos os frames
+      - name: Baixar pela API e analisar todos os frames
         shell: bash
-        run: python temp/tikwm_roblox_speed/analyze.py
+        run: python temp/tikwm_roblox_speed/analyze_api.py
 
       - name: Remover mídia e áudio temporário
         if: always()
@@ -55,7 +55,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: tikwm-roblox-speed-analysis-2026-08-03
+          name: tikwm-roblox-speed-analysis-api-2026-08-03
           path: temp/tikwm_roblox_speed/results/
           if-no-files-found: error
           retention-days: 7
