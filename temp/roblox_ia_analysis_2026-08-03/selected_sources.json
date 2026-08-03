@@ -1,0 +1,185 @@
+[
+  {
+    "identifier": "roblox-draw-it-better-roblox-artist-art-drawing-fyp",
+    "status": "DOWNLOADED",
+    "score": 248.734,
+    "title": "Roblox - Draw It Better! #roblox #artist #art #drawing #fyp",
+    "title_normalized": "roblox draw it better roblox artist art drawing fyp",
+    "creator": "Cloudricecake",
+    "description": "https://youtube.com/shorts/-EZfLDha9wM?si=M2Njc1_5grhq9LcZ",
+    "subject": [
+      "roblox",
+      "art",
+      "drawing",
+      "artist",
+      "youtube"
+    ],
+    "date": "2026-07-13T00:00:00Z",
+    "publicdate": "2026-08-02T19:50:10Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox - Draw It Better! #roblox #artist #art #drawing #fyp.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 7340518,
+      "length_metadata_s": 44.77,
+      "sha1": "c2fb902bca2b1f2fcb14f3978b3a42344a35a14f",
+      "md5": "a03a9c6ceadb2abb74fd5a3b3f679a8b"
+    },
+    "slug": "01_roblox_draw_it_better_roblox_artist_art_drawing_fyp",
+    "download_url": "https://archive.org/download/roblox-draw-it-better-roblox-artist-art-drawing-fyp/Roblox%20-%20Draw%20It%20Better%21%20%23roblox%20%23artist%20%23art%20%23drawing%20%23fyp.mp4",
+    "sha256_downloaded": "d365188ab8c951aea9c6c107d246dd99ee130340b82640c8a9b645cac3233f3e",
+    "downloaded_size": 7340518,
+    "ffprobe": {
+      "programs": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 720,
+          "height": 1280,
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1"
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "44100",
+          "channels": 2,
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0"
+        }
+      ],
+      "format": {
+        "duration": "44.768073",
+        "size": "7340518",
+        "bit_rate": "1311741"
+      }
+    },
+    "duration_verified_s": 44.768073
+  },
+  {
+    "identifier": "roblox-draw-me-roblox-art-artist-drawing-shorts",
+    "status": "DOWNLOADED",
+    "score": 218.605,
+    "title": "Roblox - Draw Me! #roblox #art #artist #drawing #shorts",
+    "title_normalized": "roblox draw me roblox art artist drawing shorts",
+    "creator": "Cloudricecake",
+    "description": "https://youtu.be/fJZvLPFygm0?si=IWlPKRADQ49D6KAq",
+    "subject": [
+      "roblox",
+      "art",
+      "drawing",
+      "artist",
+      "youtube"
+    ],
+    "date": "2025-10-19T00:00:00Z",
+    "publicdate": "2026-08-02T00:10:27Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox - Draw Me! #roblox #art #artist #drawing #shorts.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 6049547,
+      "length_metadata_s": 31.44,
+      "sha1": "5bba0aa4d77f59b80d1877cb78671444438dd306",
+      "md5": "cb33f41eccd2ff40179be6ff6c267565"
+    },
+    "slug": "02_roblox_draw_me_roblox_art_artist_drawing_shorts",
+    "download_url": "https://archive.org/download/roblox-draw-me-roblox-art-artist-drawing-shorts/Roblox%20-%20Draw%20Me%21%20%23roblox%20%23art%20%23artist%20%23drawing%20%23shorts.mp4",
+    "sha256_downloaded": "40d73981d2483906ec787198c9fed48672031d4370ab47080b5c9e13b9207b85",
+    "downloaded_size": 6049547,
+    "ffprobe": {
+      "programs": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920,
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1"
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "44100",
+          "channels": 2,
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0"
+        }
+      ],
+      "format": {
+        "duration": "31.439819",
+        "size": "6049547",
+        "bit_rate": "1539333"
+      }
+    },
+    "duration_verified_s": 31.439819
+  },
+  {
+    "identifier": "roblox-draw-me-roblox-artist-art-drawing-painting-gaming-shorts",
+    "status": "DOWNLOADED",
+    "score": 213.515,
+    "title": "Roblox - Draw Me! #roblox #artist #art #drawing #painting #gaming #shorts",
+    "title_normalized": "roblox draw me roblox artist art drawing painting gaming shorts",
+    "creator": "Cloudricecake",
+    "description": "https://youtu.be/SEdgU4X6z0o?si=SJt9Y-WQX-M0rfdu",
+    "subject": [
+      "roblox",
+      "art",
+      "drawing",
+      "artist",
+      "youtube"
+    ],
+    "date": "2025-07-08T00:00:00Z",
+    "publicdate": "2026-08-01T23:46:24Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox - Draw Me! #roblox #artist #art #drawing #painting #gaming #shorts.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 5146689,
+      "length_metadata_s": 34.97,
+      "sha1": "59170d331a1ca48dedf23b6ea7dc318c938bc3ea",
+      "md5": "ca472dc74955554dc160c5ca6c3cfb9a"
+    },
+    "slug": "03_roblox_draw_me_roblox_artist_art_drawing_painting_gamin",
+    "download_url": "https://archive.org/download/roblox-draw-me-roblox-artist-art-drawing-painting-gaming-shorts/Roblox%20-%20Draw%20Me%21%20%23roblox%20%23artist%20%23art%20%23drawing%20%23painting%20%23gaming%20%23shorts.mp4",
+    "sha256_downloaded": "0fe4a2db0bf8a4def184e640c1be03f809cc4bbf40b019154a95bfaf4224a195",
+    "downloaded_size": 5146689,
+    "ffprobe": {
+      "programs": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920,
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1"
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "44100",
+          "channels": 2,
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0"
+        }
+      ],
+      "format": {
+        "duration": "34.969252",
+        "size": "5146689",
+        "bit_rate": "1177420"
+      }
+    },
+    "duration_verified_s": 34.969252
+  }
+]

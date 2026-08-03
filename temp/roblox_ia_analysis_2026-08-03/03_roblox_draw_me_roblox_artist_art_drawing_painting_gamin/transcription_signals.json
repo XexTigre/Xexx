@@ -1,0 +1,23 @@
+{
+  "attempted": true,
+  "raw_text_stored": false,
+  "language": "en",
+  "segment_count": 1,
+  "word_count": 1,
+  "words_per_second": 0.0285965510500482,
+  "speech_duration_s": 16.9,
+  "speech_coverage_ratio": 0.4832817127458145,
+  "mean_avg_logprob": -2.5191049575805664,
+  "mean_no_speech_prob": 0.5312991738319397,
+  "top_keywords": [
+    "music"
+  ],
+  "short_excerpt_max_8_words": "music",
+  "speech_windows": [
+    {
+      "start": 0.0,
+      "end": 16.9,
+      "word_count": 1
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "videos_expected": 3,
+  "videos_analyzed": 3,
+  "total_frames_processed": 3329,
+  "all_video_validations_pass": true,
+  "raw_transcripts_stored": false,
+  "review_pass": true
+}

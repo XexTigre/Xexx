@@ -1,0 +1,57 @@
+{
+  "attempted": true,
+  "raw_text_stored": false,
+  "language": "en",
+  "segment_count": 6,
+  "word_count": 30,
+  "words_per_second": 0.9542039666322506,
+  "speech_duration_s": 31.0,
+  "speech_coverage_ratio": 0.9860107655199923,
+  "mean_avg_logprob": -0.6105430962203385,
+  "mean_no_speech_prob": 0.4128362834453583,
+  "top_keywords": [
+    "music",
+    "whole",
+    "light",
+    "through",
+    "big",
+    "dark",
+    "tent",
+    "high",
+    "before",
+    "we'll"
+  ],
+  "short_excerpt_max_8_words": "music the whole of light through the big",
+  "speech_windows": [
+    {
+      "start": 0.0,
+      "end": 10.0,
+      "word_count": 1
+    },
+    {
+      "start": 10.0,
+      "end": 13.0,
+      "word_count": 4
+    },
+    {
+      "start": 13.0,
+      "end": 17.0,
+      "word_count": 7
+    },
+    {
+      "start": 17.0,
+      "end": 21.0,
+      "word_count": 6
+    },
+    {
+      "start": 21.0,
+      "end": 26.0,
+      "word_count": 4
+    },
+    {
+      "start": 26.0,
+      "end": 31.0,
+      "word_count": 8
+    }
+  ]
+}

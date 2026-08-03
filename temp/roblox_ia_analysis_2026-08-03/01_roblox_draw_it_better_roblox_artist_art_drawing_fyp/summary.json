@@ -1,0 +1,80 @@
+{
+  "slug": "01_roblox_draw_it_better_roblox_artist_art_drawing_fyp",
+  "identifier": "roblox-draw-it-better-roblox-artist-art-drawing-fyp",
+  "title": "Roblox - Draw It Better! #roblox #artist #art #drawing #fyp",
+  "creator": "Cloudricecake",
+  "publicdate": "2026-08-02T19:50:10Z",
+  "archive_url": "https://archive.org/details/roblox-draw-it-better-roblox-artist-art-drawing-fyp",
+  "download_url": "https://archive.org/download/roblox-draw-it-better-roblox-artist-art-drawing-fyp/Roblox%20-%20Draw%20It%20Better%21%20%23roblox%20%23artist%20%23art%20%23drawing%20%23fyp.mp4",
+  "sha256": "d365188ab8c951aea9c6c107d246dd99ee130340b82640c8a9b645cac3233f3e",
+  "duration_s": 44.768073,
+  "resolution": [
+    720,
+    1280
+  ],
+  "orientation": "vertical",
+  "fps": 30.0,
+  "frames_reported": 1341,
+  "frames_processed": 1341,
+  "frame_count_delta": 0,
+  "brightness_mean": 94.05070474168065,
+  "brightness_std": 23.099628756019335,
+  "saturation_mean": 120.7901207477577,
+  "saturation_std": 16.453091913210713,
+  "edge_density_mean": 0.03148047894528337,
+  "top_edge_density_mean": 0.02205260514202293,
+  "bottom_edge_density_mean": 0.015250272663861286,
+  "overlay_edge_ratio_proxy": 0.5924763386021038,
+  "motion_mean": 0.7573412133600926,
+  "motion_p90": 2.6367850303649902,
+  "histogram_change_mean": 0.0213450452076245,
+  "scene_cuts_detected": 1,
+  "cut_rate_per_min": 1.340240845300623,
+  "estimated_mean_shot_s": 22.3840365,
+  "representative_keyframes": 24,
+  "audio": {
+    "has_audio": true,
+    "sample_rate": 16000,
+    "duration_s": 44.7680625,
+    "rms_mean": 0.03325735405087471,
+    "rms_p90": 0.050977952778339386,
+    "db_mean": -31.428054809570312,
+    "db_p10": -36.71529006958008,
+    "db_p90": -25.852371215820312,
+    "dynamic_range_db_p10_p90": 10.862918853759766,
+    "onset_peaks": 15,
+    "onset_rate_per_min": 20.10361739465495,
+    "silence_ratio_below_minus40db": 0.01899441340782123
+  },
+  "transcription": {
+    "attempted": true,
+    "raw_text_stored": false,
+    "language": "en",
+    "segment_count": 1,
+    "word_count": 1,
+    "words_per_second": 0.02233734742167705,
+    "speech_duration_s": 3.4,
+    "speech_coverage_ratio": 0.07594698123370197,
+    "mean_avg_logprob": -4.474468231201172,
+    "mean_no_speech_prob": 0.5570051074028015,
+    "top_keywords": [
+      "games"
+    ],
+    "short_excerpt_max_8_words": "games",
+    "speech_windows": [
+      {
+        "start": 0.0,
+        "end": 3.4,
+        "word_count": 1
+      }
+    ]
+  },
+  "validation": {
+    "video_decoded": true,
+    "frame_csv_written": true,
+    "frame_count_compatible": true,
+    "contact_sheet_written": true,
+    "raw_transcript_not_stored": true,
+    "pass": true
+  }
+}

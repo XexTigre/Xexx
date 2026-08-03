@@ -1,0 +1,114 @@
+{
+  "slug": "02_roblox_draw_me_roblox_art_artist_drawing_shorts",
+  "identifier": "roblox-draw-me-roblox-art-artist-drawing-shorts",
+  "title": "Roblox - Draw Me! #roblox #art #artist #drawing #shorts",
+  "creator": "Cloudricecake",
+  "publicdate": "2026-08-02T00:10:27Z",
+  "archive_url": "https://archive.org/details/roblox-draw-me-roblox-art-artist-drawing-shorts",
+  "download_url": "https://archive.org/download/roblox-draw-me-roblox-art-artist-drawing-shorts/Roblox%20-%20Draw%20Me%21%20%23roblox%20%23art%20%23artist%20%23drawing%20%23shorts.mp4",
+  "sha256": "40d73981d2483906ec787198c9fed48672031d4370ab47080b5c9e13b9207b85",
+  "duration_s": 31.439819,
+  "resolution": [
+    1080,
+    1920
+  ],
+  "orientation": "vertical",
+  "fps": 30.0,
+  "frames_reported": 941,
+  "frames_processed": 941,
+  "frame_count_delta": 0,
+  "brightness_mean": 133.07124689892302,
+  "brightness_std": 20.285566291071113,
+  "saturation_mean": 62.46433844101363,
+  "saturation_std": 14.83751449804015,
+  "edge_density_mean": 0.02901789902061112,
+  "top_edge_density_mean": 0.02322111661953818,
+  "bottom_edge_density_mean": 0.015622918927147364,
+  "overlay_edge_ratio_proxy": 0.6693116465650221,
+  "motion_mean": 0.13871815300513926,
+  "motion_p90": 0.13749343156814575,
+  "histogram_change_mean": 0.017296334767316943,
+  "scene_cuts_detected": 0,
+  "cut_rate_per_min": 0.0,
+  "estimated_mean_shot_s": 31.439819,
+  "representative_keyframes": 21,
+  "audio": {
+    "has_audio": true,
+    "sample_rate": 16000,
+    "duration_s": 31.4398125,
+    "rms_mean": 0.12360890209674835,
+    "rms_p90": 0.17949853837490082,
+    "db_mean": -18.922142028808594,
+    "db_p10": -22.54498863220215,
+    "db_p90": -14.918807983398438,
+    "dynamic_range_db_p10_p90": 7.626180648803711,
+    "onset_peaks": 28,
+    "onset_rate_per_min": 53.435433178871534,
+    "silence_ratio_below_minus40db": 0.009554140127388535
+  },
+  "transcription": {
+    "attempted": true,
+    "raw_text_stored": false,
+    "language": "en",
+    "segment_count": 6,
+    "word_count": 30,
+    "words_per_second": 0.9542039666322506,
+    "speech_duration_s": 31.0,
+    "speech_coverage_ratio": 0.9860107655199923,
+    "mean_avg_logprob": -0.6105430962203385,
+    "mean_no_speech_prob": 0.4128362834453583,
+    "top_keywords": [
+      "music",
+      "whole",
+      "light",
+      "through",
+      "big",
+      "dark",
+      "tent",
+      "high",
+      "before",
+      "we'll"
+    ],
+    "short_excerpt_max_8_words": "music the whole of light through the big",
+    "speech_windows": [
+      {
+        "start": 0.0,
+        "end": 10.0,
+        "word_count": 1
+      },
+      {
+        "start": 10.0,
+        "end": 13.0,
+        "word_count": 4
+      },
+      {
+        "start": 13.0,
+        "end": 17.0,
+        "word_count": 7
+      },
+      {
+        "start": 17.0,
+        "end": 21.0,
+        "word_count": 6
+      },
+      {
+        "start": 21.0,
+        "end": 26.0,
+        "word_count": 4
+      },
+      {
+        "start": 26.0,
+        "end": 31.0,
+        "word_count": 8
+      }
+    ]
+  },
+  "validation": {
+    "video_decoded": true,
+    "frame_csv_written": true,
+    "frame_count_compatible": true,
+    "contact_sheet_written": true,
+    "raw_transcript_not_stored": true,
+    "pass": true
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "slug": "03_roblox_draw_me_roblox_artist_art_drawing_painting_gamin",
+  "identifier": "roblox-draw-me-roblox-artist-art-drawing-painting-gaming-shorts",
+  "title": "Roblox - Draw Me! #roblox #artist #art #drawing #painting #gaming #shorts",
+  "creator": "Cloudricecake",
+  "publicdate": "2026-08-01T23:46:24Z",
+  "archive_url": "https://archive.org/details/roblox-draw-me-roblox-artist-art-drawing-painting-gaming-shorts",
+  "download_url": "https://archive.org/download/roblox-draw-me-roblox-artist-art-drawing-painting-gaming-shorts/Roblox%20-%20Draw%20Me%21%20%23roblox%20%23artist%20%23art%20%23drawing%20%23painting%20%23gaming%20%23shorts.mp4",
+  "sha256": "0fe4a2db0bf8a4def184e640c1be03f809cc4bbf40b019154a95bfaf4224a195",
+  "duration_s": 34.969252,
+  "resolution": [
+    1080,
+    1920
+  ],
+  "orientation": "vertical",
+  "fps": 30.0,
+  "frames_reported": 1047,
+  "frames_processed": 1047,
+  "frame_count_delta": 0,
+  "brightness_mean": 63.95066252408042,
+  "brightness_std": 10.466333605032082,
+  "saturation_mean": 38.23671674084244,
+  "saturation_std": 9.644720389570699,
+  "edge_density_mean": 0.024391513137919037,
+  "top_edge_density_mean": 0.0,
+  "bottom_edge_density_mean": 0.0,
+  "overlay_edge_ratio_proxy": 0.0,
+  "motion_mean": 0.055010809321718535,
+  "motion_p90": 0.06284228041768071,
+  "histogram_change_mean": 0.01084614061125867,
+  "scene_cuts_detected": 1,
+  "cut_rate_per_min": 1.715793063002892,
+  "estimated_mean_shot_s": 17.484626,
+  "representative_keyframes": 22,
+  "audio": {
+    "has_audio": true,
+    "sample_rate": 16000,
+    "duration_s": 34.96925,
+    "rms_mean": 0.1400309056043625,
+    "rms_p90": 0.20012515783309937,
+    "db_mean": -17.764163970947266,
+    "db_p10": -20.834148406982422,
+    "db_p90": -13.973966598510742,
+    "dynamic_range_db_p10_p90": 6.86018180847168,
+    "onset_peaks": 40,
+    "onset_rate_per_min": 68.63172644537701,
+    "silence_ratio_below_minus40db": 0.002861230329041488
+  },
+  "transcription": {
+    "attempted": true,
+    "raw_text_stored": false,
+    "language": "en",
+    "segment_count": 1,
+    "word_count": 1,
+    "words_per_second": 0.0285965510500482,
+    "speech_duration_s": 16.9,
+    "speech_coverage_ratio": 0.4832817127458145,
+    "mean_avg_logprob": -2.5191049575805664,
+    "mean_no_speech_prob": 0.5312991738319397,
+    "top_keywords": [
+      "music"
+    ],
+    "short_excerpt_max_8_words": "music",
+    "speech_windows": [
+      {
+        "start": 0.0,
+        "end": 16.9,
+        "word_count": 1
+      }
+    ]
+  },
+  "validation": {
+    "video_decoded": true,
+    "frame_csv_written": true,
+    "frame_count_compatible": true,
+    "contact_sheet_written": true,
+    "raw_transcript_not_stored": true,
+    "pass": true
+  }
+}

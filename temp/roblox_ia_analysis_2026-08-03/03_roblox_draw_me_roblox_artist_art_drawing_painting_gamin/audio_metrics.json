@@ -1,0 +1,14 @@
+{
+  "has_audio": true,
+  "sample_rate": 16000,
+  "duration_s": 34.96925,
+  "rms_mean": 0.1400309056043625,
+  "rms_p90": 0.20012515783309937,
+  "db_mean": -17.764163970947266,
+  "db_p10": -20.834148406982422,
+  "db_p90": -13.973966598510742,
+  "dynamic_range_db_p10_p90": 6.86018180847168,
+  "onset_peaks": 40,
+  "onset_rate_per_min": 68.63172644537701,
+  "silence_ratio_below_minus40db": 0.002861230329041488
+}

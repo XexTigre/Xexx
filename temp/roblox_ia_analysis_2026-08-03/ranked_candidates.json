@@ -1,0 +1,878 @@
+[
+  {
+    "identifier": "roblox-draw-it-better-roblox-artist-art-drawing-fyp",
+    "status": "DOWNLOADED",
+    "score": 248.734,
+    "title": "Roblox - Draw It Better! #roblox #artist #art #drawing #fyp",
+    "title_normalized": "roblox draw it better roblox artist art drawing fyp",
+    "creator": "Cloudricecake",
+    "description": "https://youtube.com/shorts/-EZfLDha9wM?si=M2Njc1_5grhq9LcZ",
+    "subject": [
+      "roblox",
+      "art",
+      "drawing",
+      "artist",
+      "youtube"
+    ],
+    "date": "2026-07-13T00:00:00Z",
+    "publicdate": "2026-08-02T19:50:10Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox - Draw It Better! #roblox #artist #art #drawing #fyp.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 7340518,
+      "length_metadata_s": 44.77,
+      "sha1": "c2fb902bca2b1f2fcb14f3978b3a42344a35a14f",
+      "md5": "a03a9c6ceadb2abb74fd5a3b3f679a8b"
+    },
+    "slug": "01_roblox_draw_it_better_roblox_artist_art_drawing_fyp",
+    "download_url": "https://archive.org/download/roblox-draw-it-better-roblox-artist-art-drawing-fyp/Roblox%20-%20Draw%20It%20Better%21%20%23roblox%20%23artist%20%23art%20%23drawing%20%23fyp.mp4",
+    "sha256_downloaded": "d365188ab8c951aea9c6c107d246dd99ee130340b82640c8a9b645cac3233f3e",
+    "downloaded_size": 7340518,
+    "ffprobe": {
+      "programs": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 720,
+          "height": 1280,
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1"
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "44100",
+          "channels": 2,
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0"
+        }
+      ],
+      "format": {
+        "duration": "44.768073",
+        "size": "7340518",
+        "bit_rate": "1311741"
+      }
+    },
+    "duration_verified_s": 44.768073
+  },
+  {
+    "identifier": "roblox-draw-me-roblox-art-artist-drawing-shorts",
+    "status": "DOWNLOADED",
+    "score": 218.605,
+    "title": "Roblox - Draw Me! #roblox #art #artist #drawing #shorts",
+    "title_normalized": "roblox draw me roblox art artist drawing shorts",
+    "creator": "Cloudricecake",
+    "description": "https://youtu.be/fJZvLPFygm0?si=IWlPKRADQ49D6KAq",
+    "subject": [
+      "roblox",
+      "art",
+      "drawing",
+      "artist",
+      "youtube"
+    ],
+    "date": "2025-10-19T00:00:00Z",
+    "publicdate": "2026-08-02T00:10:27Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox - Draw Me! #roblox #art #artist #drawing #shorts.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 6049547,
+      "length_metadata_s": 31.44,
+      "sha1": "5bba0aa4d77f59b80d1877cb78671444438dd306",
+      "md5": "cb33f41eccd2ff40179be6ff6c267565"
+    },
+    "slug": "02_roblox_draw_me_roblox_art_artist_drawing_shorts",
+    "download_url": "https://archive.org/download/roblox-draw-me-roblox-art-artist-drawing-shorts/Roblox%20-%20Draw%20Me%21%20%23roblox%20%23art%20%23artist%20%23drawing%20%23shorts.mp4",
+    "sha256_downloaded": "40d73981d2483906ec787198c9fed48672031d4370ab47080b5c9e13b9207b85",
+    "downloaded_size": 6049547,
+    "ffprobe": {
+      "programs": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920,
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1"
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "44100",
+          "channels": 2,
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0"
+        }
+      ],
+      "format": {
+        "duration": "31.439819",
+        "size": "6049547",
+        "bit_rate": "1539333"
+      }
+    },
+    "duration_verified_s": 31.439819
+  },
+  {
+    "identifier": "roblox-draw-me-roblox-artist-art-drawing-painting-gaming-shorts",
+    "status": "DOWNLOADED",
+    "score": 213.515,
+    "title": "Roblox - Draw Me! #roblox #artist #art #drawing #painting #gaming #shorts",
+    "title_normalized": "roblox draw me roblox artist art drawing painting gaming shorts",
+    "creator": "Cloudricecake",
+    "description": "https://youtu.be/SEdgU4X6z0o?si=SJt9Y-WQX-M0rfdu",
+    "subject": [
+      "roblox",
+      "art",
+      "drawing",
+      "artist",
+      "youtube"
+    ],
+    "date": "2025-07-08T00:00:00Z",
+    "publicdate": "2026-08-01T23:46:24Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox - Draw Me! #roblox #artist #art #drawing #painting #gaming #shorts.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 5146689,
+      "length_metadata_s": 34.97,
+      "sha1": "59170d331a1ca48dedf23b6ea7dc318c938bc3ea",
+      "md5": "ca472dc74955554dc160c5ca6c3cfb9a"
+    },
+    "slug": "03_roblox_draw_me_roblox_artist_art_drawing_painting_gamin",
+    "download_url": "https://archive.org/download/roblox-draw-me-roblox-artist-art-drawing-painting-gaming-shorts/Roblox%20-%20Draw%20Me%21%20%23roblox%20%23artist%20%23art%20%23drawing%20%23painting%20%23gaming%20%23shorts.mp4",
+    "sha256_downloaded": "0fe4a2db0bf8a4def184e640c1be03f809cc4bbf40b019154a95bfaf4224a195",
+    "downloaded_size": 5146689,
+    "ffprobe": {
+      "programs": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920,
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1"
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "44100",
+          "channels": 2,
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0"
+        }
+      ],
+      "format": {
+        "duration": "34.969252",
+        "size": "5146689",
+        "bit_rate": "1177420"
+      }
+    },
+    "duration_verified_s": 34.969252
+  },
+  {
+    "identifier": "roblox-draw-me-roblox-art-drawing-shorts-painting",
+    "status": "CANDIDATE",
+    "score": 198.776,
+    "title": "Roblox - Draw Me! #roblox #art #drawing #shorts #painting",
+    "title_normalized": "roblox draw me roblox art drawing shorts painting",
+    "creator": "Cloudricecake",
+    "description": "https://youtube.com/shorts/oQeMIkw4bj0?si=37rC1_f7tVSGRQVg",
+    "subject": [
+      "roblox",
+      "art",
+      "drawing",
+      "artist",
+      "youtube"
+    ],
+    "date": "2025-11-16T00:00:00Z",
+    "publicdate": "2026-07-30T17:37:36Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox - Draw Me! #roblox #art #drawing #shorts #painting.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 7761850,
+      "length_metadata_s": 33.0,
+      "sha1": "a6c4443c40eaf6b1422bc52975123330c3fd2cf9",
+      "md5": "3c4739f32dc480c481c7eff785e136c4"
+    }
+  },
+  {
+    "identifier": "roblox-draw-me-roblox-art-drawing-painting-illustration-games-shorts",
+    "status": "CANDIDATE",
+    "score": 198.487,
+    "title": "Roblox - Draw me! #roblox #art #drawing #painting #illustration #games #shorts",
+    "title_normalized": "roblox draw me roblox art drawing painting illustration games shorts",
+    "creator": "Cloudricecake",
+    "description": "https://youtube.com/shorts/YDITpBBeqD8?si=Nz6f_Vyc-03ktXRn",
+    "subject": [
+      "roblox",
+      "art",
+      "drawing",
+      "artist",
+      "youtube"
+    ],
+    "date": "2025-07-05T00:00:00Z",
+    "publicdate": "2026-07-30T21:29:16Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox - Draw me! #roblox #art #drawing #painting #illustration #games #shorts.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 4866674,
+      "length_metadata_s": 28.96,
+      "sha1": "c4865d22a44ace206e33960dd1c33c0f0f2ab0cd",
+      "md5": "405c24541e9b326c7a84a817c029be4a"
+    }
+  },
+  {
+    "identifier": "roblox-draw-me-roblox-art-drawing-fyp-painting",
+    "status": "CANDIDATE",
+    "score": 198.466,
+    "title": "Roblox - Draw Me! #roblox #art #drawing #fyp #painting",
+    "title_normalized": "roblox draw me roblox art drawing fyp painting",
+    "creator": "cloud_ricecake",
+    "description": "https://www.tiktok.com/@cloud_ricecake/video/7550755623244287253",
+    "subject": [
+      "roblox",
+      "art",
+      "drawing",
+      "artist",
+      "tiktok"
+    ],
+    "date": "2025-09-16T00:00:00Z",
+    "publicdate": "2026-08-02T01:58:39Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox - Draw Me! #roblox #art #drawing #fyp #painting.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 4659308,
+      "length_metadata_s": 36.18,
+      "sha1": "8c5e866fb6e5465129cb0d9cdd0857219a86a8fa",
+      "md5": "471bcbab56496ac716fa16cd2a67a8a7"
+    }
+  },
+  {
+    "identifier": "roblox-draw-it-better-roblox-artist-art-drawing-fyp-202608",
+    "status": "CANDIDATE",
+    "score": 198.449,
+    "title": "Roblox - Draw It Better! #roblox #artist #art #drawing #fyp",
+    "title_normalized": "roblox draw it better roblox artist art drawing fyp",
+    "creator": "Cloudricecake",
+    "description": "https://youtu.be/tz-G1vj2JZY?si=7DZYqYdtX46c4qSG",
+    "subject": [
+      "roblox",
+      "art",
+      "drawing",
+      "artist",
+      "youtube"
+    ],
+    "date": "2026-07-15T00:00:00Z",
+    "publicdate": "2026-08-02T22:08:28Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox - Draw It Better! #roblox #artist #art #drawing #fyp.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 4489290,
+      "length_metadata_s": 36.11,
+      "sha1": "51a8cb68be3af7c6646df9ff37328be7ea10c697",
+      "md5": "b879553b51cec13304679c7241e90fb5"
+    }
+  },
+  {
+    "identifier": "roblox-draw-me-roblox-art-drawing-artist_202607",
+    "status": "CANDIDATE",
+    "score": 198.421,
+    "title": "Roblox - Draw Me! #roblox #art #drawing #artist",
+    "title_normalized": "roblox draw me roblox art drawing artist",
+    "creator": "Cloudricecake",
+    "description": "https://youtube.com/shorts/pViRZhXRuKk?si=qVLZYGdAeFrXLNt_",
+    "subject": [
+      "roblox",
+      "art",
+      "drawing",
+      "artist",
+      "youtube"
+    ],
+    "date": "2026-04-11T00:00:00Z",
+    "publicdate": "2026-07-30T17:20:04Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox - Draw Me! #roblox #art #drawing #artist_.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 4205573,
+      "length_metadata_s": 18.0,
+      "sha1": "e08d8de80bba1189440d6d1e2de6a376b415432c",
+      "md5": "a8f007669a4385d2ce582674a9eecc35"
+    }
+  },
+  {
+    "identifier": "roblox-draw-me-roblox-artist-drawing-fyp-painting",
+    "status": "CANDIDATE",
+    "score": 198.256,
+    "title": "Roblox - Draw Me! #roblox #artist #drawing #fyp #painting",
+    "title_normalized": "roblox draw me roblox artist drawing fyp painting",
+    "creator": "cloud_ricecake",
+    "description": "og link (unavailable): https://www.tiktok.com/@cloud_ricecake/video/7525502103683353874 - Title is a mockup since og isn't known  - Upload date isn't known ",
+    "subject": [
+      "roblox",
+      "art",
+      "drawing",
+      "artist",
+      "tiktok"
+    ],
+    "date": null,
+    "publicdate": "2026-08-02T02:47:51Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox - Draw Me! #roblox #artist #drawing #fyp #painting.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 2555783,
+      "length_metadata_s": 26.68,
+      "sha1": "9f5377ae49ed0db2f8d0544d6a1c33463710cdec",
+      "md5": "a5fb7539802f70cd6e90f8e45c7eba32"
+    }
+  },
+  {
+    "identifier": "ytdown.com-you-tube-i-m-dying-piggy-animation-meme-slowed-do-media-b-lovzvp-bw-1-y-001-360p",
+    "status": "CANDIDATE",
+    "score": 176.158,
+    "title": "I’m dying//piggy animation meme//slowed down( read description )",
+    "title_normalized": "i m dying piggy animation meme slowed down read description",
+    "creator": "Balliwolfy",
+    "description": "I’m back , Sorry , I’m too lazy change ghosty , I know right ghosty is female or else , I can’t change ghosty , because is time to finish my video , I know it’s late , And this is not the true story , the all piggy characters not scared of ghosty I just wanna make it for fun Time : 2day FlipaClip : 18 fps Original meme     • I'M DYING - original m...   Music slowed     • I’m dying meme (Daycor...   Thank you for 73K subscribers 💕 Balliwolfy 243K subscribers Videos About Instagram  Tiktok Twitter acc Video details Date Aug 13, 2020 Views 1,498,502 Likes 44,363",
+    "subject": [
+      "YouTube",
+      "Balliwolfy",
+      "animation",
+      "animation meme",
+      "Roblox piggy",
+      "roblox"
+    ],
+    "date": "2020-08-23T00:00:00Z",
+    "publicdate": "2026-08-02T01:45:13Z",
+    "downloads": 0,
+    "file": {
+      "name": "YTDown.com_YouTube_I-m-dying-piggy-animation-meme-slowed-do_Media_bLOVZvpBw1Y_001_360p.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 1582961,
+      "length_metadata_s": 53.94,
+      "sha1": "f2aef5b6ccc5c169775bd066d909b0e93afc6d0e",
+      "md5": "5a556112ad4ef5554c493d1e335b4973"
+    }
+  },
+  {
+    "identifier": "youtube-bZxfuaUzH4o",
+    "status": "CANDIDATE",
+    "score": 172.048,
+    "title": "20th Century Tonis Park Roblox Star logo (1985, Kentucky Nuggets style)",
+    "title_normalized": "20th century tonis park roblox star logo 1985 kentucky nuggets style",
+    "creator": "Shynkarenko Oleksandr Alternate Channel",
+    "description": "Credit goes to Danillo Meirelles Almeida (Now retired) for the model. Thanks to @VladyslavBrosLogoChannel for sending the model pack to me. Gift for 20th Century Tonis Park Roblox Star. 20th Century Tonis Park Roblox Star © Tonis Corporation (now owned by Shynkarenko Oleksandr Media Corporation). Credit goes to Fox for the audio. (too lazy to add the rest of desc) Do not ever think about report, copy, flag, steal, edit, redistribute/re-upload, and/or repost my videos without my permission, and do not ever think about giving copyright/community guidelines strikes. No copyright infringement intended and no flagging intended. NOTE: No stupid comments. Software used with: Blender 3D (version 2.79 for editing) Copyright Disclaimer Under Section 107 of the Copyright Act 1976; Allowance is made for \"Fair Use\" for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statutes that might otherwise be infringing. Non-profit, educational, or personal use tips the balance in favor of fair use. No copyright infringement intended. Promotional use only. All rights and credit go directly to its rightful owners. WARNING: If you dislike my videos, i will disable ratings forever. Copyright © 2026 Shynkarenko Oleksandr Media Corporation, all rights reserved.",
+    "subject": [
+      "Youtube",
+      "video",
+      "Film & Animation"
+    ],
+    "date": "2026-08-02T00:00:00Z",
+    "publicdate": "2026-08-02T13:17:20Z",
+    "downloads": 0,
+    "file": {
+      "name": "bZxfuaUzH4o.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 476671,
+      "length_metadata_s": 19.37,
+      "sha1": "e034bf0c8324a23c9ee9127f396c8ae77fc12edc",
+      "md5": "096de8a6e79d28ac5aedf930c77a61dc"
+    }
+  },
+  {
+    "identifier": "youtube-CIaAohlWXOs",
+    "status": "CANDIDATE",
+    "score": 154.155,
+    "title": "16mm closing logos - The Alice and Crazyplant Show",
+    "title_normalized": "16mm closing logos the alice and crazyplant show",
+    "creator": "Makoto&Kotone Media",
+    "description": "☆-----Video description-----☆ Beware the scary, darker orange variant of Pretty Cure Agency and SkyRose Translate! Television logos... What if TMMC transferred the entire first episode of The Alice and Crazyplant Show into a 35mm film? Take no matter bad feeling about this! 16mm film supplied by The Madoka Magica Company. Music courtesy of NoCopyrightSounds. NOTE: Fan-made. ☆-----Channel information-----☆ Discord: Nana Mizuki A's#6468 Join PFA48 AMUSEMENT CREATIVE Discord Server: https://discord.gg/kwsZu5n DeviantArt Account: https://www.deviantart.com/fatetharlaownarts YTPMania: https://ytpmania.net/u/prettycureagency Roblox: https://www.roblox.com/users/531407770/profile GameMaps: https://www.gamemaps.com/profile/1127866 Left 4 Dead 2 Name: [TeamK] Yuko Oshima Project Fate.Alicia (Nana Mizuki Another) used MAGIX VEGAS Pro 16, Blender, Cinema 4D, and Photoshop for making videos. WARNING: Any unauthorized duplicating, copying, transmission, pirating, or stealing any videos from Project Fate.Alicia (Nana Mizuki Another) will file a suit against you and cause a wrongful termination/violation of laws. All of the content are belong to the Fair Use. I own nothing. © S.C. NANA NET (Nana Mizuki Official FanClub) © 2003 - 2020 Project Fate.Alicia Amusement Creative LLC © 2004 - 2020 NANOHA (A's/StrikerS/INNOCENT/ViVid/Reflection/Detonation/15th)/ViVid Strike PROJECT (Seven Arcs/A-1 Pictures) © 2018 - 2020 The Kyoobur (9K) Company © 2020 The Left 4 Troll (Darksyne) Community © 2020 AKS Project © 2020 CWK Enterprises All Rights Reserved.",
+    "subject": [
+      "Youtube",
+      "video",
+      "Film & Animation",
+      "35mm Film",
+      "Fake 35mm Film",
+      "Fan-made logos",
+      "The Alice and Crazyplant Show",
+      "Deteriorated film"
+    ],
+    "date": "2020-10-16T00:00:00Z",
+    "publicdate": "2026-08-02T14:12:45Z",
+    "downloads": 0,
+    "file": {
+      "name": "CIaAohlWXOs.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 1553394,
+      "length_metadata_s": 42.14,
+      "sha1": "27c57a8ca6c8fb7df4adf869aac9346207068882",
+      "md5": "8916b4e8f872620adddf19ae8b34225c"
+    }
+  },
+  {
+    "identifier": "all-jaziekittys-roblox-animations-2022",
+    "status": "CANDIDATE",
+    "score": 154.146,
+    "title": "All JazieKitty's Roblox Animations 2022",
+    "title_normalized": "all jaziekitty s roblox animations 2022",
+    "creator": "JazieKitty",
+    "description": "All JazieKitty's Roblox Animations 2022",
+    "subject": [
+      "Roblox",
+      "JazieKitty"
+    ],
+    "date": "2022-01-01T00:00:00Z",
+    "publicdate": "2026-08-02T20:42:47Z",
+    "downloads": 0,
+    "file": {
+      "name": "Noob Club.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 1456246,
+      "length_metadata_s": 25.47,
+      "sha1": "fa3910ef689854b93fbb1fa59d2defc847f2bc39",
+      "md5": "f869e84716ceb39e02826e9bea9d3de5"
+    }
+  },
+  {
+    "identifier": "youtube-7sim04cvVzY",
+    "status": "CANDIDATE",
+    "score": 154.044,
+    "title": "The Madoka Magica Company logo (2019)",
+    "title_normalized": "the madoka magica company logo 2019",
+    "creator": "Makoto&Kotone Media",
+    "description": "=====DESCRIPTION===== Just a logo for the Madoka Magica Company. This is animated version. =====INFORMATION===== Discord: https://discord.gg/VAMvKCv YTPMania: https://ytpmania.net/u/prettycureagency Roblox: https://www.roblox.com/users/531407770/profile Pretty Cure Agency used MAGIX VEGAS Pro 14 and Photoshop for making videos. Feat. Love Momozono/Lauren PeachTree, Victor Hugo Ochoa, Skyler McFadden, Skyler Hawkins, Mirai Asahina/Monica Laverne, James Bond, John Cena, Clara Rayburn, Marcos Klapof, Joseph Goes, Hana Nono/Katrina Rayburn, SimasTube19, Alice Margatroid, HigglyTownHeroesFanatic2017/Ian, Nozomi Yumehara/Nicole Olivera/Nachel Young, and Harry Forshew! © 2016-2019 Pretty Cure Agency LLC. All Rights Reserved.",
+    "subject": [
+      "Youtube",
+      "video",
+      "Film & Animation",
+      "PrettyCureAgency",
+      "TelevisionPlace",
+      "TVP",
+      "TheEGNetwork"
+    ],
+    "date": "2019-03-10T00:00:00Z",
+    "publicdate": "2026-08-02T14:14:25Z",
+    "downloads": 0,
+    "file": {
+      "name": "7sim04cvVzY.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 437145,
+      "length_metadata_s": 5.25,
+      "sha1": "7ca596733536b855158fcc1205b1c5eec4e321e1",
+      "md5": "92bbf3860f9d9492a1c9be0e42fd9e44"
+    }
+  },
+  {
+    "identifier": "my-first-phantom-forces-video-on-the-channel",
+    "status": "CANDIDATE",
+    "score": 145.217,
+    "title": "WaterEnjoyer5000's videos",
+    "title_normalized": "waterenjoyer5000 s videos",
+    "creator": "WaterEnjoyer5000",
+    "description": "WaterEnjoyer5000 is a small roblox channel who started with phantom forces and im putting his videos here just incase.",
+    "subject": [
+      "youtube",
+      "roblox"
+    ],
+    "date": "2026-08-02T00:00:00Z",
+    "publicdate": "2026-08-03T10:28:03Z",
+    "downloads": 0,
+    "file": {
+      "name": "very short pf video (i dont know what to do with).mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 2166240,
+      "length_metadata_s": 8.89,
+      "sha1": "448bf421f9e6d834fdcd89005b705b76b381ac95",
+      "md5": "c61051724437dfbc1e7aaa4e28e1bae4"
+    }
+  },
+  {
+    "identifier": "y2matego.com_-_shortened_1920x1080_vidsy_video_influencer_rp-avatar-sim_dress-up",
+    "status": "CANDIDATE",
+    "score": 145.138,
+    "title": "y2matego.com_-_Shortened_1920x1080_Vidsy_Video_Influencer_RP-Avatar-Sim_Dress-Up_Prism-Runway_Twinning_EN_30s_05-1",
+    "title_normalized": "y2matego com shortened 1920x1080 vidsy video influencer rp avatar sim dress up prism runway twinning en 30s 05 1",
+    "creator": "Roblox",
+    "description": "Roblox",
+    "subject": "Roblox",
+    "date": "2026-07-31T00:00:00Z",
+    "publicdate": "2026-07-31T20:02:55Z",
+    "downloads": 0,
+    "file": {
+      "name": "y2matego.com_-_Shortened_1920x1080_Vidsy_Video_Influencer_RP-Avatar-Sim_Dress-Up_Prism-Runway_Twinning_EN_30s_05-1.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 1378021,
+      "length_metadata_s": 6.25,
+      "sha1": "4f2a05d690fbe26725af62605accc5fb1b039ce6",
+      "md5": "efeb76fc5535814480f993b0cf7509ff"
+    }
+  },
+  {
+    "identifier": "roblox-2026-08-01-t-11-07-04.628-z",
+    "status": "CANDIDATE",
+    "score": 142.674,
+    "title": "Roblox 2026 08 01 T 11 07 04.628 Z",
+    "title_normalized": "roblox 2026 08 01 t 11 07 04 628 z",
+    "creator": null,
+    "description": "-",
+    "subject": "-",
+    "date": null,
+    "publicdate": "2026-08-01T11:14:00Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox-2026-08-01T11_07_04.628Z.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 76739494,
+      "length_metadata_s": 57.08,
+      "sha1": "c067425a86f31eb807a59e7acac57f76c1e79d97",
+      "md5": "28d786849f6ec47b18dba37a4bd22401"
+    }
+  },
+  {
+    "identifier": "v1c025g50000d8hdkjvog65ik5it2skg",
+    "status": "CANDIDATE",
+    "score": 138.632,
+    "title": "塩溶岩タワー緑剣の頃",
+    "title_normalized": "",
+    "creator": "俺のコメント🎣",
+    "description": "Credit: reo123456 (本人) aira29608 (サブアカウント、投稿したアカウント)",
+    "subject": [
+      "溶岩タワー",
+      "Lava",
+      "Rising",
+      "Game",
+      "Roblox"
+    ],
+    "date": "2026-06-05T00:00:00Z",
+    "publicdate": "2026-07-30T07:24:15Z",
+    "downloads": 0,
+    "file": {
+      "name": "v1c025g50000d8hdkjvog65ik5it2skg.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 6321684,
+      "length_metadata_s": 30.02,
+      "sha1": "8053204aa5e296fe9f97218ec213d6ca65884c4a",
+      "md5": "6bdb6f82e37f4e5c76842b9d3d80744a"
+    }
+  },
+  {
+    "identifier": "youtube-io9--gqOUPw.bcf0eac6",
+    "status": "CANDIDATE",
+    "score": 138.522,
+    "title": "塩がピーマンの教室の動画に初めて出た動画",
+    "title_normalized": "",
+    "creator": "ピーマンの教室",
+    "description": "塩が本当にピーマンの教室に出た動画。1回しか出てないけど Credit: ピーマンの教室",
+    "subject": [
+      "Roblox",
+      "Green Pepper",
+      "Bacon"
+    ],
+    "date": "2025-04-08T00:00:00Z",
+    "publicdate": "2026-07-30T07:16:27Z",
+    "downloads": 0,
+    "file": {
+      "name": "youtube-io9--gqOUPw.bcf0eac6.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 5220865,
+      "length_metadata_s": 25.08,
+      "sha1": "b4b67fe645a64dfe866cff6fc1e077704338a18b",
+      "md5": "8fb80474152cd3f4388216edae68c004"
+    }
+  },
+  {
+    "identifier": "TikTok-7614227439912258834",
+    "status": "CANDIDATE",
+    "score": 135.458,
+    "title": "¿Basura? Roblox/ PURGATORY SIGUEME Y DALE AMOR AL VIDEO PARA MÁS. 🔥 #...",
+    "title_normalized": "basura roblox purgatory sigueme y dale amor al video para m s",
+    "creator": "pombo117s",
+    "description": "¿Basura? Roblox/ PURGATORY SIGUEME Y DALE AMOR AL VIDEO PARA MÁS. 🔥 #robloxgames #humor #robloxfyp #fyp #paratiii",
+    "subject": [
+      "TikTok",
+      "video"
+    ],
+    "date": "2026-03-06T00:00:00Z",
+    "publicdate": "2026-07-31T01:51:03Z",
+    "downloads": 0,
+    "file": {
+      "name": "7614227439912258834.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 4579302,
+      "length_metadata_s": 82.65,
+      "sha1": "58072e84ea4f3e9ccf434d6dd499e2dbb38c4f1a",
+      "md5": "c8f821f3ef323b472e456a609cb33c93"
+    }
+  },
+  {
+    "identifier": "shell_faceluiz",
+    "status": "CANDIDATE",
+    "score": 135.08,
+    "title": "shell",
+    "title_normalized": "shell",
+    "creator": "IHasAFaceLUIZ",
+    "description": "video from ihasafaceluiz",
+    "subject": [
+      "ARG",
+      "Ihasafaceluiz",
+      "Roblox"
+    ],
+    "date": null,
+    "publicdate": "2026-08-01T04:20:16Z",
+    "downloads": 0,
+    "file": {
+      "name": "shell.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 798484,
+      "length_metadata_s": 39.03,
+      "sha1": "a01dd7974320aa47870f19cdf741b1a87f53b029",
+      "md5": "a8dcafaa3adcb44d00e1599e1f848836"
+    }
+  },
+  {
+    "identifier": "seizure-warning-minecraft-extreme-rant",
+    "status": "CANDIDATE",
+    "score": 129.733,
+    "title": "(SEIZURE WARNING) MINECRAFT EXTREME RANT!!!!!!!!!!",
+    "title_normalized": "seizure warning minecraft extreme rant",
+    "creator": "Indonesia",
+    "description": "My Third Rant! Oh, and Minecraft Players, if you're watching this... 5T0P PLAY1N9 M1N3CRAFT R19HT N0W!!!!!!!!!!!!!!!!! Lyrics: MINECRAFT?! HOLY CRAP NO!! OR SHOULD I SAY STOPBLOCK!! OH MY FLIPPING GOD! THIS GAME IS THE WORST NOW EVER IN MY LIFE!! THIS GAME REALLY FLIPPING SUCKS!! THIS GAME IS ABOUT 2 CHARACTERS AND THEY LIKE TO GO ON FALIURE ADVENTURES!! STEVE IS STUPID!! HE ALSO LIKES SOME STUPID LAVA CHICKEN!! AND ALEX IS DUMB!! I HOPE THIS FLIPPING GAME GETS BANNED SOON FOREVER!! DO YOU KNOW WHO LIKES THIS GAME?! NO ONE!! BECAUSE EVERYONE HATES THIS GAME!! DO YOU KNOW WHO HATES THIS GAME?! EVERYONE!! BECAUSE EVERYONE HATES THIS GAME!! FLIP YOU, MINECRAFT, AND FLIP MOJANG STUDIOS!! ROBLOX IS WAY BETTER THAN MINECRAFT!! END OF RANT!!",
+    "subject": [
+      "Anti-Minecraft",
+      "Rant"
+    ],
+    "date": "2026-07-29T00:00:00Z",
+    "publicdate": "2026-07-29T17:44:25Z",
+    "downloads": 0,
+    "file": {
+      "name": "(SEIZURE WARNING) MINECRAFT EXTREME RANT!!!!!!!!!!.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 97330738,
+      "length_metadata_s": 38.68,
+      "sha1": "b5c2ebb5c1d0e7bed5f24e626f5f86f18d5eca5c",
+      "md5": "1656df20e943ee95bf87bfedbb02c578"
+    }
+  },
+  {
+    "identifier": "roblox-2026-07-31-13-08-20",
+    "status": "CANDIDATE",
+    "score": 125.069,
+    "title": "Roblox 2026 07 31 13 08 20",
+    "title_normalized": "roblox 2026 07 31 13 08 20",
+    "creator": null,
+    "description": "OSI Ticket report",
+    "subject": "Amjhgfr4567",
+    "date": null,
+    "publicdate": "2026-07-31T11:24:50Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox 2026-07-31 13-08-20.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 50688998,
+      "length_metadata_s": 30.92,
+      "sha1": "45f290943c09251edc0b9518aff1098c14a28e45",
+      "md5": "7770f247aa04f17d6dcd74602a1df078"
+    }
+  },
+  {
+    "identifier": "20260730-1-2026-07-30-17-45-49",
+    "status": "CANDIDATE",
+    "score": 124.742,
+    "title": "最初の動物病院の動画",
+    "title_normalized": "",
+    "creator": "塩",
+    "description": "この動画後からコメントされたからSakadung Pading Kadung Dingを入れました",
+    "subject": [
+      "Animal Hospital",
+      "Roblox"
+    ],
+    "date": "2026-07-30T00:00:00Z",
+    "publicdate": "2026-07-30T12:55:25Z",
+    "downloads": 0,
+    "file": {
+      "name": "20260730-1_2026_07_30_17_45_49.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 47421235,
+      "length_metadata_s": 43.21,
+      "sha1": "f265127c1afa83ba4b6a825cc8fb2dd4a87ac3a5",
+      "md5": "73e1d948d7d3a523b14d15af4bc6d5d4"
+    }
+  },
+  {
+    "identifier": "roblox-2026-07-31-13-10-36",
+    "status": "CANDIDATE",
+    "score": 124.726,
+    "title": "Roblox 2026 07 31 13 10 36",
+    "title_normalized": "roblox 2026 07 31 13 10 36",
+    "creator": null,
+    "description": "OSI Ticket report",
+    "subject": "Amjhgfr4567",
+    "date": null,
+    "publicdate": "2026-07-31T11:25:48Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox 2026-07-31 13-10-36.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 47255474,
+      "length_metadata_s": 30.28,
+      "sha1": "95363e869559bdfd3bd966f96aebf1cdbe27b9fb",
+      "md5": "16fe57cf575d36fedfbc85b6553e7585"
+    }
+  },
+  {
+    "identifier": "document-5082687971946137248-1",
+    "status": "CANDIDATE",
+    "score": 123.696,
+    "title": "roblox",
+    "title_normalized": "roblox",
+    "creator": null,
+    "description": "Roblox recargar",
+    "subject": "Roblox",
+    "date": null,
+    "publicdate": "2026-08-01T05:43:16Z",
+    "downloads": 0,
+    "file": {
+      "name": "document_5082687971946137248 (1).mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 36960898,
+      "length_metadata_s": 76.0,
+      "sha1": "1140e29bc888dbffbb477e7faeef1e5c31085c77",
+      "md5": "d993385ea8f9c0a0022e276c28cc0445"
+    }
+  },
+  {
+    "identifier": "roblox-20260731231527-noahm-11234567890-untitled-medal",
+    "status": "CANDIDATE",
+    "score": 120.46,
+    "title": "Roblox 20260731231527 Noahm 11234567890 Untitled Medal",
+    "title_normalized": "roblox 20260731231527 noahm 11234567890 untitled medal",
+    "creator": null,
+    "description": "WDDWDWA",
+    "subject": "ADADAWDA",
+    "date": null,
+    "publicdate": "2026-07-31T13:19:40Z",
+    "downloads": 0,
+    "file": {
+      "name": "Roblox_20260731231527_Noahm11234567890_Untitled_Medal.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 4601682,
+      "length_metadata_s": 4.26,
+      "sha1": "4108fe3267dc94ed1d0346cdbd2d499918dfc3f4",
+      "md5": "a0961b821bf2da5260a51b9f9ae2606b"
+    }
+  },
+  {
+    "identifier": "sillycarsrblx_2026",
+    "status": "CANDIDATE",
+    "score": 120.404,
+    "title": "Th3r3s n0 r38s0n t0 h8t3 0n furr13z & th3r18nz, u jus h8t3 fun!!",
+    "title_normalized": "th3r3s n0 r38s0n t0 h8t3 0n furr13z th3r18nz u jus h8t3 fun",
+    "creator": "sillicarthatlikez.gubby",
+    "description": "Video is from TikTok and throughout some years, silly carz humor has been a silly humor which has been heavily hated or criticized by a vast number of people. Due to people seeing “silly carz” humor as corny and people still enjoy this humor because they believe it matches up with their interests and humor. There isn’t really anything wrong with having opinions too.",
+    "subject": "Sillycarz gubby sillycarsareawesome forsaken roblox scenecore",
+    "date": "2026-07-03T00:00:00Z",
+    "publicdate": "2026-07-29T16:00:19Z",
+    "downloads": 0,
+    "file": {
+      "name": "attachment.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 4042546,
+      "length_metadata_s": 16.1,
+      "sha1": "9105658c5f428adeb1e04a23fc174c6a04721a0d",
+      "md5": "046f25a38feef5dfc32561a695c3f354"
+    }
+  },
+  {
+    "identifier": "TikTok-7668411510087077127",
+    "status": "CANDIDATE",
+    "score": 120.325,
+    "title": "La demanda será legendaria 💀🔥 #Noticias #minecraft #roblox #pombo1...",
+    "title_normalized": "la demanda ser legendaria noticias minecraft roblox pombo1",
+    "creator": "pombo117s",
+    "description": "La demanda será legendaria 💀🔥 #Noticias #minecraft #roblox #pombo117 #robloxgames",
+    "subject": [
+      "TikTok",
+      "video"
+    ],
+    "date": "2026-07-30T00:00:00Z",
+    "publicdate": "2026-07-31T01:51:18Z",
+    "downloads": 0,
+    "file": {
+      "name": "7668411510087077127.mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 3247699,
+      "length_metadata_s": 38.0,
+      "sha1": "e9ab909c7645c16add641b47742962ed3f78cc6a",
+      "md5": "12c792157aa0c74af5895a999e63ce15"
+    }
+  },
+  {
+    "identifier": "meme-madness-roblox-meme-attack",
+    "status": "CANDIDATE",
+    "score": 120.28,
+    "title": "my youtube videos",
+    "title_normalized": "my youtube videos",
+    "creator": "ServerBomberGaming",
+    "description": "incase my youtube channel ever just disappears im gonna just archive my videos here.",
+    "subject": [
+      "youtube",
+      "roblox"
+    ],
+    "date": "2026-07-28T00:00:00Z",
+    "publicdate": "2026-07-29T21:16:39Z",
+    "downloads": 0,
+    "file": {
+      "name": "roblox nico nextbots _ kazotsky kick showcase (new).mp4",
+      "format": "MPEG4",
+      "source": "original",
+      "size": 2802150,
+      "length_metadata_s": 45.0,
+      "sha1": "c9a1f4fc25a8c8edbfbd7cc55fa755b57eafaaa2",
+      "md5": "9effa18f315e9f6a9818b95014309add"
+    }
+  }
+]
