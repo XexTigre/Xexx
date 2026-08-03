@@ -1,0 +1,40 @@
+name: Roblox Reddit download diagnostic
+
+on:
+  push:
+    branches:
+      - 'reddit-download-run-*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  WORK_DIR: /tmp/roblox_reddit_trends
+  RESULT_DIR: temp/roblox_reddit_trend_download_2026-08-03
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Verify FFmpeg
+        run: ffmpeg -version | head -1
+      - name: Discover and download Reddit-hosted Roblox videos
+        continue-on-error: true
+        run: python temp/roblox_trend_pipeline/download_reddit_trends.py
+      - name: Save diagnostic
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$RESULT_DIR"
+          if ! git diff --cached --quiet; then
+            git commit -m 'Salva diagnóstico de vídeos Roblox do Reddit'
+            git push origin HEAD:${{ github.ref_name }}
+          fi
