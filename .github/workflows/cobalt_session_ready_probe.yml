@@ -1,0 +1,83 @@
+name: Cobalt ready session probe
+
+on:
+  push:
+    branches:
+      - 'cobalt-ready-probe-*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  RESULT_DIR: temp/cobalt_ready_probe_2026-08-03
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Start official YouTube session generator
+        shell: bash
+        run: |
+          docker network create cobalt-net
+          docker run -d --name yt-session --network cobalt-net -p 8080:8080 \
+            ghcr.io/imputnet/yt-session-generator:webserver
+          mkdir -p "$RESULT_DIR"
+          ready=0
+          for i in $(seq 1 180); do
+            code=$(curl --max-time 10 -s -o /tmp/token.json -w '%{http_code}' http://127.0.0.1:8080/token || true)
+            if [ "$code" = "200" ] && python - <<'PY'
+import json
+p='/tmp/token.json'
+try:
+    d=json.load(open(p))
+    assert d.get('po_token') or d.get('poToken')
+    assert d.get('visitor_data') or d.get('visitorData')
+except Exception:
+    raise SystemExit(1)
+PY
+            then
+              ready=1
+              break
+            fi
+            sleep 2
+          done
+          echo "session_ready=$ready" > "$RESULT_DIR/session_status.txt"
+          test "$ready" = "1"
+      - name: Start Cobalt using ready session server
+        run: |
+          docker run -d --name cobalt --network cobalt-net -p 9000:9000 \
+            -e API_URL=http://127.0.0.1:9000/ \
+            -e YOUTUBE_SESSION_SERVER=http://yt-session:8080/ \
+            -e YOUTUBE_SESSION_INNERTUBE_CLIENT=WEB_EMBEDDED \
+            ghcr.io/imputnet/cobalt:11
+          for i in $(seq 1 60); do
+            curl -sf http://127.0.0.1:9000/ >/dev/null && break
+            sleep 1
+          done
+      - name: Probe selected Roblox Short
+        shell: bash
+        run: |
+          curl --max-time 120 -sS -D "$RESULT_DIR/headers.txt" \
+            -o "$RESULT_DIR/body.json" \
+            -H 'Accept: application/json' \
+            -H 'Content-Type: application/json' \
+            --data '{"url":"https://www.youtube.com/watch?v=ViAD2FfHsRc","videoQuality":"720","youtubeVideoContainer":"mp4","youtubeVideoCodec":"h264","alwaysProxy":true}' \
+            http://127.0.0.1:9000/ || true
+          docker logs cobalt 2>&1 | sed -E 's/(po[_-]?token|visitor[_-]?data)[^ ]*/REDACTED/Ig' > "$RESULT_DIR/cobalt.log" || true
+      - name: Save non-sensitive probe evidence
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$RESULT_DIR"
+          if ! git diff --cached --quiet; then
+            git commit -m 'Salva sonda Cobalt após sessão pronta'
+            git push origin HEAD:${{ github.ref_name }}
+          fi
