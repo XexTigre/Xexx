@@ -1,0 +1,38 @@
+name: Roblox Reddit RSS diagnostic
+
+on:
+  push:
+    branches:
+      - 'reddit-rss-run-*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  WORK_DIR: /tmp/roblox_reddit_rss
+  RESULT_DIR: temp/roblox_reddit_rss_diagnostic_2026-08-03
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Discover and download RSS videos
+        continue-on-error: true
+        run: python temp/roblox_trend_pipeline/download_reddit_rss.py
+      - name: Save diagnostic
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$RESULT_DIR"
+          if ! git diff --cached --quiet; then
+            git commit -m 'Salva diagnóstico RSS de vídeos Roblox'
+            git push origin HEAD:${{ github.ref_name }}
+          fi
