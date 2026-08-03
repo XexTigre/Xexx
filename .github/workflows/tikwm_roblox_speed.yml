@@ -1,0 +1,61 @@
+name: TikWM Roblox speed analysis
+
+on:
+  push:
+    branches:
+      - 'analysis/tikwm-roblox-speed-*'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar ferramentas
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --upgrade pip
+          python -m pip install requests opencv-python-headless numpy librosa soundfile faster-whisper
+          mkdir -p temp/tikwm_roblox_speed/results
+          {
+            ffmpeg -version | head -n 1
+            python --version
+          } > temp/tikwm_roblox_speed/results/tool_versions.txt
+
+      - name: Baixar pela API e analisar todos os frames
+        shell: bash
+        run: python temp/tikwm_roblox_speed/analyze_api.py
+
+      - name: Remover mídia e áudio temporário
+        if: always()
+        shell: bash
+        run: |
+          rm -rf temp/tikwm_roblox_speed/videos
+          find temp/tikwm_roblox_speed/results -name '*.wav' -delete
+
+      - name: Publicar resultados revisáveis
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tikwm-roblox-speed-analysis-api-2026-08-03
+          path: temp/tikwm_roblox_speed/results/
+          if-no-files-found: error
+          retention-days: 7
