@@ -1,0 +1,42 @@
+[
+  {
+    "url": "https://www.reddit.com/r/roblox/top.json?t=month&limit=100&raw_json=1",
+    "error": "HTTP Error 403: Blocked"
+  },
+  {
+    "url": "https://www.reddit.com/r/roblox/new.json?limit=100&raw_json=1",
+    "error": "HTTP Error 403: Blocked"
+  },
+  {
+    "url": "https://www.reddit.com/r/bloxymemes/top.json?t=month&limit=100&raw_json=1",
+    "error": "HTTP Error 403: Blocked"
+  },
+  {
+    "url": "https://www.reddit.com/r/bloxymemes/new.json?limit=100&raw_json=1",
+    "error": "HTTP Error 403: Blocked"
+  },
+  {
+    "url": "https://www.reddit.com/r/RobloxAvatars/top.json?t=month&limit=100&raw_json=1",
+    "error": "HTTP Error 403: Blocked"
+  },
+  {
+    "url": "https://www.reddit.com/r/RobloxAvatars/new.json?limit=100&raw_json=1",
+    "error": "HTTP Error 403: Blocked"
+  },
+  {
+    "url": "https://www.reddit.com/r/robloxgamedev/top.json?t=month&limit=100&raw_json=1",
+    "error": "HTTP Error 403: Blocked"
+  },
+  {
+    "url": "https://www.reddit.com/r/robloxgamedev/new.json?limit=100&raw_json=1",
+    "error": "HTTP Error 403: Blocked"
+  },
+  {
+    "url": "https://www.reddit.com/r/RobloxDevelopers/top.json?t=month&limit=100&raw_json=1",
+    "error": "HTTP Error 403: Blocked"
+  },
+  {
+    "url": "https://www.reddit.com/r/RobloxDevelopers/new.json?limit=100&raw_json=1",
+    "error": "HTTP Error 403: Blocked"
+  }
+]
