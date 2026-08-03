@@ -3,10 +3,7 @@ name: Blender viral video color reviewed
 on:
   push:
     branches:
-      - 'feature/blender-viral-video-*'
-  pull_request:
-    branches:
-      - main
+      - 'render/color-only-viral-*'
   workflow_dispatch:
 
 permissions:
@@ -21,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref || github.ref_name }}
+          ref: ${{ github.ref_name }}
       - name: Instalar ferramentas
         run: |
           sudo apt-get update
