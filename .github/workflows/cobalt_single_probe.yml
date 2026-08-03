@@ -1,0 +1,54 @@
+name: Cobalt single probe
+
+on:
+  push:
+    branches:
+      - 'cobalt-probe-*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  RESULT_DIR: temp/cobalt_single_probe_2026-08-03
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Start Cobalt
+        run: |
+          docker run -d --name cobalt -p 9000:9000 \
+            -e API_URL=http://127.0.0.1:9000/ \
+            ghcr.io/imputnet/cobalt:11
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:9000/ && break
+            sleep 1
+          done
+      - name: Probe one canonical YouTube URL
+        shell: bash
+        run: |
+          mkdir -p "$RESULT_DIR"
+          curl --max-time 45 -sS -D "$RESULT_DIR/headers.txt" \
+            -o "$RESULT_DIR/body.json" \
+            -H 'Accept: application/json' \
+            -H 'Content-Type: application/json' \
+            --data '{"url":"https://www.youtube.com/watch?v=ViAD2FfHsRc"}' \
+            http://127.0.0.1:9000/ || true
+          docker logs cobalt > "$RESULT_DIR/cobalt.log" 2>&1 || true
+      - name: Save probe
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$RESULT_DIR"
+          if ! git diff --cached --quiet; then
+            git commit -m 'Salva sonda curta do Cobalt'
+            git push origin HEAD:${{ github.ref_name }}
+          fi
