@@ -1,4 +1,4 @@
-name: Blender viral v2.0.3 critical shots
+name: Blender viral v2.0.4 critical shots
 
 on:
   push:
@@ -7,16 +7,20 @@ on:
     branches: [main]
   workflow_dispatch:
 
+concurrency:
+  group: blender-viral-v2-critical
+  cancel-in-progress: true
+
 permissions:
   actions: read
   contents: read
 
 jobs:
-  critical-v3:
+  critical-v4:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
-      V2_OUT: viral_v2_critical_v3_output
+      V2_OUT: viral_v2_critical_v4_output
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
@@ -26,7 +30,7 @@ jobs:
           repository: ${{ github.repository }}
           run-id: 30850927696
           path: base_artifact
-      - name: Preparar v2.0.3
+      - name: Preparar v2.0.4
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg xvfb libxrender1 libxi6 libxxf86vm1 libxfixes3 libxkbcommon0 libsm6 libgl1
@@ -41,7 +45,7 @@ jobs:
           p=Path('temp/blender_viral_video/enhance_v2_final.py')
           s=p.read_text().replace('resolution_x=360','resolution_x=180').replace('resolution_y=640','resolution_y=320').replace("'resolution':[360,640]","'resolution':[180,320]")
           old="bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'viral_button_chase_v2.blend'));bpy.ops.render.render(animation=True)"
-          new="bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'viral_button_chase_v2_0_3.blend')); (OUT/'stills').mkdir(parents=True,exist_ok=True)\nfor f in (116,188):\n S.frame_set(f); S.render.filepath=str(OUT/'stills'/f'frame_{f:04d}.png'); bpy.ops.render.render(write_still=True)"
+          new="bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'viral_button_chase_v2_0_4.blend')); (OUT/'stills').mkdir(parents=True,exist_ok=True)\nfor f in (116,188):\n S.frame_set(f); S.render.filepath=str(OUT/'stills'/f'frame_{f:04d}.png'); bpy.ops.render.render(write_still=True)"
           if old not in s: raise RuntimeError('render anchor missing')
           p.write_text(s.replace(old,new))
           PY
@@ -50,11 +54,11 @@ jobs:
         run: |
           xvfb-run -a blender base_artifact/viral_ultrafast_output/viral_button_chase.blend --background --python temp/blender_viral_video/enhance_v2_final.py
           test "$(find "$V2_OUT/stills" -name 'frame_*.png' | wc -l)" -eq 2
-          ffmpeg -y -pattern_type glob -i "$V2_OUT/stills/frame_*.png" -vf "scale=360:640,tile=2x1" -frames:v 1 "$V2_OUT/critical_contact_sheet_v2_0_3.png"
+          ffmpeg -y -pattern_type glob -i "$V2_OUT/stills/frame_*.png" -vf "scale=360:640,tile=2x1" -frames:v 1 "$V2_OUT/critical_contact_sheet_v2_0_4.png"
           cp temp/blender_viral_video/enhance_v2_final.py "$V2_OUT/"
       - uses: actions/upload-artifact@v4
         with:
-          name: blender-viral-v2-0-3-critical-stills
-          path: viral_v2_critical_v3_output
+          name: blender-viral-v2-0-4-critical-stills
+          path: viral_v2_critical_v4_output
           if-no-files-found: error
           retention-days: 7
