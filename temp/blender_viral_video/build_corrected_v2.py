@@ -20,12 +20,12 @@ s = s.replace(
 )
 anchor = "S['version']='2.0.0';"
 fix_lines = [
-    "S.view_settings.exposure=-.85",
-    "camera_factors={1:3.2,2:2.2,3:1.35,4:1.25,5:1.25,6:2.5,7:2.5,8:2.6,9:1.6,10:1.3,11:2.2,12:1.3,13:2.7,14:1.8,15:3.2}",
+    "S.view_settings.exposure=-.75",
+    "camera_factors={1:3.2,2:2.2,3:1.35,4:1.25,5:1.25,6:2.5,7:2.5,8:2.25,9:1.6,10:1.3,11:2.2,12:1.15,13:2.7,14:1.8,15:3.2}",
     "for idx,factor in camera_factors.items():",
     " cam=bpy.data.objects.get(f'ShotCam{idx}')",
     " if not cam: continue",
-    " cam.data.lens=min(cam.data.lens,46 if idx in {1,2,6,7,8,13,15} else 52)",
+    " cam.data.lens=min(cam.data.lens,44 if idx in {1,2,6,7,8,12,13,15} else 50)",
     " rig=cam.parent",
     " if not rig: continue",
     " rig.location*=factor",
@@ -34,6 +34,10 @@ fix_lines = [
     "   if fc.data_path=='location':",
     "    for kp in fc.keyframe_points:",
     "     kp.co[1]*=factor;kp.handle_left[1]*=factor;kp.handle_right[1]*=factor",
+    "for obj in bpy.data.objects:",
+    " if obj.name.startswith(('Tower','V2Tower','V2Win')) and abs(obj.location.y)<8:",
+    "  sign=1 if obj.location.y>=0 else -1",
+    "  obj.location.y=sign*(8.5+abs(obj.location.y)*.25)",
     "for ld in bpy.data.lights: ld.energy*=.58",
     "for mat in bpy.data.materials:",
     " if mat.use_nodes:",
@@ -43,13 +47,15 @@ fix_lines = [
 if anchor not in s:
     raise RuntimeError('Enhancer anchor not found')
 s = s.replace(anchor, '\n'.join(fix_lines) + '\n' + anchor)
+s = s.replace("S['version']='2.0.0'", "S['version']='2.0.2'")
+s = s.replace("'version':'2.0.0'", "'version':'2.0.2'")
 s = s.replace(
     "'classification']='native_eevee_3d_low_poly'",
     "'classification']='native_eevee_3d_low_poly_optimized_corrected'",
 )
 s = s.replace(
     "'native Eevee render','AgX','motion blur','DOF','glow compositor'",
-    "'native Eevee render','AgX','corrected cameras','post glow','speed streaks'",
+    "'native Eevee render','AgX','corrected cameras','cleared camera corridor','post glow'",
 )
 DST.write_text(s, encoding='utf-8')
 compile(s, str(DST), 'exec')
