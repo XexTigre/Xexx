@@ -14,12 +14,6 @@
   {
     "slug": "pega_pega_aug02",
     "video_id": "ViAD2FfHsRc",
-    "instance": "https://pipedapi.kavin.rocks",
-    "error": "HTTP Error 526: <none>"
-  },
-  {
-    "slug": "pega_pega_aug02",
-    "video_id": "ViAD2FfHsRc",
     "instance": "https://pipedapi.rivo.lol",
     "error": "<urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1016)>"
   },
@@ -32,8 +26,8 @@
   {
     "slug": "pega_pega_aug02",
     "video_id": "ViAD2FfHsRc",
-    "instance": "https://pipedapi.tokhmi.xyz",
-    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'pipedapi.tokhmi.xyz'. (_ssl.c:1016)>"
+    "instance": "https://pipedapi.kavin.rocks",
+    "error": "HTTP Error 526: <none>"
   },
   {
     "slug": "pega_pega_aug02",
@@ -42,10 +36,28 @@
     "error": "HTTP Error 522: <none>"
   },
   {
+    "slug": "pega_pega_aug02",
+    "video_id": "ViAD2FfHsRc",
+    "instance": "https://pipedapi.tokhmi.xyz",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'pipedapi.tokhmi.xyz'. (_ssl.c:1016)>"
+  },
+  {
+    "slug": "skyfall_aug01",
+    "video_id": "A7sRDc3W6QQ",
+    "instance": "https://piped-api.garudalinux.org",
+    "error": "<urlopen error [Errno -5] No address associated with hostname>"
+  },
+  {
     "slug": "skyfall_aug01",
     "video_id": "A7sRDc3W6QQ",
     "instance": "https://pipedapi.syncpundit.io",
     "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "slug": "skyfall_aug01",
+    "video_id": "A7sRDc3W6QQ",
+    "instance": "https://pipedapi.rivo.lol",
+    "error": "<urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1016)>"
   },
   {
     "slug": "skyfall_aug01",
@@ -62,26 +74,14 @@
   {
     "slug": "skyfall_aug01",
     "video_id": "A7sRDc3W6QQ",
-    "instance": "https://piped-api.garudalinux.org",
-    "error": "<urlopen error [Errno -5] No address associated with hostname>"
-  },
-  {
-    "slug": "skyfall_aug01",
-    "video_id": "A7sRDc3W6QQ",
-    "instance": "https://pipedapi.rivo.lol",
-    "error": "<urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1016)>"
+    "instance": "https://pipedapi.tokhmi.xyz",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'pipedapi.tokhmi.xyz'. (_ssl.c:1016)>"
   },
   {
     "slug": "skyfall_aug01",
     "video_id": "A7sRDc3W6QQ",
     "instance": "https://api-piped.mha.fi",
     "error": "HTTP Error 522: <none>"
-  },
-  {
-    "slug": "skyfall_aug01",
-    "video_id": "A7sRDc3W6QQ",
-    "instance": "https://pipedapi.tokhmi.xyz",
-    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'pipedapi.tokhmi.xyz'. (_ssl.c:1016)>"
   },
   {
     "slug": "no_batidao_2026",
@@ -92,12 +92,6 @@
   {
     "slug": "no_batidao_2026",
     "video_id": "znoKsfh8UDY",
-    "instance": "https://pipedapi.kavin.rocks",
-    "error": "HTTP Error 526: <none>"
-  },
-  {
-    "slug": "no_batidao_2026",
-    "video_id": "znoKsfh8UDY",
     "instance": "https://pipedapi.rivo.lol",
     "error": "<urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1016)>"
   },
@@ -106,6 +100,12 @@
     "video_id": "znoKsfh8UDY",
     "instance": "https://piped-api.garudalinux.org",
     "error": "<urlopen error [Errno -5] No address associated with hostname>"
+  },
+  {
+    "slug": "no_batidao_2026",
+    "video_id": "znoKsfh8UDY",
+    "instance": "https://pipedapi.kavin.rocks",
+    "error": "HTTP Error 526: <none>"
   },
   {
     "slug": "no_batidao_2026",
