@@ -2,7 +2,7 @@ name: Blender viral v2 camera stills corrected
 
 on:
   push:
-    branches: ['review/viral-v2-stills-*']
+    branches: ['review/viral-v2-stills-corrected-*']
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -40,36 +40,33 @@ jobs:
           p=Path('temp/blender_viral_video/enhance_v2.py')
           s=p.read_text().replace('resolution_x=540','resolution_x=360').replace('resolution_y=960','resolution_y=640').replace("'resolution':[540,960]","'resolution':[360,640]")
           anchor="S['version']='2.0.0';"
-          fix="""
-S.view_settings.exposure=-1.15
-camera_factors={1:3.2,2:2.2,3:1.35,4:1.25,5:1.25,6:2.5,7:2.5,8:2.6,9:1.6,10:1.3,11:2.2,12:1.3,13:2.7,14:1.8,15:3.2}
-for idx,factor in camera_factors.items():
- cam=bpy.data.objects.get(f'ShotCam{idx}')
- if not cam: continue
- cam.data.lens=min(cam.data.lens,46 if idx in {1,2,6,7,8,13,15} else 52)
- rig=cam.parent
- if not rig: continue
- rig.location*=factor
- if rig.animation_data and rig.animation_data.action:
-  for fc in rig.animation_data.action.fcurves:
-   if fc.data_path=='location':
-    for kp in fc.keyframe_points:
-     kp.co[1]*=factor;kp.handle_left[1]*=factor;kp.handle_right[1]*=factor
-for ld in bpy.data.lights:
- ld.energy*=.48
-for mat in bpy.data.materials:
- if mat.use_nodes:
-  pbs=mat.node_tree.nodes.get('Principled BSDF')
-  if pbs and 'Emission Strength' in pbs.inputs:
-   pbs.inputs['Emission Strength'].default_value*=.55
-"""
+          fix_lines=[
+              "S.view_settings.exposure=-1.15",
+              "camera_factors={1:3.2,2:2.2,3:1.35,4:1.25,5:1.25,6:2.5,7:2.5,8:2.6,9:1.6,10:1.3,11:2.2,12:1.3,13:2.7,14:1.8,15:3.2}",
+              "for idx,factor in camera_factors.items():",
+              " cam=bpy.data.objects.get(f'ShotCam{idx}')",
+              " if not cam: continue",
+              " cam.data.lens=min(cam.data.lens,46 if idx in {1,2,6,7,8,13,15} else 52)",
+              " rig=cam.parent",
+              " if not rig: continue",
+              " rig.location*=factor",
+              " if rig.animation_data and rig.animation_data.action:",
+              "  for fc in rig.animation_data.action.fcurves:",
+              "   if fc.data_path=='location':",
+              "    for kp in fc.keyframe_points:",
+              "     kp.co[1]*=factor;kp.handle_left[1]*=factor;kp.handle_right[1]*=factor",
+              "for ld in bpy.data.lights: ld.energy*=.48",
+              "for mat in bpy.data.materials:",
+              " if mat.use_nodes:",
+              "  pbs=mat.node_tree.nodes.get('Principled BSDF')",
+              "  if pbs and 'Emission Strength' in pbs.inputs: pbs.inputs['Emission Strength'].default_value*=.55",
+          ]
           assert anchor in s
-          s=s.replace(anchor,fix+'\n'+anchor)
+          s=s.replace(anchor,'\n'.join(fix_lines)+'\n'+anchor)
           old="bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'viral_button_chase_v2.blend'));bpy.ops.render.render(animation=True)"
           new="bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'viral_button_chase_v2_corrected.blend')); (OUT/'stills').mkdir(parents=True,exist_ok=True)\nfor f in (8,24,37,50,64,82,100,116,133,150,168,188,206,221,235):\n S.frame_set(f); S.render.filepath=str(OUT/'stills'/f'frame_{f:04d}.png'); bpy.ops.render.render(write_still=True)"
           assert old in s
-          s=s.replace(old,new)
-          Path('temp/blender_viral_video/enhance_v2_stills_corrected.py').write_text(s)
+          Path('temp/blender_viral_video/enhance_v2_stills_corrected.py').write_text(s.replace(old,new))
           PY
           python3 -m py_compile temp/blender_viral_video/enhance_v2_stills_corrected.py
       - name: Renderizar 15 evidências corrigidas
