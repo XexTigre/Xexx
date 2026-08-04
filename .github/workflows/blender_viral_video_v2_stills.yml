@@ -1,4 +1,4 @@
-name: Blender viral v2 camera stills
+name: Blender viral v2 camera stills corrected
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
-      V2_OUT: viral_v2_stills_output
+      V2_OUT: viral_v2_stills_corrected_output
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
@@ -26,7 +26,7 @@ jobs:
           repository: ${{ github.repository }}
           run-id: 30850927696
           path: base_artifact
-      - name: Instalar e preparar
+      - name: Instalar e preparar correção
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg xvfb libxrender1 libxi6 libxxf86vm1 libxfixes3 libxkbcommon0 libsm6 libgl1
@@ -37,21 +37,50 @@ jobs:
           curl -fsSL 'https://raw.githubusercontent.com/XexTigre/Xexx/feature/viral-v2-2026-08-04/temp/blender_viral_video/enhance_v2.py' -o temp/blender_viral_video/enhance_v2.py
           python3 - <<'PY'
           from pathlib import Path
-          p=Path('temp/blender_viral_video/enhance_v2.py');s=p.read_text();s=s.replace('resolution_x=540','resolution_x=360').replace('resolution_y=960','resolution_y=640').replace("'resolution':[540,960]","'resolution':[360,640]")
+          p=Path('temp/blender_viral_video/enhance_v2.py')
+          s=p.read_text().replace('resolution_x=540','resolution_x=360').replace('resolution_y=960','resolution_y=640').replace("'resolution':[540,960]","'resolution':[360,640]")
+          anchor="S['version']='2.0.0';"
+          fix="""
+S.view_settings.exposure=-1.15
+camera_factors={1:3.2,2:2.2,3:1.35,4:1.25,5:1.25,6:2.5,7:2.5,8:2.6,9:1.6,10:1.3,11:2.2,12:1.3,13:2.7,14:1.8,15:3.2}
+for idx,factor in camera_factors.items():
+ cam=bpy.data.objects.get(f'ShotCam{idx}')
+ if not cam: continue
+ cam.data.lens=min(cam.data.lens,46 if idx in {1,2,6,7,8,13,15} else 52)
+ rig=cam.parent
+ if not rig: continue
+ rig.location*=factor
+ if rig.animation_data and rig.animation_data.action:
+  for fc in rig.animation_data.action.fcurves:
+   if fc.data_path=='location':
+    for kp in fc.keyframe_points:
+     kp.co[1]*=factor;kp.handle_left[1]*=factor;kp.handle_right[1]*=factor
+for ld in bpy.data.lights:
+ ld.energy*=.48
+for mat in bpy.data.materials:
+ if mat.use_nodes:
+  pbs=mat.node_tree.nodes.get('Principled BSDF')
+  if pbs and 'Emission Strength' in pbs.inputs:
+   pbs.inputs['Emission Strength'].default_value*=.55
+"""
+          assert anchor in s
+          s=s.replace(anchor,fix+'\n'+anchor)
           old="bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'viral_button_chase_v2.blend'));bpy.ops.render.render(animation=True)"
-          new="bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'viral_button_chase_v2.blend')); (OUT/'stills').mkdir(parents=True,exist_ok=True)\nfor f in (8,24,37,50,64,82,100,116,133,150,168,188,206,221,235):\n S.frame_set(f); S.render.filepath=str(OUT/'stills'/f'frame_{f:04d}.png'); bpy.ops.render.render(write_still=True)"
-          assert old in s;s=s.replace(old,new);Path('temp/blender_viral_video/enhance_v2_stills.py').write_text(s)
+          new="bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'viral_button_chase_v2_corrected.blend')); (OUT/'stills').mkdir(parents=True,exist_ok=True)\nfor f in (8,24,37,50,64,82,100,116,133,150,168,188,206,221,235):\n S.frame_set(f); S.render.filepath=str(OUT/'stills'/f'frame_{f:04d}.png'); bpy.ops.render.render(write_still=True)"
+          assert old in s
+          s=s.replace(old,new)
+          Path('temp/blender_viral_video/enhance_v2_stills_corrected.py').write_text(s)
           PY
-          python3 -m py_compile temp/blender_viral_video/enhance_v2_stills.py
-      - name: Renderizar 15 evidências
+          python3 -m py_compile temp/blender_viral_video/enhance_v2_stills_corrected.py
+      - name: Renderizar 15 evidências corrigidas
         run: |
-          xvfb-run -a blender base_artifact/viral_ultrafast_output/viral_button_chase.blend --background --python temp/blender_viral_video/enhance_v2_stills.py
+          xvfb-run -a blender base_artifact/viral_ultrafast_output/viral_button_chase.blend --background --python temp/blender_viral_video/enhance_v2_stills_corrected.py
           test "$(find "$V2_OUT/stills" -name 'frame_*.png' | wc -l)" -eq 15
-          ffmpeg -y -pattern_type glob -i "$V2_OUT/stills/frame_*.png" -vf "scale=216:384,tile=5x3" -frames:v 1 "$V2_OUT/camera_contact_sheet.png"
-          cp temp/blender_viral_video/enhance_v2_stills.py "$V2_OUT/"
+          ffmpeg -y -pattern_type glob -i "$V2_OUT/stills/frame_*.png" -vf "scale=216:384,tile=5x3" -frames:v 1 "$V2_OUT/camera_contact_sheet_corrected.png"
+          cp temp/blender_viral_video/enhance_v2_stills_corrected.py "$V2_OUT/"
       - uses: actions/upload-artifact@v4
         with:
-          name: blender-viral-v2-camera-stills
-          path: viral_v2_stills_output
+          name: blender-viral-v2-camera-stills-corrected
+          path: viral_v2_stills_corrected_output
           if-no-files-found: error
           retention-days: 7
