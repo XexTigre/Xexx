@@ -1,0 +1,60 @@
+name: Blender viral video v2.0.2 final still review
+
+on:
+  push:
+    branches: ['review/viral-v2-final-*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  final-stills:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      V2_OUT: viral_v2_final_stills_output
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: blender-viral-button-chase-ultrafast-reviewed
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: 30850927696
+          path: base_artifact
+      - name: Preparar Blender e script final
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg xvfb libxrender1 libxi6 libxxf86vm1 libxfixes3 libxkbcommon0 libsm6 libgl1
+          wget -q https://download.blender.org/release/Blender4.5/blender-4.5.12-linux-x64.tar.xz
+          tar -xf blender-4.5.12-linux-x64.tar.xz
+          echo "$PWD/blender-4.5.12-linux-x64" >> "$GITHUB_PATH"
+          mkdir -p temp/blender_viral_video "$V2_OUT/stills"
+          curl -fsSL 'https://raw.githubusercontent.com/XexTigre/Xexx/feature/viral-v2-2026-08-04/temp/blender_viral_video/enhance_v2.py' -o temp/blender_viral_video/enhance_v2.py
+          python3 temp/blender_viral_video/build_corrected_v2.py
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('temp/blender_viral_video/enhance_v2_final.py')
+          s=p.read_text()
+          old="bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'viral_button_chase_v2.blend'));bpy.ops.render.render(animation=True)"
+          new="bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'viral_button_chase_v2_0_2.blend')); (OUT/'stills').mkdir(parents=True,exist_ok=True)\nfor f in (8,24,37,50,64,82,100,116,133,150,168,188,206,221,235):\n S.frame_set(f); S.render.filepath=str(OUT/'stills'/f'frame_{f:04d}.png'); bpy.ops.render.render(write_still=True)"
+          if old not in s: raise RuntimeError('render anchor missing')
+          p.write_text(s.replace(old,new))
+          PY
+          python3 -m py_compile temp/blender_viral_video/enhance_v2_final.py
+      - name: Renderizar e montar contato visual
+        run: |
+          xvfb-run -a blender base_artifact/viral_ultrafast_output/viral_button_chase.blend --background --python temp/blender_viral_video/enhance_v2_final.py
+          test "$(find "$V2_OUT/stills" -name 'frame_*.png' | wc -l)" -eq 15
+          ffmpeg -y -pattern_type glob -i "$V2_OUT/stills/frame_*.png" -vf "scale=216:384,tile=5x3" -frames:v 1 "$V2_OUT/camera_contact_sheet_v2_0_2.png"
+          cp temp/blender_viral_video/enhance_v2_final.py "$V2_OUT/"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: blender-viral-v2-0-2-final-stills
+          path: viral_v2_final_stills_output
+          if-no-files-found: error
+          retention-days: 7

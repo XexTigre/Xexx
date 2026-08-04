@@ -1,0 +1,66 @@
+name: Blender viral video v2.0.1 final reviewed
+
+on:
+  push:
+    branches: ['review/viral-v2-final-*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  render-final:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      V2_OUT: viral_v2_final_output
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: blender-viral-button-chase-ultrafast-reviewed
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: 30850927696
+          path: base_artifact
+      - name: Instalar Blender e validação
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg xvfb libxrender1 libxi6 libxxf86vm1 libxfixes3 libxkbcommon0 libsm6 libgl1 python3-pil python3-jsonschema
+          wget -q https://download.blender.org/release/Blender4.5/blender-4.5.12-linux-x64.tar.xz
+          tar -xf blender-4.5.12-linux-x64.tar.xz
+          echo "$PWD/blender-4.5.12-linux-x64" >> "$GITHUB_PATH"
+          mkdir -p temp/blender_viral_video "$V2_OUT/frames"
+          curl -fsSL 'https://raw.githubusercontent.com/XexTigre/Xexx/feature/viral-v2-2026-08-04/temp/blender_viral_video/enhance_v2.py' -o temp/blender_viral_video/enhance_v2.py
+          python3 temp/blender_viral_video/build_corrected_v2.py
+          python3 -m py_compile temp/blender_viral_video/enhance_v2_final.py temp/blender_viral_video/review_v2_final.py
+      - name: Renderizar 240 quadros Eevee
+        run: |
+          xvfb-run -a blender base_artifact/viral_ultrafast_output/viral_button_chase.blend --background --python temp/blender_viral_video/enhance_v2_final.py
+          test "$(find "$V2_OUT/frames" -name 'frame_*.png' | wc -l)" -eq 240
+          test -s "$V2_OUT/viral_button_chase_v2.blend"
+      - name: Criar áudio e MP4
+        run: |
+          ffmpeg -y -f lavfi -i "sine=frequency=60:sample_rate=48000:duration=10" -f lavfi -i "sine=frequency=720:sample_rate=48000:duration=10" -f lavfi -i "anoisesrc=color=pink:sample_rate=48000:duration=10" -filter_complex "[0:a]volume=.22,tremolo=f=2.5:d=.72,lowpass=f=200[b];[1:a]volume=.045,tremolo=f=7:d=.8[a];[2:a]highpass=f=700,lowpass=f=5000,volume=.018[w];[b][a][w]amix=inputs=3:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=7" -c:a pcm_s16le "$V2_OUT/audio.wav"
+          ffmpeg -y -framerate 24 -start_number 1 -i "$V2_OUT/frames/frame_%04d.png" -i "$V2_OUT/audio.wav" -filter_complex "[0:v]eq=contrast=1.05:saturation=1.10,split[base][blur];[blur]gblur=sigma=4[glow];[base][glow]blend=all_mode=screen:all_opacity=.12,unsharp=5:5:.3:5:5:0[v]" -map "[v]" -map 1:a -c:v libx264 -preset medium -crf 18 -profile:v baseline -level 3.1 -x264-params bframes=0 -pix_fmt yuv420p -c:a aac -b:a 160k -movflags +faststart -shortest "$V2_OUT/viral_button_chase_v2_0_1.mp4"
+      - name: Validar frames, câmeras e schema
+        run: |
+          ffmpeg -v error -xerror -i "$V2_OUT/viral_button_chase_v2_0_1.mp4" -f null -
+          ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=codec_name,profile,width,height,r_frame_rate,nb_read_frames:format=duration,size -of json "$V2_OUT/viral_button_chase_v2_0_1.mp4" > "$V2_OUT/ffprobe.json"
+          python3 temp/blender_viral_video/review_v2_final.py --root "$V2_OUT"
+          python3 -c "import json;from jsonschema import validate;r=json.load(open('$V2_OUT/final_gate_report.v2.0.1.json'));s=json.load(open('$V2_OUT/viral_release.schema.v2.0.1.json'));validate(r,s);print('schema valid')"
+      - name: Criar evidências visuais
+        run: |
+          ffmpeg -y -i "$V2_OUT/viral_button_chase_v2_0_1.mp4" -vf "fps=1,scale=270:-1,tile=5x2" -frames:v 1 "$V2_OUT/contact_sheet.png"
+          ffmpeg -y -i "$V2_OUT/viral_button_chase_v2_0_1.mp4" -vf "fps=8,scale=270:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128[p];[b][p]paletteuse" "$V2_OUT/preview.gif"
+          cp temp/blender_viral_video/enhance_v2_final.py temp/blender_viral_video/build_corrected_v2.py temp/blender_viral_video/review_v2_final.py "$V2_OUT/"
+          rm -rf "$V2_OUT/frames"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: blender-viral-button-chase-v2-0-1-final-reviewed
+          path: viral_v2_final_output
+          if-no-files-found: error
+          retention-days: 7
