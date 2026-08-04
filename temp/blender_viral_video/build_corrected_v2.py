@@ -21,11 +21,11 @@ s = s.replace(
 anchor = "S['version']='2.0.0';"
 fix_lines = [
     "S.view_settings.exposure=-.75",
-    "camera_factors={1:3.2,2:2.2,3:1.35,4:1.25,5:1.25,6:2.5,7:2.5,8:2.25,9:1.6,10:1.3,11:2.2,12:1.15,13:2.7,14:1.8,15:3.2}",
+    "camera_factors={1:3.2,2:2.2,3:1.35,4:1.25,5:1.25,6:2.5,7:2.5,8:4.5,9:1.6,10:1.3,11:2.2,12:3.5,13:2.7,14:1.8,15:3.2}",
     "for idx,factor in camera_factors.items():",
     " cam=bpy.data.objects.get(f'ShotCam{idx}')",
     " if not cam: continue",
-    " cam.data.lens=min(cam.data.lens,44 if idx in {1,2,6,7,8,12,13,15} else 50)",
+    " cam.data.lens=min(cam.data.lens,32 if idx in {8,12} else (44 if idx in {1,2,6,7,13,15} else 50))",
     " rig=cam.parent",
     " if not rig: continue",
     " rig.location*=factor",
@@ -47,15 +47,15 @@ fix_lines = [
 if anchor not in s:
     raise RuntimeError('Enhancer anchor not found')
 s = s.replace(anchor, '\n'.join(fix_lines) + '\n' + anchor)
-s = s.replace("S['version']='2.0.0'", "S['version']='2.0.2'")
-s = s.replace("'version':'2.0.0'", "'version':'2.0.2'")
+s = s.replace("S['version']='2.0.0'", "S['version']='2.0.3'")
+s = s.replace("'version':'2.0.0'", "'version':'2.0.3'")
 s = s.replace(
     "'classification']='native_eevee_3d_low_poly'",
     "'classification']='native_eevee_3d_low_poly_optimized_corrected'",
 )
 s = s.replace(
     "'native Eevee render','AgX','motion blur','DOF','glow compositor'",
-    "'native Eevee render','AgX','corrected cameras','cleared camera corridor','post glow'",
+    "'native Eevee render','AgX','corrected cameras','cleared camera corridor','wide critical shots','post glow'",
 )
 DST.write_text(s, encoding='utf-8')
 compile(s, str(DST), 'exec')
