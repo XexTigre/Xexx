@@ -1,0 +1,78 @@
+name: Blender viral video v2 fast reviewed
+
+on:
+  push:
+    branches: ['review/viral-v2-fast-*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  render-v2-fast:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      V2_OUT: viral_v2_fast_output
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: blender-viral-button-chase-ultrafast-reviewed
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: 30850927696
+          path: base_artifact
+      - name: Instalar ferramentas
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg xvfb libxrender1 libxi6 libxxf86vm1 libxfixes3 libxkbcommon0 libsm6 libgl1 python3-pil
+          wget -q https://download.blender.org/release/Blender4.5/blender-4.5.12-linux-x64.tar.xz
+          tar -xf blender-4.5.12-linux-x64.tar.xz
+          echo "$PWD/blender-4.5.12-linux-x64" >> "$GITHUB_PATH"
+          mkdir -p temp/blender_viral_video
+          curl -fsSL 'https://raw.githubusercontent.com/XexTigre/Xexx/feature/blender-viral-video-2026-08-03/temp/blender_viral_video/render.py' -o temp/blender_viral_video/render_base.py || true
+          curl -fsSL 'https://raw.githubusercontent.com/XexTigre/Xexx/feature/viral-v2-2026-08-04/temp/blender_viral_video/enhance_v2.py' -o temp/blender_viral_video/enhance_v2.py
+          sed -e "s/resolution_x=540/resolution_x=360/" -e "s/resolution_y=960/resolution_y=640/" -e "s/'resolution':\[540,960\]/'resolution':[360,640]/" temp/blender_viral_video/enhance_v2.py > temp/blender_viral_video/enhance_v2_fast.py
+          python3 -m py_compile temp/blender_viral_video/enhance_v2_fast.py
+      - name: Renderizar Eevee 360x640
+        run: |
+          mkdir -p "$V2_OUT/frames"
+          xvfb-run -a blender base_artifact/viral_ultrafast_output/viral_button_chase.blend --background --python temp/blender_viral_video/enhance_v2_fast.py
+          test "$(find "$V2_OUT/frames" -name 'frame_*.png' | wc -l)" -eq 240
+      - name: Codificar e revisar
+        run: |
+          ffmpeg -y -f lavfi -i "sine=frequency=62:sample_rate=48000:duration=10" -f lavfi -i "anoisesrc=color=pink:sample_rate=48000:duration=10" -filter_complex "[0:a]volume=.24,tremolo=f=3:d=.7[b];[1:a]highpass=f=500,volume=.025[w];[b][w]amix=inputs=2:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=7" -c:a pcm_s16le "$V2_OUT/audio.wav"
+          ffmpeg -y -framerate 24 -start_number 1 -i "$V2_OUT/frames/frame_%04d.png" -i "$V2_OUT/audio.wav" -c:v libx264 -preset medium -crf 18 -profile:v baseline -level 3.1 -x264-params bframes=0 -pix_fmt yuv420p -c:a aac -b:a 160k -movflags +faststart -shortest "$V2_OUT/viral_button_chase_v2_fast.mp4"
+          ffmpeg -v error -xerror -i "$V2_OUT/viral_button_chase_v2_fast.mp4" -f null -
+          ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=width,height,nb_read_frames,r_frame_rate:format=duration,size -of json "$V2_OUT/viral_button_chase_v2_fast.mp4" > "$V2_OUT/ffprobe.json"
+          python3 - <<'PY'
+          import json,statistics
+          from pathlib import Path
+          from PIL import Image,ImageStat,ImageChops
+          r=Path('viral_v2_fast_output');fs=sorted((r/'frames').glob('frame_*.png'));p=json.load(open(r/'ffprobe.json'));prev=None;rows=[]
+          for f in fs:
+           im=Image.open(f).convert('L').resize((90,160));st=ImageStat.Stat(im);d=None if prev is None else ImageStat.Stat(ImageChops.difference(im,prev)).mean[0];rows.append({'frame':int(f.stem[-4:]),'mean':st.mean[0],'stddev':st.stddev[0],'diff':d,'blank':st.mean[0]<2 or st.stddev[0]<1.5});prev=im
+          decoded=int(p['streams'][0]['nb_read_frames']);bl=[x['frame'] for x in rows if x['blank']];diffs=[x['diff'] for x in rows if x['diff'] is not None];ranges=[(1,16),(17,31),(32,43),(44,56),(57,72),(73,91),(92,108),(109,124),(125,141),(142,158),(159,177),(178,198),(199,214),(215,228),(229,240)];cams=[]
+          for i,(a,b) in enumerate(ranges,1):
+           m=rows[(a+b)//2-1];issues=[]
+           if m['blank']:issues.append('blank')
+           if m['stddev']<8:issues.append('low_contrast')
+           cams.append({'camera':f'ShotCam{i}','range':[a,b],'evidence':f'frame_{(a+b)//2:04d}.png','issues':issues,'status':'approved' if not issues else 'rejected'})
+          gates={'frames_rendered':len(fs)==240,'frames_decoded':decoded==240,'resolution':p['streams'][0]['width']==360 and p['streams'][0]['height']==640,'blank_frames':not bl,'motion':statistics.median(diffs)>.2,'camera_reviews':all(c['status']=='approved' for c in cams),'blend_exists':(r/'viral_button_chase_v2.blend').stat().st_size>100000}
+          report={'schema_version':'2.0.0-fast','status':'APPROVED' if all(gates.values()) else 'REJECTED','classification':'native_eevee_3d_low_poly','gates':gates,'frames':{'rendered':len(fs),'decoded':decoded,'blank':bl,'median_diff':statistics.median(diffs)},'camera_reviews':cams,'virality_guaranteed':False}
+          json.dump(report,open(r/'final_gate_report.v2.0.0-fast.json','w'),indent=2);json.dump(cams,open(r/'camera_review.v2.0.0-fast.json','w'),indent=2);assert report['status']=='APPROVED',report
+          PY
+          ffmpeg -y -i "$V2_OUT/viral_button_chase_v2_fast.mp4" -vf "fps=1,scale=270:-1,tile=5x2" -frames:v 1 "$V2_OUT/contact_sheet.png"
+          ffmpeg -y -i "$V2_OUT/viral_button_chase_v2_fast.mp4" -vf "fps=8,scale=270:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128[p];[b][p]paletteuse" "$V2_OUT/preview.gif"
+          cp temp/blender_viral_video/enhance_v2_fast.py "$V2_OUT/"
+          rm -rf "$V2_OUT/frames"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: blender-viral-button-chase-v2-fast-reviewed
+          path: viral_v2_fast_output
+          if-no-files-found: error
+          retention-days: 7
