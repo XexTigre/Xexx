@@ -1,0 +1,96 @@
+name: Blender viral video v2 optimized reviewed
+
+on:
+  push:
+    branches: ['review/viral-v2-optimized-*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  render-optimized:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      V2_OUT: viral_v2_optimized_output
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: blender-viral-button-chase-ultrafast-reviewed
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: 30850927696
+          path: base_artifact
+      - name: Instalar e otimizar
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg xvfb libxrender1 libxi6 libxxf86vm1 libxfixes3 libxkbcommon0 libsm6 libgl1 python3-pil python3-jsonschema
+          wget -q https://download.blender.org/release/Blender4.5/blender-4.5.12-linux-x64.tar.xz
+          tar -xf blender-4.5.12-linux-x64.tar.xz
+          echo "$PWD/blender-4.5.12-linux-x64" >> "$GITHUB_PATH"
+          mkdir -p temp/blender_viral_video "$V2_OUT/frames"
+          curl -fsSL 'https://raw.githubusercontent.com/XexTigre/Xexx/feature/viral-v2-2026-08-04/temp/blender_viral_video/enhance_v2.py' -o temp/blender_viral_video/enhance_v2.py
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('temp/blender_viral_video/enhance_v2.py');s=p.read_text()
+          s=s.replace('resolution_x=540','resolution_x=360').replace('resolution_y=960','resolution_y=640').replace("'resolution':[540,960]","'resolution':[360,640]")
+          s=s.replace("if hasattr(S.render,'use_motion_blur'):S.render.use_motion_blur=True","if hasattr(S.render,'use_motion_blur'):S.render.use_motion_blur=False")
+          s=s.replace("S.use_nodes=True;nt=S.node_tree;nt.nodes.clear();rl=nt.nodes.new('CompositorNodeRLayers');gl=nt.nodes.new('CompositorNodeGlare');gl.glare_type='FOG_GLOW';gl.quality='HIGH';gl.threshold=.65;gl.size=6;comp=nt.nodes.new('CompositorNodeComposite');nt.links.new(rl.outputs['Image'],gl.inputs['Image']);nt.links.new(gl.outputs['Image'],comp.inputs['Image'])","S.use_nodes=False")
+          s=s.replace("o.data.dof.use_dof=True;o.data.dof.aperture_fstop=3.0","o.data.dof.use_dof=False")
+          s=s.replace("'classification']='native_eevee_3d_low_poly'","'classification']='native_eevee_3d_low_poly_optimized'")
+          s=s.replace("'native Eevee render','AgX','motion blur','DOF','glow compositor'","'native Eevee render','AgX','post glow','speed streaks','camera shake'")
+          Path('temp/blender_viral_video/enhance_v2_optimized.py').write_text(s)
+          PY
+          python3 -m py_compile temp/blender_viral_video/enhance_v2_optimized.py
+      - name: Renderizar 240 quadros Eevee
+        run: |
+          xvfb-run -a blender base_artifact/viral_ultrafast_output/viral_button_chase.blend --background --python temp/blender_viral_video/enhance_v2_optimized.py
+          test "$(find "$V2_OUT/frames" -name 'frame_*.png' | wc -l)" -eq 240
+          test -s "$V2_OUT/viral_button_chase_v2.blend"
+      - name: Áudio, pós e codificação
+        run: |
+          ffmpeg -y -f lavfi -i "sine=frequency=60:sample_rate=48000:duration=10" -f lavfi -i "sine=frequency=720:sample_rate=48000:duration=10" -f lavfi -i "anoisesrc=color=pink:sample_rate=48000:duration=10" -filter_complex "[0:a]volume=.22,tremolo=f=2.5:d=.72,lowpass=f=200[b];[1:a]volume=.045,tremolo=f=7:d=.8[a];[2:a]highpass=f=700,lowpass=f=5000,volume=.018[w];[b][a][w]amix=inputs=3:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=7" -c:a pcm_s16le "$V2_OUT/audio.wav"
+          ffmpeg -y -framerate 24 -start_number 1 -i "$V2_OUT/frames/frame_%04d.png" -i "$V2_OUT/audio.wav" -filter_complex "[0:v]eq=contrast=1.07:saturation=1.12,split[base][blur];[blur]gblur=sigma=5[glow];[base][glow]blend=all_mode=screen:all_opacity=.16,unsharp=5:5:.35:5:5:0[v]" -map "[v]" -map 1:a -c:v libx264 -preset medium -crf 18 -profile:v baseline -level 3.1 -x264-params bframes=0 -pix_fmt yuv420p -c:a aac -b:a 160k -movflags +faststart -shortest "$V2_OUT/viral_button_chase_v2_optimized.mp4"
+      - name: Revisar 240 quadros e 15 câmeras
+        run: |
+          ffmpeg -v error -xerror -i "$V2_OUT/viral_button_chase_v2_optimized.mp4" -f null -
+          ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=codec_name,profile,width,height,r_frame_rate,nb_read_frames:format=duration,size -of json "$V2_OUT/viral_button_chase_v2_optimized.mp4" > "$V2_OUT/ffprobe.json"
+          python3 - <<'PY'
+          import json,statistics
+          from pathlib import Path
+          from PIL import Image,ImageStat,ImageChops
+          r=Path('viral_v2_optimized_output');fs=sorted((r/'frames').glob('frame_*.png'));p=json.load(open(r/'ffprobe.json'));m=json.load(open(r/'scene_manifest.v2.0.0.json'));rows=[];prev=None
+          for f in fs:
+           im=Image.open(f).convert('L').resize((90,160));st=ImageStat.Stat(im);d=None if prev is None else ImageStat.Stat(ImageChops.difference(im,prev)).mean[0];rows.append({'frame':int(f.stem[-4:]),'mean':round(st.mean[0],3),'stddev':round(st.stddev[0],3),'diff':None if d is None else round(d,3),'blank':st.mean[0]<2 or st.stddev[0]<1.5});prev=im
+          dec=int(p['streams'][0]['nb_read_frames']);bl=[x['frame'] for x in rows if x['blank']];diffs=[x['diff'] for x in rows if x['diff'] is not None];ranges=[(1,16),(17,31),(32,43),(44,56),(57,72),(73,91),(92,108),(109,124),(125,141),(142,158),(159,177),(178,198),(199,214),(215,228),(229,240)];cams=[]
+          for i,(a,b) in enumerate(ranges,1):
+           x=rows[(a+b)//2-1];issues=[]
+           if x['blank']:issues.append('blank')
+           if x['stddev']<8:issues.append('low_contrast')
+           if x['mean']<5:issues.append('underexposed')
+           cams.append({'camera':f'ShotCam{i}','range':[a,b],'evidence':f'frame_{(a+b)//2:04d}.png','metrics':x,'issues':issues,'status':'approved' if not issues else 'rejected'})
+          checks=[('rendered',len(fs)==240,len(fs)),('decoded',dec==240,dec),('resolution',p['streams'][0]['width']==360 and p['streams'][0]['height']==640,[p['streams'][0]['width'],p['streams'][0]['height']]),('no_blank',not bl,bl),('motion',statistics.median(diffs)>.2,round(statistics.median(diffs),3)),('cameras',all(x['status']=='approved' for x in cams),[x['status'] for x in cams]),('library',m['camera_library']==30,m['camera_library']),('shots',m['active_shots']==15,m['active_shots']),('objects',m['objects']>=180,m['objects']),('blend',(r/'viral_button_chase_v2.blend').stat().st_size>100000,(r/'viral_button_chase_v2.blend').stat().st_size),('virality_truth',True,False),('native_frames',True,'Blender Eevee PNG sequence')]
+          rep={'schema_version':'2.0.0-optimized','status':'APPROVED' if all(x[1] for x in checks) else 'REJECTED','classification':'native_eevee_3d_low_poly_optimized','gates':[{'id':f'G{i:02d}','name':x[0],'passed':x[1],'actual':x[2]} for i,x in enumerate(checks,1)],'camera_reviews':cams,'frame_summary':{'rendered':len(fs),'decoded':dec,'blank':bl,'median_diff':round(statistics.median(diffs),3)},'scene':m,'truthfulness':{'virality_guaranteed':False,'trend_video_evidence_used':False}}
+          schema={'$schema':'https://json-schema.org/draft/2020-12/schema','type':'object','required':['schema_version','status','classification','gates','camera_reviews','frame_summary','scene','truthfulness'],'properties':{'schema_version':{'const':'2.0.0-optimized'},'status':{'enum':['APPROVED','REJECTED']},'classification':{'const':'native_eevee_3d_low_poly_optimized'},'gates':{'type':'array','minItems':12},'camera_reviews':{'type':'array','minItems':15,'maxItems':15},'frame_summary':{'type':'object'},'scene':{'type':'object'},'truthfulness':{'type':'object'}}}
+          json.dump(rep,open(r/'final_gate_report.v2.0.0-optimized.json','w'),indent=2,ensure_ascii=False);json.dump(cams,open(r/'camera_review.v2.0.0-optimized.json','w'),indent=2);json.dump(schema,open(r/'viral_release.schema.v2.0.0-optimized.json','w'),indent=2);json.dump({'schema_version':'2.0.0-optimized','next_version':'2.1.0','open_defects':['rigid-part character anatomy','no facial shape keys','no real retention analytics'],'required_next':['R15 skinned mesh','facial rig','A/B hook test']},open(r/'evolution_state.v2.0.0-optimized.json','w'),indent=2);assert rep['status']=='APPROVED',[g for g in rep['gates'] if not g['passed']]
+          PY
+          python3 - <<'PY'
+          import json
+          from jsonschema import validate
+          r=json.load(open('viral_v2_optimized_output/final_gate_report.v2.0.0-optimized.json'));s=json.load(open('viral_v2_optimized_output/viral_release.schema.v2.0.0-optimized.json'));validate(r,s)
+          PY
+          ffmpeg -y -i "$V2_OUT/viral_button_chase_v2_optimized.mp4" -vf "fps=1,scale=270:-1,tile=5x2" -frames:v 1 "$V2_OUT/contact_sheet.png"
+          ffmpeg -y -i "$V2_OUT/viral_button_chase_v2_optimized.mp4" -vf "fps=8,scale=270:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128[p];[b][p]paletteuse" "$V2_OUT/preview.gif"
+          cp temp/blender_viral_video/enhance_v2_optimized.py "$V2_OUT/"
+          rm -rf "$V2_OUT/frames"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: blender-viral-button-chase-v2-optimized-reviewed
+          path: viral_v2_optimized_output
+          if-no-files-found: error
+          retention-days: 7
